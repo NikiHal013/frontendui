@@ -71,20 +71,20 @@ export const RequestButton = ({ operation, children, request, onDone = () => {},
     const operationConfig = {
         C: {
             asyncAction: RequestInsertAsyncAction,
-            dialogTitle: "Vložit novou request",
-            loadingMsg: "Vkládám novou request",
+            dialogTitle: "Vložit nový požadavek",
+            loadingMsg: "Vkládám nový požadavek",
             renderContent: () => <RequestMediumEditableContent request={request} />,
         },
         U: {
             asyncAction: RequestUpdateAsyncAction,
-            dialogTitle: "Upravit request",
-            loadingMsg: "Ukládám request",
+            dialogTitle: "Upravit požadavek",
+            loadingMsg: "Ukládám požadavek",
             renderContent: () => <RequestMediumEditableContent request={request} />,
         },
         D: {
             asyncAction: RequestDeleteAsyncAction,
-            dialogTitle: "Chcete odebrat request?",
-            loadingMsg: "Odstraňuji request",
+            dialogTitle: "Chcete odebrat požadavek?",
+            loadingMsg: "Odstraňuji požadavek",
             renderContent: () => (
                 <h2>
                     {request?.name} ({request?.name_en})

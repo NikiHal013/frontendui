@@ -71,20 +71,20 @@ export const RequestTypeButton = ({ operation, children, requesttype, onDone = (
     const operationConfig = {
         C: {
             asyncAction: RequestTypeInsertAsyncAction,
-            dialogTitle: "Vložit novou requesttype",
-            loadingMsg: "Vkládám novou requesttype",
+            dialogTitle: "Vložit nový typ požadavků",
+            loadingMsg: "Vkládám nový typ požadavků",
             renderContent: () => <RequestTypeMediumEditableContent requesttype={requesttype} />,
         },
         U: {
             asyncAction: RequestTypeUpdateAsyncAction,
-            dialogTitle: "Upravit requesttype",
-            loadingMsg: "Ukládám requesttype",
+            dialogTitle: "Upravit typ požadavků",
+            loadingMsg: "Ukládám typ požadavků",
             renderContent: () => <RequestTypeMediumEditableContent requesttype={requesttype} />,
         },
         D: {
             asyncAction: RequestTypeDeleteAsyncAction,
-            dialogTitle: "Chcete odebrat requesttype?",
-            loadingMsg: "Odstraňuji requesttype",
+            dialogTitle: "Chcete odebrat typ požadavků?",
+            loadingMsg: "Odstraňuji typ požadavků",
             renderContent: () => (
                 <h2>
                     {requesttype?.name} ({requesttype?.name_en})

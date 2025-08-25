@@ -10,12 +10,14 @@ import { DigitalFormFieldCardCapsule } from "../../DigitalFormFieldGQLModel/Comp
 import { DigitalFormFieldButton } from "../../DigitalFormFieldGQLModel/Components/DigitalFormFieldCUDButton"
 import { DigitalFormSectionMediumEditableContent } from "./DigitalFormSectionMediumEditableContent"
 import { DigitalFormSectionButton } from './DigitalFormSectionCUDButton'
-import { ArrowDown, ArrowUp, Pencil, PlusLg, SignIntersection, Trash } from "react-bootstrap-icons"
+import { ArrowDown, ArrowUp, Pencil, PencilFill, PlusLg, SignIntersection, Trash } from "react-bootstrap-icons"
 import { DigitalSubmissionFieldMediumEditableContent } from "../../DigitalSubmissionFieldGQLModel/Components/DigitalSubmissionFieldMediumEditableContent"
 import { useEffect, useState } from "react"
 import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
 import { DigitalFormReadAsyncAction } from "../../DigitalFormGQLModel/Queries"
-
+import { DigitalSubmissionSectionLargeContent } from "../../DigitalSubmissionSectionGQLModel/Components/DigitalSubmissionSectionLargeContent"
+import { DigitalSubmissionSectionCardCapsule } from "../../DigitalSubmissionSectionGQLModel/Components/DigitalSubmissionSectionCardCapsule"
+import { ExampleDS } from "../../DigitalSubmissionGQLModel/Components/DigitalSubmissionMediumEditableContent"
 /**
  * A large card component for displaying detailed content and layout for an digitalformsection entity.
  *
@@ -40,148 +42,320 @@ import { DigitalFormReadAsyncAction } from "../../DigitalFormGQLModel/Queries"
  *   <p>Additional content for the middle column.</p>
  * </DigitalFormSectionLargeCard>
  */
-export const DigitalFormSectionLargeContent = ({digitalformsection, children}) => {
-    const {fields, sections} = digitalformsection
-    console.log("DigitalFormSectionLargeContent.digitalformsection", digitalformsection)
+export const DigitalFormSectionLargeContent = ({digitalformsection, submissionsection, children}) => {
+    const {fields=[], sections=[]} = digitalformsection
+    
+    const childrensubmissionsections = submissionsection?.sections || []
+    // console.log("DigitalFormSectionLargeContent.digitalformsection", digitalformsection)
     return (
         <>  
-            {/* DigitalFormSectionLargeContent */}
-            <DigitalFormSectionFields digitalsectionfields={fields} />
-            <hr/>
-            <DigitalFormFieldButton 
-                operation="C" 
-                className="btn btn-sm btn-outline-success form-control"
-                digitalformfield={{
-                    formSectionId: digitalformsection?.id,
-                    id: crypto.randomUUID(),
-                    name: "field",
-                    label: "Položka",
-                    labelEn: "Item",
-                    description: "delší popis",
-                    required: false,
-                    order: fields.length + 1
-                }}
-            >
-                <PlusLg  /> Přidat položku do sekce
-            </DigitalFormFieldButton>
-
-            <DigitalFormSections digitalformsections={sections} />
+            <DigitalFormSectionFields 
+                digitalsectionfields={fields} 
+                submissionsection={submissionsection} 
+            />
+            <DigitalFormSections 
+                digitalformsections={sections} 
+                submissionsections={childrensubmissionsections}
+            />            
             {/* <pre>{JSON.stringify(digitalformsection, null, 2)}</pre> */}
         </>
     )
 }
 
-export const DigitalFormSection = ({ digitalformsection }) => {
-    const {sections=[]} = digitalformsection
+export const DigitalFormSectionDummy = ({ digitalformsection, children }) => {
+    const {repeatable, repeatableMax, repeatableMin} = digitalformsection
+    const createSubmissionSection = () => {
+        return {
+            id: crypto.randomUUID(),
+            formSection: digitalformsection,
+            sections: [],
+            fields: [],
+        }
+    }
+    const [submissionSections, setSubmissionSections] = useState(
+        Array(repeatableMin).map((_, i) => createSubmissionSection())
+    )
+    useEffect(() => {
+        console.log("DigitalFormSectionDummy.useEffect", digitalformsection)
+        setSubmissionSections(
+            Array(repeatableMin).map((_, i) => createSubmissionSection())
+        )
+    }, [digitalformsection, repeatableMin, repeatableMax])
+    
+    const onAddDummySection = () => {
+        console.log("DigitalFormSectionDummy.onAddDummySection", digitalformsection)
+        setSubmissionSections(old => [
+            ...old,
+            createSubmissionSection()
+        ])
+    }
+
+    if (!repeatable) return (<>NO</>)
+    return "DigitalFormSectionDummy"
+    return (<>
+        {/* REPEATING */}
+        {submissionSections.map((sSection, index) => (<>
+            {/*  <DigitalSubmissionSectionCardCapsule key={sSection?.id} digitalsubmissionsection={sSection}> */}
+                {/* <DigitalSubmissionSectionLargeContent key={sSection?.id} digitalsubmissionsection={sSection} /> */}
+                <DigitalSubmissionSectionCardCapsule key={sSection?.id} digitalsubmissionsection={sSection} title={digitalformsection?.name + " " + (index + 1)}>
+                    <pre key={sSection?.id}>{JSON.stringify(sSection, null, 4)}</pre>
+                </DigitalSubmissionSectionCardCapsule>
+                
+            {/*  </DigitalSubmissionSectionCardCapsule> */}
+        </>)
+        )}
+        {/* {(repeatableMax - 1) < submissionSections.length && <button className="btn btn-outline-primary form-control" onClick={onAddDummySection}>Zopakovat sekci</button>}
+        <button className="btn btn-outline-primary form-control" onClick={onAddDummySection}>Zopakovat sekci</button> */}
+    </>)
+}
+
+export const DigitalFormSection = ({ digitalformsection, submissionsections }) => {
+    const {sections=[], fields=[], repeatable, repeatableMax} = digitalformsection
     const { loading, error, fetch: formrefetch } = useAsyncAction(DigitalFormReadAsyncAction, {id: digitalformsection.formId}, {deferred: true})
     const onDelete = async() => {
         console.log("refetching form from section", digitalformsection)
         const fresh = await formrefetch({id: digitalformsection.formId})
         console.log("refetched form", fresh)
     }
-    return (
-        <DigitalFormSectionCardCapsule key={digitalformsection?.id} digitalformsection={digitalformsection}>
-            <SimpleCardCapsuleRightCorner>
-                <button className="btn btn-sm btn-outline-success">E</button>
-                <button className="btn btn-sm btn-outline-success">
-                    <ArrowUp />
-                </button>
-                <button className="btn btn-sm btn-outline-success">
-                    <ArrowDown />
-                </button>
-                <DigitalFormSectionButton
-                    operation="D" 
-                    className="btn btn-sm btn-outline-danger"
-                    onDone={onDelete}
-                    digitalformsection={digitalformsection}
-                >
-                    <Trash  />
-                </DigitalFormSectionButton>                
-            </SimpleCardCapsuleRightCorner>
-            {/* <DigitalFormSectionMediumEditableContent digitalformsection={digitalformsection} /> */}
-            <DigitalFormSectionLargeContent digitalformsection={digitalformsection} />
-            <hr/>
-            <DigitalFormSectionButton
-                operation="C" 
-                className="btn btn-sm btn-outline-success form-control"
-                digitalformsection={{
-                    sectionId: digitalformsection?.id,
-                    id: crypto.randomUUID(),
-                    name: "section",
-                    label: "Nová vnořená sekce",
-                    labelEn: "New section",
-                    description: "Popis / nápověda",
-                    order: sections.lenght + 1,
-                    repeatable: false,
-                    repeatableMin: 1,
-                    repeatableMax: 1
-                }}
+    return (<>
+            <DigitalFormSectionCardCapsule 
+                digitalformsection={digitalformsection}
+                title={digitalformsection?.name}
             >
-                <PlusLg  /> Přidat vnořenou sekci
-            </DigitalFormSectionButton>
-        </DigitalFormSectionCardCapsule>
+                <hr />
+                <ExampleDS />
+                <hr />
+                <SimpleCardCapsuleRightCorner>
+                    <DigitalFormSectionButton 
+                        operation="JSON" 
+                        className="btn btn-sm btn-outline-success"
+                        digitalformsection={{
+                            sectionId: digitalformsection?.id,
+                            formId: digitalformsection?.formId,
+                            id: crypto.randomUUID(),
+                            name: "section",
+                            label: "Nová vnořená sekce",
+                            labelEn: "New section",
+                            description: "Popis / nápověda",
+                            order: sections.lenght + 1,
+                            repeatable: false,
+                            repeatableMin: 1,
+                            repeatableMax: 1
+                        }}
+                    >
+                        <SignIntersection /> Přidat vnořenou sekcci JSON
+                    </DigitalFormSectionButton>
+                    <DigitalFormFieldButton 
+                        operation="C" 
+                        className="btn btn-sm btn-outline-success"
+                        digitalformfield={{
+                            formSectionId: digitalformsection?.id,
+                            id: crypto.randomUUID(),
+                            name: "field",
+                            label: "Položka",
+                            labelEn: "Item",
+                            description: "delší popis",
+                            required: false,
+                            order: fields.length + 1
+                        }}
+                    >
+                        <PlusLg  /> Přidat položku do sekce
+                    </DigitalFormFieldButton>
+
+                    <DigitalFormSectionButton
+                        operation="C" 
+                        className="btn btn-sm btn-outline-success"
+                        digitalformsection={{
+                            sectionId: digitalformsection?.id,
+                            formId: digitalformsection?.formId,
+                            id: crypto.randomUUID(),
+                            name: "section",
+                            label: "Nová vnořená sekce",
+                            labelEn: "New section",
+                            description: "Popis / nápověda",
+                            order: sections.lenght + 1,
+                            repeatable: false,
+                            repeatableMin: 1,
+                            repeatableMax: 10
+                        }}
+                    >
+                        <PlusLg  /> Přidat vnořenou sekci
+                    </DigitalFormSectionButton>                        
+                    <DigitalFormSectionButton
+                        operation="U" 
+                        className="btn btn-sm btn-outline-success"
+                        // onDone={onDelete}
+                        digitalformsection={digitalformsection}
+                    >
+                        <PencilFill  />
+                    </DigitalFormSectionButton>                
+
+                    <button className="btn btn-sm btn-outline-success">
+                        <ArrowUp />
+                    </button>
+                    <button className="btn btn-sm btn-outline-success">
+                        <ArrowDown />
+                    </button>
+                    <DigitalFormSectionButton
+                        operation="D" 
+                        className="btn btn-sm btn-outline-danger"
+                        onDone={onDelete}
+                        digitalformsection={digitalformsection}
+                    >
+                        <Trash  />
+                    </DigitalFormSectionButton>      
+                            
+                </SimpleCardCapsuleRightCorner>
+                {submissionsections.map((submissionsection, index) => {
+                    if (index === 0) return (<div key={submissionsection?.id} >
+                        <DigitalFormSectionLargeContent 
+                                digitalformsection={digitalformsection} 
+                                submissionsection={submissionsection}
+                            /> 
+                    </div>)
+                    return (
+                        <DigitalSubmissionSectionCardCapsule 
+                            key={submissionsection?.id} 
+                            digitalsubmissionsection={submissionsection} 
+                            title={digitalformsection?.name}
+                        >
+                            {(index ===0) && (
+                            <SimpleCardCapsuleRightCorner>
+                                <DigitalFormFieldButton 
+                                    operation="C" 
+                                    className="btn btn-sm btn-outline-success"
+                                    digitalformfield={{
+                                        formSectionId: digitalformsection?.id,
+                                        id: crypto.randomUUID(),
+                                        name: "field",
+                                        label: "Položka",
+                                        labelEn: "Item",
+                                        description: "delší popis",
+                                        required: false,
+                                        order: fields.length + 1
+                                    }}
+                                >
+                                    <PlusLg  /> Přidat položku do sekce
+                                </DigitalFormFieldButton>
+
+                                <DigitalFormSectionButton
+                                    operation="C" 
+                                    className="btn btn-sm btn-outline-success"
+                                    digitalformsection={{
+                                        sectionId: digitalformsection?.id,
+                                        id: crypto.randomUUID(),
+                                        name: "section",
+                                        label: "Nová vnořená sekce",
+                                        labelEn: "New section",
+                                        description: "Popis / nápověda",
+                                        order: sections.lenght + 1,
+                                        repeatable: false,
+                                        repeatableMin: 1,
+                                        repeatableMax: 1
+                                    }}
+                                >
+                                    <PlusLg  /> Přidat vnořenou sekci
+                                </DigitalFormSectionButton>                        
+                                <DigitalFormSectionButton
+                                    operation="U" 
+                                    className="btn btn-sm btn-outline-success"
+                                    // onDone={onDelete}
+                                    digitalformsection={digitalformsection}
+                                >
+                                    <PencilFill  />
+                                </DigitalFormSectionButton>                
+
+                                <button className="btn btn-sm btn-outline-success">
+                                    <ArrowUp />
+                                </button>
+                                <button className="btn btn-sm btn-outline-success">
+                                    <ArrowDown />
+                                </button>
+                                <DigitalFormSectionButton
+                                    operation="D" 
+                                    className="btn btn-sm btn-outline-danger"
+                                    onDone={onDelete}
+                                    digitalformsection={digitalformsection}
+                                >
+                                    <Trash  />
+                                </DigitalFormSectionButton>                
+                            </SimpleCardCapsuleRightCorner>
+                            )}
+                            {/* {(index === 0) && <DigitalSubmissionSectionLargeContent digitalsubmissionsection={submissionsection} /> } */}
+                            {(index === 0) && (
+                                <DigitalFormSectionLargeContent 
+                                    digitalformsection={digitalformsection} 
+                                    submissionsection={submissionsection}
+                                /> 
+                            )}
+                        </DigitalSubmissionSectionCardCapsule>
+                    )
+                })}
+                {submissionsections.length === 0 && (<>
+                    <pre>{JSON.stringify(digitalformsection, null, 4)}</pre>
+                </>)}
+                {/* <pre>DigitalFormSection {JSON.stringify(submissionsections, null, 4)}</pre> */}
+                {repeatable && repeatableMax > submissionsections.length && (
+                    <button className="btn btn-outline-primary form-control" onClick={null}>Zopakovat sekci</button>
+                )}
+            
+            </DigitalFormSectionCardCapsule>
+        </>
     )
 }
 
 
-export const DigitalFormSections = ({ digitalformsections }) => {
+export const DigitalFormSections = ({ digitalformsections, submissionsections=[] }) => {
     const ordered = digitalformsections.toSorted((a,b) => {
         const aorder = a?.order ?? 0;
         const border = b?.order ?? 0;
         return border - aorder
     })
+    // const {repeatable, repeatableMax, repeatableMin} = digitalformsection
+    
     return (
         <>
         {/* DigitalFormSections */}
-        {ordered.map(section => <DigitalFormSection key={section?.id} digitalformsection={section} />)}
+        {/* <pre>DigitalFormSections{JSON.stringify(ordered.map(o => o.id), null, 4)}</pre> */}
+        {ordered.map(section => <DigitalFormSection 
+            key={section?.id} 
+            digitalformsection={section} 
+            submissionsections={submissionsections.filter(s => s.formSection?.id === section.id)} 
+        />)}
+        {/* <pre>DigitalFormSections{JSON.stringify(ordered.map(o => o.id), null, 4)}</pre> */}
+        {/* <pre>DigitalFormSections{JSON.stringify(submissionsections.map(ss => ss), null, 4)}</pre> */}
+        {/* <pre>DigitalFormSections{JSON.stringify(submissionsections, null, 4)}</pre> */}
         </>
     )
 }
 
-export const DigitalFormField = ({ digitalformfield }) => {
+
+export const DigitalSubmissionFieldDummy = ({ digitalformfield, children }) => {
     const [submissionField, setSubmissionField] = useState({
         id: crypto.randomUUID(),
         field: digitalformfield,
-        value: null
+        value: null,
+        key: 0,
     })
     useEffect(
-        () => setSubmissionField(old => ({...old, field: digitalformfield})),
+        () => setSubmissionField(old => {   
+            const newSubmissionField = {...old, field: digitalformfield, key: old.key + 1}
+            console.log("DigitalSubmissionDummy.useEffect", newSubmissionField)
+            return newSubmissionField
+        }
+        ),
         [digitalformfield]
     )
-    // console.log("DigitalFormField", submissionField)
+    // console.log("DigitalSubmissionDummy", submissionField)
     const onChangeField = (e) => {
         const value = e?.target?.value
         setSubmissionField(
-            old => ({...old, value})
+            old => ({...old, value})    
         )
-    }
-    const onUpdateDone = async () => {
-
-    }
-    const onDeleteDone = async () => {
-
     }
     return (<>
         <DigitalSubmissionFieldMediumEditableContent digitalsubmissionfield={submissionField} onChange={onChangeField} onBlur={onChangeField}>
-            <SimpleCardCapsuleRightCorner>
-                {/* <button className="btn btn-sm btn-outline-success"><Pencil /></button> */}
-                <DigitalFormFieldButton 
-                    operation="U" 
-                    className="btn btn-sm btn-outline-success"
-                    digitalformfield={digitalformfield}
-                    onDone={onUpdateDone}
-                >
-                    <Pencil />
-                </DigitalFormFieldButton>
-                <DigitalFormFieldButton 
-                    operation="D" 
-                    className="btn btn-sm btn-outline-danger"
-                    digitalformfield={digitalformfield}
-                    onDone={onDeleteDone}
-                >
-                    <Trash />
-                </DigitalFormFieldButton>
-            </SimpleCardCapsuleRightCorner>  
+            {children}
         </DigitalSubmissionFieldMediumEditableContent>
          
         </>
@@ -192,7 +366,73 @@ export const DigitalFormField = ({ digitalformfield }) => {
         // </DigitalFormFieldCardCapsule>
     )
 }
-export const DigitalFormSectionFields = ({ digitalsectionfields }) => {
+
+
+export const DigitalFormField = ({ digitalformfield, submissionfield }) => {
+    const onUpdateDone = async () => {
+
+    }
+    const onDeleteDone = async () => {
+
+    }
+    const submissionfieldOnChange = (e) => {
+        const { name, value } = e.target
+        console.log("DigitalFormField.onChange", name, value)
+        // setSubmissionData(prev => ({ ...prev, [name]: value }))
+        submissionfield.onChange(submissionfield, value)
+    }
+
+    return (
+        <>
+            {/* <pre>{JSON.stringify(digitalformfield, null, 4)}</pre> */}
+            {/* <pre>{JSON.stringify(submissionfield, null, 4)}</pre> */}
+            {/* onChange: {submissionfield?.onChange ? "true" : "false"} */}
+            <DigitalSubmissionFieldMediumEditableContent 
+                digitalsubmissionfield={submissionfield} 
+                onChange={submissionfieldOnChange} 
+                onBlur={submissionfieldOnChange}
+            >
+                <SimpleCardCapsuleRightCorner>
+                    <DigitalFormFieldButton 
+                        operation="U"
+                        className="btn btn-sm btn-outline-success"
+                        digitalformfield={digitalformfield}
+                        onDone={onUpdateDone}
+                    >
+                        <Pencil />
+                    </DigitalFormFieldButton>
+                </SimpleCardCapsuleRightCorner>
+                {/* {children} */}
+            </DigitalSubmissionFieldMediumEditableContent>
+
+        </>
+        // <DigitalSubmissionFieldDummy>
+            
+        //     <SimpleCardCapsuleRightCorner>
+        //         <DigitalFormFieldButton 
+        //             operation="U" 
+        //             className="btn btn-sm btn-outline-success"
+        //             digitalformfield={digitalformfield}
+        //             onDone={onUpdateDone}
+        //         >
+        //             <Pencil />
+        //         </DigitalFormFieldButton>
+        //         <DigitalFormFieldButton 
+        //             operation="D" 
+        //             className="btn btn-sm btn-outline-danger"
+        //             digitalformfield={digitalformfield}
+        //             onDone={onDeleteDone}
+        //         >
+        //             <Trash />
+        //         </DigitalFormFieldButton>
+        //     </SimpleCardCapsuleRightCorner>  
+        //     <pre>{JSON.stringify(submissionfield, null, 4)}</pre>
+        // </DigitalSubmissionFieldDummy>
+    )
+}
+
+export const DigitalFormSectionFields = ({ digitalsectionfields, submissionsection={fields: []} }) => {
+    const {fields=[]} = submissionsection
     const ordered = digitalsectionfields.toSorted((a,b) => {
         const aorder = a?.order ?? 0;
         const border = b?.order ?? 0;
@@ -200,7 +440,16 @@ export const DigitalFormSectionFields = ({ digitalsectionfields }) => {
     })
     return (
         <>
-        {ordered.map(field => <DigitalFormField key={field?.id} digitalformfield={field} />)}
+            {/* DigitalFormSectionFields */}
+            {ordered.map(formfield => (
+                <DigitalFormField 
+                    key={formfield?.id} 
+                    digitalformfield={formfield} 
+                    submissionfield={fields.find(field => field?.field?.id === formfield?.id)} 
+                />)
+            )}
+            {/* <pre>{JSON.stringify(ordered, null, 4)}</pre> */}
+            {/* FIELDS<pre>{JSON.stringify(submissionsection?.fields, null, 4)}</pre> */}
         </>
     )
 }

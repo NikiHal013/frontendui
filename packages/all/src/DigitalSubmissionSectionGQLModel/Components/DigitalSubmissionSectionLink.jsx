@@ -31,5 +31,5 @@ export const DigitalSubmissionSectionURI = `${URIRoot}/digitalsubmissionsection/
  * @see ProxyLink - The base component used for rendering the link.
  */
 export const DigitalSubmissionSectionLink = ({digitalsubmissionsection, ...props}) => {
-    return <ProxyLink to={DigitalSubmissionSectionURI + digitalsubmissionsection.id} {...props}>{digitalsubmissionsection.name}</ProxyLink>
+    return <ProxyLink to={DigitalSubmissionSectionURI + digitalsubmissionsection.id} {...props}>{digitalsubmissionsection?.name}</ProxyLink>
 }

@@ -30,7 +30,10 @@ import { DigitalFormSectionMediumContent } from "./DigitalFormSectionMediumConte
  */
 export const DigitalFormSectionMediumCard = ({digitalformsection, children}) => {
     return (
-        <DigitalFormSectionCardCapsule title={<><PersonFill /> <DigitalFormSectionLink digitalformsection={digitalformsection} /></>}>
+        <DigitalFormSectionCardCapsule 
+            title={<><PersonFill /> <DigitalFormSectionLink digitalformsection={digitalformsection} /></>}
+            digitalformsection={digitalformsection}
+        >
             <DigitalFormSectionMediumContent digitalformsection={digitalformsection}>
                 {children}
             </DigitalFormSectionMediumContent>

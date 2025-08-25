@@ -20,7 +20,7 @@ const styles = {
         backgroundColor: "white",
         textAlign: "center",
         width: "100%",
-        minWidth: "300px",
+        // minWidth: "200px",
         // zIndex: 10
     },
     capsuleTitle: {

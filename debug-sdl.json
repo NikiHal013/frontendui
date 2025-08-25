@@ -1385,6 +1385,88 @@
       ]
     },
     {
+      "kind": "InputObjectTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "DigitalFormField insert parameter description",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldDeleteGQLModel"
+      },
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "primary key",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "id"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "UUID"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "timestamp for concurrent update",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lastchange"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DateTime"
+              }
+            }
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
       "kind": "ObjectTypeDefinition",
       "description": {
         "kind": "StringValue",
@@ -1981,6 +2063,541 @@
       ]
     },
     {
+      "kind": "ObjectTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "Error object returned as an result of Delete operation",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldGQLModelDeleteError"
+      },
+      "interfaces": [],
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Entity to be updated",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "Entity"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormFieldGQLModel"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "reason of fail",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "msg"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "String"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "always True, available when error",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "failed"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "Boolean"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "location of the error - resolver name",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "location"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "original data",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "input"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "JSON"
+            }
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
+      "kind": "UnionTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldGQLModelDigitalFormFieldGQLModelUpdateError"
+      },
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__unionMember"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            },
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "member"
+              },
+              "value": {
+                "kind": "StringValue",
+                "value": "DigitalFormFieldGQLModel",
+                "block": false
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__unionMember"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            },
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "member"
+              },
+              "value": {
+                "kind": "StringValue",
+                "value": "DigitalFormFieldGQLModelUpdateError",
+                "block": false
+              }
+            }
+          ]
+        }
+      ],
+      "types": [
+        {
+          "kind": "NamedType",
+          "name": {
+            "kind": "Name",
+            "value": "DigitalFormFieldGQLModel"
+          }
+        },
+        {
+          "kind": "NamedType",
+          "name": {
+            "kind": "Name",
+            "value": "DigitalFormFieldGQLModelUpdateError"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "UnionTypeDefinition",
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldGQLModelInsertError"
+      },
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__unionMember"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            },
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "member"
+              },
+              "value": {
+                "kind": "StringValue",
+                "value": "DigitalFormFieldGQLModel",
+                "block": false
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__unionMember"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            },
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "member"
+              },
+              "value": {
+                "kind": "StringValue",
+                "value": "InsertError",
+                "block": false
+              }
+            }
+          ]
+        }
+      ],
+      "types": [
+        {
+          "kind": "NamedType",
+          "name": {
+            "kind": "Name",
+            "value": "DigitalFormFieldGQLModel"
+          }
+        },
+        {
+          "kind": "NamedType",
+          "name": {
+            "kind": "Name",
+            "value": "InsertError"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "ObjectTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "Error object returned as an result of Update operation",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldGQLModelUpdateError"
+      },
+      "interfaces": [],
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Entity to be updated",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "Entity"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormFieldGQLModel"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "reason of fail",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "msg"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "String"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "always True, available when error",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "failed"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "Boolean"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "error code, if available",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "code"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "location of the error - resolver name",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "location"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "original data",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "input"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "JSON"
+            }
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
       "kind": "InputObjectTypeDefinition",
       "description": {
         "kind": "StringValue",
@@ -2565,6 +3182,29 @@
           "kind": "InputValueDefinition",
           "description": {
             "kind": "StringValue",
+            "value": "id of the field type",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "typeId"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
             "value": "section id where the field is placed",
             "block": true
           },
@@ -2752,6 +3392,427 @@
           "description": {
             "kind": "StringValue",
             "value": "statement of computation",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "computed"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Int"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
+      "kind": "InterfaceTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "set of mutations",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldMutations"
+      },
+      "interfaces": [],
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Insert a DigitalFormField",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormFieldInsert"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "description": {
+                "kind": "StringValue",
+                "value": "form field attributes to be inserted",
+                "block": true
+              },
+              "name": {
+                "kind": "Name",
+                "value": "formField"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalFormFieldInsertGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DigitalFormFieldGQLModelInsertError"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Update a DigitalFormField",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormFieldUpdate"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "description": {
+                "kind": "StringValue",
+                "value": "form field attributes to be updated",
+                "block": true
+              },
+              "name": {
+                "kind": "Name",
+                "value": "formField"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalFormFieldUpdateGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DigitalFormFieldGQLModelDigitalFormFieldGQLModelUpdateError"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Delete a DigitalFormField",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormFieldDelete"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "description": {
+                "kind": "StringValue",
+                "value": "id and lastchange of form field to be deleted",
+                "block": true
+              },
+              "name": {
+                "kind": "Name",
+                "value": "formField"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalFormFieldDeleteGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormFieldGQLModelDeleteError"
+            }
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "DigitalFormField update parameter description",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DigitalFormFieldUpdateGQLModel"
+      },
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "primary key",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "id"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "UUID"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "timestamp for concurrent update",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "lastchange"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DateTime"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "variable name",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "name"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "label - visual description",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "label"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "label - visual description",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "labelEn"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "description - visual placeholder",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "description"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "required"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Boolean"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "order"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Int"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "",
             "block": true
           },
           "name": {
@@ -5473,7 +6534,7 @@
           },
           "name": {
             "kind": "Name",
-            "value": "parentId"
+            "value": "sectionId"
           },
           "arguments": [],
           "type": {
@@ -5481,6 +6542,69 @@
             "name": {
               "kind": "Name",
               "value": "UUID"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Digital document form parent id which this section belongs to",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "formId"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Digital document form parent which this section belongs to",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "form"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormGQLModel"
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Digital document form section parent which this section belongs to",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "section"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormSectionGQLModel"
             }
           },
           "directives": []
@@ -5765,7 +6889,7 @@
           },
           "name": {
             "kind": "Name",
-            "value": "repatableMin"
+            "value": "repeatableMin"
           },
           "arguments": [],
           "type": {
@@ -5786,7 +6910,7 @@
           },
           "name": {
             "kind": "Name",
-            "value": "repatableMax"
+            "value": "repeatableMax"
           },
           "arguments": [],
           "type": {
@@ -6490,7 +7614,7 @@
       "kind": "InputObjectTypeDefinition",
       "description": {
         "kind": "StringValue",
-        "value": "Compound filter encapsulating subfilters on fields:\n\n- **id** filter, examples:\n\n\t {'id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **label** filter, examples:\n\n\t {'label': {'_eq': 'Peter'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_lt': 'F'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_gt': 'E'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_startswith': 'Pet'}}\n\t {'label': {'_endswith': 'ter'}}\n- **name** filter, examples:\n\n\t {'name': {'_eq': 'Peter'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_lt': 'F'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_gt': 'E'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_startswith': 'Pet'}}\n\t {'name': {'_endswith': 'ter'}}\n- **label_en** filter, examples:\n\n\t {'label_en': {'_eq': 'Peter'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_lt': 'F'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_gt': 'E'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_startswith': 'Pet'}}\n\t {'label_en': {'_endswith': 'ter'}}\n- **description** filter, examples:\n\n\t {'description': {'_eq': 'Peter'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_lt': 'F'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_gt': 'E'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_startswith': 'Pet'}}\n\t {'description': {'_endswith': 'ter'}}\n- **parent_id** filter, examples:\n\n\t {'parent_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'parent_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n\nSubfilters can be nested via `_and` and `_or`. `_and` can nest only `_or`, while `_or` can nest only `_and`\n_and can be a list of subfilters, all of them must be satisfied\n_or can be a list of subfilters, one of them must be satisfied",
+        "value": "Compound filter encapsulating subfilters on fields:\n\n- **id** filter, examples:\n\n\t {'id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **label** filter, examples:\n\n\t {'label': {'_eq': 'Peter'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_lt': 'F'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_gt': 'E'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_startswith': 'Pet'}}\n\t {'label': {'_endswith': 'ter'}}\n- **name** filter, examples:\n\n\t {'name': {'_eq': 'Peter'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_lt': 'F'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_gt': 'E'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_startswith': 'Pet'}}\n\t {'name': {'_endswith': 'ter'}}\n- **label_en** filter, examples:\n\n\t {'label_en': {'_eq': 'Peter'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_lt': 'F'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_gt': 'E'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_startswith': 'Pet'}}\n\t {'label_en': {'_endswith': 'ter'}}\n- **description** filter, examples:\n\n\t {'description': {'_eq': 'Peter'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_lt': 'F'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_gt': 'E'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_startswith': 'Pet'}}\n\t {'description': {'_endswith': 'ter'}}\n- **section_id** filter, examples:\n\n\t {'section_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'section_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **form_id** filter, examples:\n\n\t {'form_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'form_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n\nSubfilters can be nested via `_and` and `_or`. `_and` can nest only `_or`, while `_or` can nest only `_and`\n_and can be a list of subfilters, all of them must be satisfied\n_or can be a list of subfilters, one of them must be satisfied",
         "block": true
       },
       "name": {
@@ -6687,7 +7811,30 @@
           },
           "name": {
             "kind": "Name",
-            "value": "parent_id"
+            "value": "section_id"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UuidFilter"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "UUID filter operators, \nfor field \"id\" the filters can be \n{\"id\": {\"_eq\": \"5fa97795-454e-4631-870e-3f0806018755\"}}\n{\"id\": {\"_in\": [\"5fa97795-454e-4631-870e-3f0806018755\", \"011ec2bc-a0b9-44f3-bcd8-a42691eebaa4\"]}}",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "form_id"
           },
           "type": {
             "kind": "NamedType",
@@ -6707,7 +7854,7 @@
       "kind": "InputObjectTypeDefinition",
       "description": {
         "kind": "StringValue",
-        "value": "Compound filter encapsulating subfilters on fields:\n\n- **id** filter, examples:\n\n\t {'id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **label** filter, examples:\n\n\t {'label': {'_eq': 'Peter'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_lt': 'F'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_gt': 'E'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_startswith': 'Pet'}}\n\t {'label': {'_endswith': 'ter'}}\n- **name** filter, examples:\n\n\t {'name': {'_eq': 'Peter'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_lt': 'F'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_gt': 'E'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_startswith': 'Pet'}}\n\t {'name': {'_endswith': 'ter'}}\n- **label_en** filter, examples:\n\n\t {'label_en': {'_eq': 'Peter'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_lt': 'F'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_gt': 'E'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_startswith': 'Pet'}}\n\t {'label_en': {'_endswith': 'ter'}}\n- **description** filter, examples:\n\n\t {'description': {'_eq': 'Peter'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_lt': 'F'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_gt': 'E'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_startswith': 'Pet'}}\n\t {'description': {'_endswith': 'ter'}}\n- **parent_id** filter, examples:\n\n\t {'parent_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'parent_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n\nSubfilters can be nested via `_and` and `_or`. `_and` can nest only `_or`, while `_or` can nest only `_and`\n_and can be a list of subfilters, all of them must be satisfied\n_or can be a list of subfilters, one of them must be satisfied",
+        "value": "Compound filter encapsulating subfilters on fields:\n\n- **id** filter, examples:\n\n\t {'id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **label** filter, examples:\n\n\t {'label': {'_eq': 'Peter'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_lt': 'F'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_gt': 'E'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_startswith': 'Pet'}}\n\t {'label': {'_endswith': 'ter'}}\n- **name** filter, examples:\n\n\t {'name': {'_eq': 'Peter'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_lt': 'F'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_gt': 'E'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_startswith': 'Pet'}}\n\t {'name': {'_endswith': 'ter'}}\n- **label_en** filter, examples:\n\n\t {'label_en': {'_eq': 'Peter'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_lt': 'F'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_gt': 'E'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_startswith': 'Pet'}}\n\t {'label_en': {'_endswith': 'ter'}}\n- **description** filter, examples:\n\n\t {'description': {'_eq': 'Peter'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_lt': 'F'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_gt': 'E'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_startswith': 'Pet'}}\n\t {'description': {'_endswith': 'ter'}}\n- **section_id** filter, examples:\n\n\t {'section_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'section_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **form_id** filter, examples:\n\n\t {'form_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'form_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n\nSubfilters can be nested via `_and` and `_or`. `_and` can nest only `_or`, while `_or` can nest only `_and`\n_and can be a list of subfilters, all of them must be satisfied\n_or can be a list of subfilters, one of them must be satisfied",
         "block": true
       },
       "name": {
@@ -6875,7 +8022,30 @@
           },
           "name": {
             "kind": "Name",
-            "value": "parent_id"
+            "value": "section_id"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UuidFilter"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "UUID filter operators, \nfor field \"id\" the filters can be \n{\"id\": {\"_eq\": \"5fa97795-454e-4631-870e-3f0806018755\"}}\n{\"id\": {\"_in\": [\"5fa97795-454e-4631-870e-3f0806018755\", \"011ec2bc-a0b9-44f3-bcd8-a42691eebaa4\"]}}",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "form_id"
           },
           "type": {
             "kind": "NamedType",
@@ -6895,7 +8065,7 @@
       "kind": "InputObjectTypeDefinition",
       "description": {
         "kind": "StringValue",
-        "value": "Compound filter encapsulating subfilters on fields:\n\n- **id** filter, examples:\n\n\t {'id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **label** filter, examples:\n\n\t {'label': {'_eq': 'Peter'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_lt': 'F'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_gt': 'E'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_startswith': 'Pet'}}\n\t {'label': {'_endswith': 'ter'}}\n- **name** filter, examples:\n\n\t {'name': {'_eq': 'Peter'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_lt': 'F'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_gt': 'E'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_startswith': 'Pet'}}\n\t {'name': {'_endswith': 'ter'}}\n- **label_en** filter, examples:\n\n\t {'label_en': {'_eq': 'Peter'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_lt': 'F'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_gt': 'E'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_startswith': 'Pet'}}\n\t {'label_en': {'_endswith': 'ter'}}\n- **description** filter, examples:\n\n\t {'description': {'_eq': 'Peter'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_lt': 'F'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_gt': 'E'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_startswith': 'Pet'}}\n\t {'description': {'_endswith': 'ter'}}\n- **parent_id** filter, examples:\n\n\t {'parent_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'parent_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n\nSubfilters can be nested via `_and` and `_or`. `_and` can nest only `_or`, while `_or` can nest only `_and`\n_and can be a list of subfilters, all of them must be satisfied\n_or can be a list of subfilters, one of them must be satisfied",
+        "value": "Compound filter encapsulating subfilters on fields:\n\n- **id** filter, examples:\n\n\t {'id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **label** filter, examples:\n\n\t {'label': {'_eq': 'Peter'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_lt': 'F'}}\n\t {'label': {'_ge': 'A'}}\n\t {'label': {'_gt': 'E'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_like': 'Pet%'}}\n\t {'label': {'_startswith': 'Pet'}}\n\t {'label': {'_endswith': 'ter'}}\n- **name** filter, examples:\n\n\t {'name': {'_eq': 'Peter'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_lt': 'F'}}\n\t {'name': {'_ge': 'A'}}\n\t {'name': {'_gt': 'E'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_like': 'Pet%'}}\n\t {'name': {'_startswith': 'Pet'}}\n\t {'name': {'_endswith': 'ter'}}\n- **label_en** filter, examples:\n\n\t {'label_en': {'_eq': 'Peter'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_lt': 'F'}}\n\t {'label_en': {'_ge': 'A'}}\n\t {'label_en': {'_gt': 'E'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_like': 'Pet%'}}\n\t {'label_en': {'_startswith': 'Pet'}}\n\t {'label_en': {'_endswith': 'ter'}}\n- **description** filter, examples:\n\n\t {'description': {'_eq': 'Peter'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_lt': 'F'}}\n\t {'description': {'_ge': 'A'}}\n\t {'description': {'_gt': 'E'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_like': 'Pet%'}}\n\t {'description': {'_startswith': 'Pet'}}\n\t {'description': {'_endswith': 'ter'}}\n- **section_id** filter, examples:\n\n\t {'section_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'section_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n- **form_id** filter, examples:\n\n\t {'form_id': {'_eq': '5fa97795-454e-4631-870e-3f0806018755'}}\n\t {'form_id': {'_in': ['5fa97795-454e-4631-870e-3f0806018755', '011ec2bc-a0b9-44f3-bcd8-a42691eebaa4']}}\n\nSubfilters can be nested via `_and` and `_or`. `_and` can nest only `_or`, while `_or` can nest only `_and`\n_and can be a list of subfilters, all of them must be satisfied\n_or can be a list of subfilters, one of them must be satisfied",
         "block": true
       },
       "name": {
@@ -7063,7 +8233,30 @@
           },
           "name": {
             "kind": "Name",
-            "value": "parent_id"
+            "value": "section_id"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UuidFilter"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "UUID filter operators, \nfor field \"id\" the filters can be \n{\"id\": {\"_eq\": \"5fa97795-454e-4631-870e-3f0806018755\"}}\n{\"id\": {\"_in\": [\"5fa97795-454e-4631-870e-3f0806018755\", \"011ec2bc-a0b9-44f3-bcd8-a42691eebaa4\"]}}",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "form_id"
           },
           "type": {
             "kind": "NamedType",
@@ -7209,7 +8402,7 @@
           "kind": "InputValueDefinition",
           "description": {
             "kind": "StringValue",
-            "value": "DigitalFormSection master id",
+            "value": "DigitalForm id",
             "block": true
           },
           "name": {
@@ -7800,18 +8993,110 @@
           "kind": "InputValueDefinition",
           "description": {
             "kind": "StringValue",
-            "value": "DigitalFormSection eng name",
+            "value": "visual label",
             "block": true
           },
           "name": {
             "kind": "Name",
-            "value": "nameEn"
+            "value": "label"
           },
           "type": {
             "kind": "NamedType",
             "name": {
               "kind": "Name",
               "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "visual label in english",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "labelEn"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Minimum number of repetitions",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "repeatableMin"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Int"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Maximum number of repetitions",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "repeatableMax"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Int"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Is section repeatable",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "repeatable"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "Boolean"
             }
           },
           "defaultValue": {
@@ -9696,7 +10981,7 @@
           "kind": "InputValueDefinition",
           "description": {
             "kind": "StringValue",
-            "value": "field value",
+            "value": "value of the field",
             "block": true
           },
           "name": {
@@ -10442,6 +11727,27 @@
                   }
                 }
               }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "calculate the form value from its sections and fields and return it in json form",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "value"
+          },
+          "arguments": [],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "JSON"
             }
           },
           "directives": []
@@ -12053,6 +13359,157 @@
       ]
     },
     {
+      "kind": "InputObjectTypeDefinition",
+      "description": {
+        "kind": "StringValue",
+        "value": "DigitalSubmission insert mutation",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "DigitalSubmissionInsertGQLModel2"
+      },
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "[form](#digitalformgqlmodel) for this submission",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "formId"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "UUID"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "DigitalSubmission name",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "name"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "DigitalSubmission eng name",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "nameEn"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "DigitalSubmission master id",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "parentId"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "DigitalSubmission id client generated",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "id"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
       "kind": "InterfaceTypeDefinition",
       "description": {
         "kind": "StringValue",
@@ -12112,6 +13569,49 @@
                   "name": {
                     "kind": "Name",
                     "value": "DigitalSubmissionInsertGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DigitalSubmissionGQLModelInsertError"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Insert a DigitalSubmission",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormSubmissionInsert2"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "name": {
+                "kind": "Name",
+                "value": "digitalFormSubmission"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalSubmissionInsertGQLModel2"
                   }
                 }
               },
@@ -30434,7 +31934,7 @@
           },
           "defaultValue": {
             "kind": "StringValue",
-            "value": "29fd57e3-c1b6-4d16-9e7c-8f54e33543a1",
+            "value": "9322538c-732d-4f23-a778-8bb16e4a55ae",
             "block": false
           },
           "directives": []
@@ -37226,6 +38726,49 @@
                   "name": {
                     "kind": "Name",
                     "value": "GroupInsertGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "GroupGQLModelInsertError"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Inserts a new rbacobject out of structure represented by a group.",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "rbacObjectInsert"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "name": {
+                "kind": "Name",
+                "value": "rbacobject"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "RbacFreeInsertGQLModel"
                   }
                 }
               },
@@ -45310,6 +46853,13 @@
           "kind": "NamedType",
           "name": {
             "kind": "Name",
+            "value": "DigitalFormFieldMutations"
+          }
+        },
+        {
+          "kind": "NamedType",
+          "name": {
+            "kind": "Name",
             "value": "DigitalSubmissionMutation"
           }
         },
@@ -45522,6 +47072,38 @@
               "value": {
                 "kind": "StringValue",
                 "value": "DigitalFormSectionMutation",
+                "block": false
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__implements"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "OFFICE"
+              }
+            },
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "interface"
+              },
+              "value": {
+                "kind": "StringValue",
+                "value": "DigitalFormFieldMutations",
                 "block": false
               }
             }
@@ -47787,6 +49369,210 @@
           "kind": "FieldDefinition",
           "description": {
             "kind": "StringValue",
+            "value": "Insert a DigitalFormField",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormFieldInsert"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "description": {
+                "kind": "StringValue",
+                "value": "form field attributes to be inserted",
+                "block": true
+              },
+              "name": {
+                "kind": "Name",
+                "value": "formField"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalFormFieldInsertGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DigitalFormFieldGQLModelInsertError"
+              }
+            }
+          },
+          "directives": [
+            {
+              "kind": "Directive",
+              "name": {
+                "kind": "Name",
+                "value": "join__field"
+              },
+              "arguments": [
+                {
+                  "kind": "Argument",
+                  "name": {
+                    "kind": "Name",
+                    "value": "graph"
+                  },
+                  "value": {
+                    "kind": "EnumValue",
+                    "value": "OFFICE"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Update a DigitalFormField",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormFieldUpdate"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "description": {
+                "kind": "StringValue",
+                "value": "form field attributes to be updated",
+                "block": true
+              },
+              "name": {
+                "kind": "Name",
+                "value": "formField"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalFormFieldUpdateGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DigitalFormFieldGQLModelDigitalFormFieldGQLModelUpdateError"
+              }
+            }
+          },
+          "directives": [
+            {
+              "kind": "Directive",
+              "name": {
+                "kind": "Name",
+                "value": "join__field"
+              },
+              "arguments": [
+                {
+                  "kind": "Argument",
+                  "name": {
+                    "kind": "Name",
+                    "value": "graph"
+                  },
+                  "value": {
+                    "kind": "EnumValue",
+                    "value": "OFFICE"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Delete a DigitalFormField",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormFieldDelete"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "description": {
+                "kind": "StringValue",
+                "value": "id and lastchange of form field to be deleted",
+                "block": true
+              },
+              "name": {
+                "kind": "Name",
+                "value": "formField"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalFormFieldDeleteGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormFieldGQLModelDeleteError"
+            }
+          },
+          "directives": [
+            {
+              "kind": "Directive",
+              "name": {
+                "kind": "Name",
+                "value": "join__field"
+              },
+              "arguments": [
+                {
+                  "kind": "Argument",
+                  "name": {
+                    "kind": "Name",
+                    "value": "graph"
+                  },
+                  "value": {
+                    "kind": "EnumValue",
+                    "value": "OFFICE"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
             "value": "Insert a DigitalSubmission",
             "block": true
           },
@@ -47808,6 +49594,70 @@
                   "name": {
                     "kind": "Name",
                     "value": "DigitalSubmissionInsertGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "DigitalSubmissionGQLModelInsertError"
+              }
+            }
+          },
+          "directives": [
+            {
+              "kind": "Directive",
+              "name": {
+                "kind": "Name",
+                "value": "join__field"
+              },
+              "arguments": [
+                {
+                  "kind": "Argument",
+                  "name": {
+                    "kind": "Name",
+                    "value": "graph"
+                  },
+                  "value": {
+                    "kind": "EnumValue",
+                    "value": "OFFICE"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Insert a DigitalSubmission",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "digitalFormSubmissionInsert2"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "name": {
+                "kind": "Name",
+                "value": "digitalFormSubmission"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "DigitalSubmissionInsertGQLModel2"
                   }
                 }
               },
@@ -48837,6 +50687,70 @@
                   "name": {
                     "kind": "Name",
                     "value": "GroupInsertGQLModel"
+                  }
+                }
+              },
+              "directives": []
+            }
+          ],
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "GroupGQLModelInsertError"
+              }
+            }
+          },
+          "directives": [
+            {
+              "kind": "Directive",
+              "name": {
+                "kind": "Name",
+                "value": "join__field"
+              },
+              "arguments": [
+                {
+                  "kind": "Argument",
+                  "name": {
+                    "kind": "Name",
+                    "value": "graph"
+                  },
+                  "value": {
+                    "kind": "EnumValue",
+                    "value": "UG"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "FieldDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Inserts a new rbacobject out of structure represented by a group.",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "rbacObjectInsert"
+          },
+          "arguments": [
+            {
+              "kind": "InputValueDefinition",
+              "name": {
+                "kind": "Name",
+                "value": "rbacobject"
+              },
+              "type": {
+                "kind": "NonNullType",
+                "type": {
+                  "kind": "NamedType",
+                  "name": {
+                    "kind": "Name",
+                    "value": "RbacFreeInsertGQLModel"
                   }
                 }
               },
@@ -57490,6 +59404,148 @@
       "kind": "InputObjectTypeDefinition",
       "description": {
         "kind": "StringValue",
+        "value": "Input model for inserting a new group.",
+        "block": true
+      },
+      "name": {
+        "kind": "Name",
+        "value": "RbacFreeInsertGQLModel"
+      },
+      "directives": [
+        {
+          "kind": "Directive",
+          "name": {
+            "kind": "Name",
+            "value": "join__type"
+          },
+          "arguments": [
+            {
+              "kind": "Argument",
+              "name": {
+                "kind": "Name",
+                "value": "graph"
+              },
+              "value": {
+                "kind": "EnumValue",
+                "value": "UG"
+              }
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Identifier for the group's type.",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "grouptypeId"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "UUID"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "Primary key of the group.",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "id"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "UUID"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "členství, která budou vytvořena pro tuto skupinu",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "memberships"
+          },
+          "type": {
+            "kind": "ListType",
+            "type": {
+              "kind": "NonNullType",
+              "type": {
+                "kind": "NamedType",
+                "name": {
+                  "kind": "Name",
+                  "value": "MembershipInsertGQLModel"
+                }
+              }
+            }
+          },
+          "defaultValue": {
+            "kind": "ListValue",
+            "values": []
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "List of roles assigned to the user\nSeznam rolí přiřazených uživateli",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "roles"
+          },
+          "type": {
+            "kind": "ListType",
+            "type": {
+              "kind": "NonNullType",
+              "type": {
+                "kind": "NamedType",
+                "name": {
+                  "kind": "Name",
+                  "value": "RoleInsertGQLModel"
+                }
+              }
+            }
+          },
+          "defaultValue": {
+            "kind": "ListValue",
+            "values": []
+          },
+          "directives": []
+        }
+      ]
+    },
+    {
+      "kind": "InputObjectTypeDefinition",
+      "description": {
+        "kind": "StringValue",
         "value": "Define the initial state of RBAC object",
         "block": true
       },
@@ -62617,6 +64673,29 @@
           "kind": "InputValueDefinition",
           "description": {
             "kind": "StringValue",
+            "value": "Storage for access control",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "rbacobjectId"
+          },
+          "type": {
+            "kind": "NonNullType",
+            "type": {
+              "kind": "NamedType",
+              "name": {
+                "kind": "Name",
+                "value": "UUID"
+              }
+            }
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
             "value": "RequestTypeGQLModel primary key",
             "block": true
           },
@@ -62633,6 +64712,114 @@
           },
           "defaultValue": {
             "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "name",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "name"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "String"
+            }
+          },
+          "defaultValue": {
+            "kind": "StringValue",
+            "value": "New request type",
+            "block": false
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "statemachine id",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "statemachineId"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "initial state id",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "stateId"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "UUID"
+            }
+          },
+          "defaultValue": {
+            "kind": "NullValue"
+          },
+          "directives": []
+        },
+        {
+          "kind": "InputValueDefinition",
+          "description": {
+            "kind": "StringValue",
+            "value": "The form defining the structure of data to be submitted",
+            "block": true
+          },
+          "name": {
+            "kind": "Name",
+            "value": "initialForm"
+          },
+          "type": {
+            "kind": "NamedType",
+            "name": {
+              "kind": "Name",
+              "value": "DigitalFormInsertGQLModel"
+            }
+          },
+          "defaultValue": {
+            "kind": "ObjectValue",
+            "fields": [
+              {
+                "kind": "ObjectField",
+                "name": {
+                  "kind": "Name",
+                  "value": "name"
+                },
+                "value": {
+                  "kind": "StringValue",
+                  "value": "Formulář pro požadavek",
+                  "block": false
+                }
+              }
+            ]
           },
           "directives": []
         }
@@ -65286,7 +67473,7 @@
           },
           "defaultValue": {
             "kind": "StringValue",
-            "value": "2025-08-04T03:59:40.186774",
+            "value": "2025-08-24T18:05:10.114171",
             "block": false
           },
           "directives": []

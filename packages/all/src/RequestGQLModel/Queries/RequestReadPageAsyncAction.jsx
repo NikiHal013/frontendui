@@ -12,7 +12,12 @@ const RequestReadPageQuery = createQueryStrLazy(`
 query RequestPage($skip: Int, $limit: Int, $orderby: String, $where: RequestInputFilter) {
   result: requestPage(skip: $skip, limit: $limit, orderby: $orderby, where: $where) {
     ...RequestLargeFragment
-
+    state {
+      __typename
+      id
+      name
+    }
+    requestTypeId
     activeSubmission {
       __typename
       id
@@ -36,8 +41,8 @@ query RequestPage($skip: Int, $limit: Int, $orderby: String, $where: RequestInpu
           name
           label
           order
-          repatableMin
-          repatableMax
+          repeatableMin
+          repeatableMax
         }
         id
         fields {

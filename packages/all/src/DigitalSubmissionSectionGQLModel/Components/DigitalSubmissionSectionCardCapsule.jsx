@@ -29,7 +29,11 @@ import { DigitalSubmissionSectionLink } from "./DigitalSubmissionSectionLink"
  *   <Button variant="primary">Click Me</Button>
  * </DigitalSubmissionSectionCardCapsule>
  */
-export const DigitalSubmissionSectionCardCapsule = ({digitalsubmissionsection, children, title=<><PersonFill /> <DigitalSubmissionSectionLink digitalsubmissionsection={digitalsubmissionsection} /></>}) => {
+export const DigitalSubmissionSectionCardCapsule = ({
+    digitalsubmissionsection, 
+    children, 
+    title=<><PersonFill /> <DigitalSubmissionSectionLink digitalsubmissionsection={digitalsubmissionsection} /></>
+}) => {
     return (
         <CardCapsule title={title}>
             {children}

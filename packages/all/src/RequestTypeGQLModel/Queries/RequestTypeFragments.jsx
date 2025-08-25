@@ -1,6 +1,7 @@
 import { createQueryStrLazy } from "@hrbolek/uoisfrontend-gql-shared";
 import { FormSectionWithFieldsFragment } from "../../DigitalFormFieldGQLModel/Queries";
 import { DigitalFormSectionsFragment } from "../../DigitalFormGQLModel/Queries";
+import { RBACObjectLargeFragment } from "../../RBACObjectGQLModel/Queries/RBACObjectFragments";
 
 export const RequestTypeLinkFragment = createQueryStrLazy(`
 fragment RequestTypeLinkFragment on RequestTypeGQLModel {
@@ -68,7 +69,7 @@ fragment RequestTypeMediumFragment on RequestTypeGQLModel {
   rbacobject {
     __typename
     id
-    
+    ...RBACObjectLargeFragment
   }
   statemachine {
     __typename
@@ -114,7 +115,7 @@ fragment RequestTypeMediumFragment on RequestTypeGQLModel {
     typeId
   }
 }
-`, RequestTypeLinkFragment);
+`, RequestTypeLinkFragment, RBACObjectLargeFragment);
 
 export const RequestTypeLargeFragment = createQueryStrLazy(`
 fragment RequestTypeLargeFragment on RequestTypeGQLModel {

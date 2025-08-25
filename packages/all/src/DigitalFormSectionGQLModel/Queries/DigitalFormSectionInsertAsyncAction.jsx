@@ -10,7 +10,11 @@ mutation DigitalFormSectionInsertMutation(
   $label: String, 
   $labelEn: String,
   $formId: UUID,
-  $sectionId: UUID
+  $sectionId: UUID,
+  $repeatableMin: Int,
+  $repeatableMax: Int,
+  $repeatable: Boolean
+
 ) {
   result: digitalFormSectionInsert(
     digitalFormSection: {
@@ -19,7 +23,10 @@ mutation DigitalFormSectionInsertMutation(
       label: $label, 
       labelEn: $labelEn,
       formId: $formId,
-      sectionId: $sectionId
+      sectionId: $sectionId,
+      repeatableMin: $repeatableMin,
+      repeatableMax: $repeatableMax,
+      repeatable: $repeatable
     }
   ) {
     ... on InsertError {

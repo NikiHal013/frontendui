@@ -1,4 +1,5 @@
 import { createQueryStrLazy } from "@hrbolek/uoisfrontend-gql-shared";
+import { RBACObjectLargeFragment } from "../../RBACObjectGQLModel/Queries/RBACObjectFragments";
 
 export const RequestLinkFragment = createQueryStrLazy(`
 fragment RequestLinkFragment on RequestGQLModel {
@@ -66,6 +67,7 @@ fragment RequestMediumFragment on RequestGQLModel {
   rbacobject {
     __typename
     id
+    ...RBACObjectLargeFragment
   }
   activeSubmission {
     __typename
@@ -97,7 +99,7 @@ fragment RequestMediumFragment on RequestGQLModel {
     order
   }
 }
-`, RequestLinkFragment);
+`, RequestLinkFragment, RBACObjectLargeFragment);
 
 export const RequestLargeFragment = createQueryStrLazy(`
 fragment RequestLargeFragment on RequestGQLModel {

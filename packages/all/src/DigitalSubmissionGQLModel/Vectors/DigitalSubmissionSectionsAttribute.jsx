@@ -4,6 +4,7 @@ import { useAsyncAction, createAsyncGraphQLAction, processVectorAttributeFromGra
 import { ErrorHandler, InfiniteScroll, LoadingSpinner } from "@hrbolek/uoisfrontend-shared"
 
 import { DigitalSubmissionSections } from "../../DigitalSubmissionSectionGQLModel/Vectors/DigitalSubmissionSectionSectionsAttribute";
+import { DigitalSubmissionSectionButton } from "../../DigitalSubmissionSectionGQLModel/Components/DigitalSubmissionSectionCUDButton";
 
 /**
  * Inserts a SectionGQLModel item into a digitalsubmission’s sections array and dispatches an update.
@@ -354,9 +355,53 @@ export const DigitalSubmissionSectionsAttribute_ = ({
 //     return sorted;
 // }
 
+const groupSectionsByForm = (sections) => {
+    const map = {}
+    for (const section of sections) {
+        const formSection = section.formSection;
+        const id = formSection?.id
+        if (!id) continue;
+
+        if (!(id in map)) {
+            map[id] = {
+                formSection, items: []
+            }
+        }
+        map[id].items.push(section)
+    }
+    const sorted = Object.values(map).sort((a, b) => {
+        const aOrder = a.formSection?.order ?? 0;
+        const bOrder = b.formSection?.order ?? 0;
+        return aOrder - bOrder;
+    });
+
+    return sorted
+}
+
+export const DigitalSubmissionSectionRepeatable = ({formSection, digitalsubmissionsections}) => {
+    const length = digitalsubmissionsections.length
+    const visible = (formSection.repeatable && length < formSection.repeatable_max) || (length === 0);
+    if (!visible) return null;
+    return (<>
+        <DigitalSubmissionSectionButton 
+            operation="C"
+            digitalsubmissionsection={{}}
+            className="btn btn-success form-control" 
+        >
+            Přidat sekci {formSection?.name}
+        </DigitalSubmissionSectionButton>
+    </>)
+}
+
 export const DigitalSubmissionSectionsAttribute = ({digitalsubmission}) => {
     const {sections = []} = digitalsubmission;
-    return (
-        <DigitalSubmissionSections sections={sections} />
+    const grouped = groupSectionsByForm(sections)
+    return (<>
+        {grouped.map(({formSection, items}) => <div key={formSection.id}>
+            <DigitalSubmissionSections sections={items} />    
+            <DigitalSubmissionSectionRepeatable formSection={formSection} digitalsubmissionsections={items} />
+        </div>)}
+    </>
+        
     )
 }

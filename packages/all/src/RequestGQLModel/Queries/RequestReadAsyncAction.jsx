@@ -37,8 +37,8 @@ activeSubmission {
           name
           label
           order
-          repatableMin
-          repatableMax
+          repeatableMin
+          repeatableMax
         }
         id
         fields {

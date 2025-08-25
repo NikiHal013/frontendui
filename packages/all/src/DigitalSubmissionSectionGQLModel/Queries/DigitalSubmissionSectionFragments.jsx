@@ -101,8 +101,8 @@ fragment DigitalSubmissionSectionMediumFragment on DigitalSubmissionSectionGQLMo
     description
     parentId
     order
-    repatableMin
-    repatableMax
+    repeatableMin
+    repeatableMax
     repeatable
   }
   submission {

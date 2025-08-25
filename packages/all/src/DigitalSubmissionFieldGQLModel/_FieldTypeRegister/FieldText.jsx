@@ -4,7 +4,16 @@ export const FieldText = ({digitalsubmissionfield, onChange=(e)=>null, onBlur=(e
     const label = digitalsubmissionfield?.field?.label
     return (
         <>           
-            <Input id={"value"} type={"text"} label={label} className="form-control" defaultValue={digitalsubmissionfield?.value|| "Název"} onChange={onChange} onBlur={onBlur}>
+        {/* {digitalsubmissionfield?.__typename} */}
+            <Input 
+                id={"value"} 
+                type={"text"} 
+                label={label} 
+                className="form-control" 
+                defaultValue={digitalsubmissionfield?.value|| "Název"} 
+                onChange={onChange} 
+                onBlur={onBlur}
+            >
                 {children}
             </Input>
         </>

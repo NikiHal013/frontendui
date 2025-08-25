@@ -58,16 +58,17 @@ export const Input_ = ({label,  ariaHidden=false , ...props}) => {
  * />
  */
 export const Input = ({ label, ariaHidden = false, children, ...props }) => {
-    const { id, value, defaultValue, onChange = () => null, type } = props;
+    const { id, value, defaultValue, onChange = () => null, onBlur= () => null, type } = props;
     const fired = useRef(false);
 
     // Pomocná funkce pro konverzi hodnoty podle typu
     const coerceValue = (val) => {
         if (type === "number") {
+            if (val === "" || val == null) return "";     // ← prázdno zůstává prázdno
             const num = Number(val);
-            return isNaN(num) ? "" : num;
+            return Number.isNaN(num) ? "" : num;
         }
-        return val;
+        return val ?? "";
     };
 
     // Inicializační volání onChange s převedenou hodnotou
@@ -81,14 +82,14 @@ export const Input = ({ label, ariaHidden = false, children, ...props }) => {
     }, [value, defaultValue, onChange, id, type]);
 
     // Obalující onChange handler
-    const handleChange = (e) => {
+    const handleChange = (next) => (e) => {
         const coercedValue = coerceValue(e.target.value);
-        onChange({ target: { id, value: coercedValue } });
+        next({ target: { id, value: coercedValue } });
     };
 
     if (ariaHidden) return null;
 
-    const inputElement = <input {...props} onChange={handleChange} />;
+    const inputElement = <input {...props} onChange={handleChange(onChange)} onBlur={handleChange(onBlur)}/>;
 
     if (!label) return inputElement;
 

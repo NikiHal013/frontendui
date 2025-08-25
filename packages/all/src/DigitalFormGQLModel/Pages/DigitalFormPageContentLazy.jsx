@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-
+import { useSelector } from "react-redux"
 import { CreateDelayer, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfrontend-shared"
 import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
 import { DigitalFormReadAsyncAction } from "../Queries"
@@ -34,7 +34,9 @@ import { DigitalFormPageContent } from "./DigitalFormPageContent"
  * </DigitalFormPageContentLazy>
  */
 export const DigitalFormPageContentLazy = ({ digitalform, children }) => {
-    const { error, loading, entity, fetch } = useAsyncAction(DigitalFormReadAsyncAction, digitalform)
+    const { error, loading, entity: e, fetch } = useAsyncAction(DigitalFormReadAsyncAction, digitalform)
+    // const entity = useSelector(state => state.items[digitalform?.id])
+    const entity = e
     const [delayer] = useState(() => CreateDelayer())
   
     const handleChange = async (e) => {

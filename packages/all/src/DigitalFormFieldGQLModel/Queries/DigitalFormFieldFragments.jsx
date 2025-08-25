@@ -92,8 +92,8 @@ fragment DigitalFormFieldMediumFragment on DigitalFormFieldGQLModel {
     sectionId
     formId
     order
-    repatableMin
-    repatableMax
+    repeatableMin
+    repeatableMax
     repeatable
   }
   form {
@@ -122,6 +122,9 @@ export const FormSectionWithFieldsFragment = createQueryStrLazy(
   lastchange
   formId
   sectionId
+  repeatableMin
+  repeatableMax
+  repeatable
   fields {
     __typename
     id

@@ -1,7 +1,9 @@
 import { useLocation } from "react-router"
 import { InfiniteScroll, MyNavbar } from "@hrbolek/uoisfrontend-shared"
 import { TemplateReadPageAsyncAction } from "../Queries"
-import { TemplateMediumCard } from "../Components"
+import { TemplateLink, TemplateMediumCard } from "../Components"
+import { TemplatePageNavbar } from "./TemplatePageNavbar"
+import { Col } from "react-bootstrap"
 
 /**
  * Visualizes a list of template entities using TemplateMediumCard.
@@ -26,9 +28,57 @@ const TemplateVisualiser = ({items}) => {
     return (
         <>
             {items.map(template => (
-                <TemplateMediumCard key={template.id} template={template} />
+                <Col key={requesttype.id} >
+                    <TemplateMediumCard key={template.id} template={template}>
+                        
+                    </TemplateMediumCard>
+                </Col>
             ))}
         </>
+    )
+}
+
+/**
+ * Visualizes a list of template entities using table.
+ *
+ * This component receives an array of template objects via the `items` prop
+ * and renders a `tr` for each item. Each row is keyed by the template's `id`.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Array<Object>} props.items - Array of template entities to visualize. Each object should have a unique `id` property.
+ * @returns {JSX.Element} A fragment containing a list of TemplateMediumCard components.
+ *
+ * @example
+ * const templates = [
+ *   { id: 1, name: "Template 1", ... },
+ *   { id: 2, name: "Template 2", ... }
+ * ];
+ *
+ * <TemplateTableVisualiser items={templates} />
+ */
+export const TemplateTableVisualiser = ({items}) => {
+    return (
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Name</th>
+                    <th>Tools</th>
+                </tr>
+            </thead>
+            <tbody>
+            {items.map(template => (
+                <tr key={template?.id} >
+                    <td>
+                        <TemplateLink template={template} />
+                    </td>
+                    <td>{template?.name}</td>
+                    <td></td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
     )
 }
 
@@ -69,8 +119,9 @@ export const TemplateVectorPage = ({children, Visualiser=TemplateVisualiser}) =>
     } catch (e) {
         console.warn("Invalid 'where' query parameter!", e);
     }
+    const onSearchChange = () => null
     return (<>
-        <MyNavbar onSearchChange={onSearchChange} />
+        <TemplatePageNavbar template={template} onSearchChange={onSearchChange} />
         <InfiniteScroll
             preloadedItems={[]} // No preloaded items for template
             actionParams={actionParams} 

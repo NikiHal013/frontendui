@@ -1,4 +1,8 @@
 import { Input } from "@hrbolek/uoisfrontend-shared"
+import { DigitalSubmissionSectionCardCapsule } from "./DigitalSubmissionSectionCardCapsule"
+import { DigitalSubmissionFieldMediumEditableContent } from "../../DigitalSubmissionFieldGQLModel/Components/DigitalSubmissionFieldMediumEditableContent"
+import { DigitalFormSectionCardCapsule } from "../../DigitalFormSectionGQLModel/Components/DigitalFormSectionCardCapsule"
+import { DigitalSubmissionSections } from "../../DigitalSubmissionGQLModel/Components/DigitalSubmissionMediumEditableContent"
 
 /**
  * A component that displays medium-level content for an digitalsubmissionsection entity.
@@ -23,12 +27,54 @@ import { Input } from "@hrbolek/uoisfrontend-shared"
  *   <p>Additional information about the entity.</p>
  * </DigitalSubmissionSectionMediumContent>
  */
-export const DigitalSubmissionSectionMediumEditableContent = ({digitalsubmissionsection, onChange=(e)=>null, onBlur=(e)=>null, children}) => {
-    return (
-        <>           
-            <Input id={"name"} label={"Název"} className="form-control" defaultValue={digitalsubmissionsection?.name|| "Název"} onChange={onChange} onBlur={onBlur} />
-            <Input id={"name_en"} label={"Anglický název"} className="form-control" defaultValue={digitalsubmissionsection?.name_en|| "Anglický název"} onChange={onChange} onBlur={onBlur} />
-            {children}
+export const DigitalSubmissionSectionMediumEditableContent = ({
+    digitalsubmissionsection, onChange=(e)=>null, onBlur=(e)=>null, children
+}) => {
+    const sections = digitalsubmissionsection?.sections || []
+    const fields = digitalsubmissionsection?.fields?.toSorted(
+        (a, b) => (a.order || 0) - (b.order || 0)
+    ) || []
+
+    return (<>
+            {/* <pre>{JSON.stringify(digitalsubmissionsection, null, 2)}</pre> */}
+            {fields.map(field => (
+                <DigitalSubmissionFieldMediumEditableContent 
+                    key={field.id}
+                    digitalsubmissionfield={field}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            ))}
+            <DigitalSubmissionSections 
+                sections={sections} 
+                onChange={onChange}
+                onBlur={onBlur}
+            /> 
         </>
+        // <>           
+        //     <Input id={"name"} label={"Název"} className="form-control" defaultValue={digitalsubmissionsection?.name|| "Název"} onChange={onChange} onBlur={onBlur} />
+        //     <Input id={"name_en"} label={"Anglický název"} className="form-control" defaultValue={digitalsubmissionsection?.name_en|| "Anglický název"} onChange={onChange} onBlur={onBlur} />
+        //     {children}
+        // </>
     )
 }
+
+
+// export const groupSectionsByFormSection = (sections) => {
+//     const grouped = {}
+//     sections.forEach(section => {
+//         const formSectionId = section?.formSection?.id || "no-section"
+//         if(!grouped[formSectionId]) {
+//             grouped[formSectionId] = {
+//                 formSection: section?.formSection || {id: null, name: "no-section"},
+//                 sections: []
+//             }
+//         }
+//         grouped[formSectionId].sections.push(section)
+//     })
+//     Object.values(grouped).forEach(group => {
+//         group.sections.sort((a, b) => (a.index || 0) - (b.index || 0))
+//     })
+//     return Object.values(grouped)
+// }
+

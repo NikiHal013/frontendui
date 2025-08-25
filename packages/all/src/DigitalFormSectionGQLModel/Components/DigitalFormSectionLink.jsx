@@ -31,5 +31,5 @@ export const DigitalFormSectionURI = `${URIRoot}/digitalformsection/view/`;
  * @see ProxyLink - The base component used for rendering the link.
  */
 export const DigitalFormSectionLink = ({digitalformsection, ...props}) => {
-    return <ProxyLink to={DigitalFormSectionURI + digitalformsection.id} {...props}>{digitalformsection.name}</ProxyLink>
+    return <ProxyLink to={DigitalFormSectionURI + digitalformsection?.id} {...props}>{digitalformsection?.name || "DF"}</ProxyLink>
 }

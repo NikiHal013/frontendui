@@ -78,6 +78,7 @@ export const InfiniteScroll = ({
     Visualiser,
     calculateNewFilter = (oldfilter) => ({...oldfilter, skip: (oldfilter.skip || 0) + (oldfilter.limit || 10), limit: oldfilter.limit || 10}),
     children,
+    reset=0,
     onAll = () => null,
     ...props
  }) => {
@@ -117,6 +118,20 @@ export const InfiniteScroll = ({
         })
     },[preloadedItems])
 
+    useEffect(() => {
+        _setState(oldState => ({
+            filter: {
+                ...actionParams
+            },
+            // skip: skip,
+            // limit: limit,
+            loading: false,
+            hasMore: true,
+            errors: null,
+            results: oldState.results
+        }))
+    }, [reset])
+
     // Function to load more items
     const loadItems = async () => {
         if (_state.loading || !_state.hasMore) return;
@@ -131,29 +146,74 @@ export const InfiniteScroll = ({
             if (!Array.isArray(fetchedResults)) {
                 fetchedResults = Object.values(fetchedResults).find(v => Array.isArray(v)) || [];
             }
-            // console.log("fetchedResults", params.skip, params.limit)
+            // console.log("fetchedResults", params.skip, params.limit, fetchedResults)
             // console.log("fetchedResults JS", JSON.stringify(fetchedResults))
-
-            if (fetchedResults.length == 0 ) {
-                onAll()
-                _setState(_state =>({
-                    ..._state,
-                    // results: mergeArraysById(_state.results, fetchedResults || []),
-                    // skip: _state.skip + _state.limit,
-                    hasMore: false,
-                    loading: false
-                }));
+            const limit = params?.limit
+            if (limit) {
+                const hasMore = (fetchedResults.length === limit)
+                if (hasMore) {
+                    const newfilter = calculateNewFilter(_state.filter)
+                    _setState(_state => ({
+                        ..._state,
+                        filter: newfilter,
+                        results: mergeArraysById(_state.results, fetchedResults || []),
+                        // skip: _state.skip + _state.limit,
+                        hasMore: true,
+                        loading: false
+                    }));
+                } else {
+                    onAll()
+                    _setState(_state =>({
+                        ..._state,
+                        results: mergeArraysById(_state.results, fetchedResults || []),
+                        // skip: _state.skip + _state.limit,
+                        hasMore: false,
+                        loading: false
+                    }));
+                }
+                if (fetchedResults.length !== limit ) {
+                    onAll()
+                    _setState(_state =>({
+                        ..._state,
+                        results: mergeArraysById(_state.results, fetchedResults || []),
+                        // skip: _state.skip + _state.limit,
+                        hasMore: false,
+                        loading: false
+                    }));
+                } else {
+                    const newfilter = calculateNewFilter(_state.filter)
+                    _setState(_state => ({
+                        ..._state,
+                        filter: newfilter,
+                        results: mergeArraysById(_state.results, fetchedResults || []),
+                        // skip: _state.skip + _state.limit,
+                        hasMore: true,
+                        loading: false
+                    }));
+                }
             } else {
-                const newfilter = calculateNewFilter(_state.filter)
-                _setState(_state => ({
-                    ..._state,
-                    filter: newfilter,
-                    results: mergeArraysById(_state.results, fetchedResults || []),
-                    // skip: _state.skip + _state.limit,
-                    hasMore: true,
-                    loading: false
-                }));
+                if (fetchedResults.length == 0 ) {
+                    onAll()
+                    _setState(_state =>({
+                        ..._state,
+                        // results: mergeArraysById(_state.results, fetchedResults || []),
+                        // skip: _state.skip + _state.limit,
+                        hasMore: false,
+                        loading: false
+                    }));
+                } else {
+                    const newfilter = calculateNewFilter(_state.filter)
+                    _setState(_state => ({
+                        ..._state,
+                        filter: newfilter,
+                        results: mergeArraysById(_state.results, fetchedResults || []),
+                        // skip: _state.skip + _state.limit,
+                        hasMore: true,
+                        loading: false
+                    }));
+                }
             }
+            
         } catch (error) {
             console.error("Error loading items:", error);
             _setState(_state => ({

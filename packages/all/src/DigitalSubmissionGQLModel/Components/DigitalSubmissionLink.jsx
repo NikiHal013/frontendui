@@ -31,5 +31,5 @@ export const DigitalSubmissionURI = `${URIRoot}/digitalsubmission/view/`;
  * @see ProxyLink - The base component used for rendering the link.
  */
 export const DigitalSubmissionLink = ({digitalsubmission, ...props}) => {
-    return <ProxyLink to={DigitalSubmissionURI + digitalsubmission.id} {...props}>{digitalsubmission.name}</ProxyLink>
+    return <ProxyLink to={DigitalSubmissionURI + digitalsubmission?.id} {...props}>{digitalsubmission?.name ?? "LINK"}</ProxyLink>
 }

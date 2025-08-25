@@ -1,4 +1,5 @@
-import { Input, Label, Select } from "@hrbolek/uoisfrontend-shared"
+import { Input, Label, Select, TextArea } from "@hrbolek/uoisfrontend-shared"
+import { useState } from "react"
 
 /**
  * A component that displays medium-level content for an digitalformsection entity.
@@ -24,6 +25,14 @@ import { Input, Label, Select } from "@hrbolek/uoisfrontend-shared"
  * </DigitalFormSectionMediumContent>
  */
 export const DigitalFormSectionMediumEditableContent = ({digitalformsection, onChange=(e)=>null, onBlur=(e)=>null, children}) => {
+    const [showRepeatLimits, setShowRepeatLimits] = useState(digitalformsection?.repeatable ?? false)
+    const onChangeRepeatable = (next) => (e) => {
+        // console.log("DigitalFormSectionMediumEditableContent.onChangeRepeatable", e.target.value)
+        const value = e.target.value === "true" ? true : false
+        setShowRepeatLimits(value)
+        next({...e, target: {...e.target, value}})
+    }
+    
     return (
         <>           
             <Input id={"name"} label={"Název"} className="form-control" defaultValue={digitalformsection?.name|| "Název"} onChange={onChange} onBlur={onBlur} />
@@ -31,16 +40,71 @@ export const DigitalFormSectionMediumEditableContent = ({digitalformsection, onC
             <Input id={"labelEn"} label={"Anglický titulek"} className="form-control" defaultValue={digitalformsection?.label_en|| "Title"} onChange={onChange} onBlur={onBlur} />
             <Input id={"description"} label={"Popis"} className="form-control" defaultValue={digitalformsection?.description|| "Popis"} onChange={onChange} onBlur={onBlur} />
             <Input id={"order"} type="number" label={"Pořadí"} className="form-control" defaultValue={digitalformsection?.order|| 1} onChange={onChange} onBlur={onBlur} />
-            <Select id={"repeatable"} label={"Povolit opakování"} className="form-control" defaultValue={digitalformsection?.repeatable ?? false} onChange={onChange} onBlur={onBlur} >
+            <Select 
+                id={"repeatable"} 
+                label={"Povolit opakování"} 
+                className="form-control" 
+                defaultValue={digitalformsection?.repeatable ?? false} 
+                onChange={onChangeRepeatable(onChange)} 
+                onBlur={onChangeRepeatable(onBlur)} 
+            >
                 <option value={false}>Ne</option>
                 <option value={true}>Ano</option>
             </Select>
-            {digitalformsection?.repeatable && (<>
-                <Input id={"repeatableMin"} type="number" label={"Minimální počet opakování"} className="form-control" defaultValue={digitalformsection?.repeatableMin|| 1} onChange={onChange} onBlur={onBlur} />
-                <Input id={"repeatableMax"} type="number" label={"Maximální počet opakování"} className="form-control" defaultValue={digitalformsection?.repeatableMax|| 1} onChange={onChange} onBlur={onBlur} />
+            {/* {JSON.stringify(showRepeatLimits)} <br /> */}
+            {showRepeatLimits && (<>
+                <Input 
+                    id={"repeatableMin"} 
+                    type="number" 
+                    label={"Minimální počet opakování"} 
+                    className="form-control" 
+                    defaultValue={digitalformsection?.repeatableMin|| 1} 
+                    onChange={onChange} 
+                    onBlur={onBlur} 
+                />
+                <Input 
+                    id={"repeatableMax"} 
+                    type="number" 
+                    label={"Maximální počet opakování"} 
+                    className="form-control" 
+                    defaultValue={digitalformsection?.repeatableMax|| 1} 
+                    onChange={onChange} 
+                    onBlur={onBlur} 
+                />
             </>)}
             
             {children}
         </>
     )
+}
+
+const ok = "bg-opacity-10 bg-success"
+const error = "bg-opacity-10 bg-danger"
+export const DigitalFormSectionJSONContent = ({digitalformsection, children, onChange=()=>null, className, ...props}) => {
+    const [className_, setClassName] = useState(className || "form-control")
+    const onChange_ = (e) => {
+        const value = e.target.value
+        try {
+            const json = JSON.parse(value)
+            onChange({target: {id: "json", value: json}})
+            setClassName(old => {
+                if (old.includes(ok)) return old
+                if (old.includes(error)) return old.replace(error, ok)
+                return `${old} ${ok}`
+            })
+        } catch (err) {
+            setClassName(old => {
+                if (old.includes(error)) return old
+                if (old.includes(ok)) return old.replace(ok, error)
+                return `${old} ${error}`
+            })
+            console.error("Invalid JSON format:", err)
+            // Optionally handle the error, e.g., show a message to the user
+        }
+        console.log("DigitalFormSectionJSONContent.onChange", e.target.value)
+    }
+    return (<>
+        <TextArea {...props} className={className_} id={"json"} label={"JSON data"} onChange={onChange_} defaultValue={JSON.stringify(digitalformsection?.json || {}, null, 2)}/>
+        {children}
+    </>)
 }

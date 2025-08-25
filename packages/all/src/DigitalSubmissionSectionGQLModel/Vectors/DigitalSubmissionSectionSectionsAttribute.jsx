@@ -379,7 +379,7 @@ export const DigitalSubmissionSections = ({ sections }) => {
 
     const isNarrow = width < 2000;
     return (
-        <div ref={rowRef}>"DigitalSubmissionSections"
+        <div ref={rowRef}>
             {/* <pre>{JSON.stringify(sections, null, 4)}</pre> */}
             <br/>{grouped.map(({formSection, items}) => (
             <Row key={formSection?.id}>

@@ -26,9 +26,13 @@ export const RequestTypeMediumContent = ({requesttype, children}) => {
     return (
         <>
             <Row>
+                <Col><strong>Název</strong></Col>
+                <Col>{requesttype?.name}</Col>
+            </Row>
+            {/* <Row>
                 <Col>JSON</Col>
                 <Col><pre>{JSON.stringify(requesttype, null, 2)}</pre></Col>
-            </Row>
+            </Row> */}
             {children}
         </>
     )

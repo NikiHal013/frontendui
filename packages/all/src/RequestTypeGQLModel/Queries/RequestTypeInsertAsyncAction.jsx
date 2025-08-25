@@ -3,23 +3,23 @@ import { RequestTypeLargeFragment } from "./RequestTypeFragments";
 
 
 const RequestTypeInsertMutationStr = `
-mutation RequestTypeInsertMutation($id: UUID, $name: String, $name_en: String) {
+mutation RequestTypeInsert(
+  $id: UUID, 
+  $rbacobjectId: UUID!,
+	$name: String,
+  $statemachineId: UUID!,
+  $statemachinename: String!="Stavový automat pro proces ",
+  $stateId: UUID,
+  $statename: String!="Žadatel"
+) {
   result: requesttypeInsert(
-    requesttype: {id: $id, name: $name, nameEn: $name_en}
-  ) {
-    ... on InsertError {
-      failed
-      msg
-      input
-    }
-    ...RequestTypeLarge
-  }
-}
-`
-
-const RequestTypeInsertMutation = createQueryStrLazy(`
-mutation RequesttypeInsert($id: UUID) {
-  result: requesttypeInsert(requestType: { id: $id }) {
+    requestType: { 
+      id: $id, 
+      rbacobjectId: $rbacobjectId,
+      name: $name,
+      statemachineId: $statemachineId,
+      stateId: $stateId
+    }) {
     __typename
     ... on InsertError {
       msg
@@ -32,6 +32,70 @@ mutation RequesttypeInsert($id: UUID) {
       ...RequestTypeLargeFragment
     }
   }
-}
-`, RequestTypeLargeFragment)
+  
+  rbac: rbacObjectInsert(rbacobject: {
+    id: $rbacobjectId,
+    grouptypeId: "de8654be-e776-4b6e-bb1e-2d5c949aa1eb"
+    roles: []
+  }) {
+    __typename
+    ...on InsertError {
+      msg
+      code
+      location
+      input
+      
+    }
+    ...on GroupGQLModel {
+      id
+      name
+      grouptypeId
+    }
+  }
+  
+  statemachine: statemachineInsert(statemachine: {
+    id: $statemachineId,
+    rbacobjectId: $rbacobjectId,
+    name: $statemachinename,
+    states: [
+      {
+        name: $statename,
+        id: $stateId,
+        statemachineId: $statemachineId
+      }
+    ]
+  }) {
+    __typename
+    ...on InsertError {
+      msg
+      code
+      location
+      input
+    }
+    ...on StateMachineGQLModel {
+      id
+      name   
+    }
+  }
+}`
+
+// fragment RequestTypeLargeFragment on RequestTypeGQLModel {
+//   initialForm {
+//       __typename
+//       id
+//       name
+//       rbacobject {
+//         __typename
+//         id
+//       }
+//     }  
+//   rbacobject {
+//     __typename
+//     id
+//   }
+// }
+
+
+const RequestTypeInsertMutation = createQueryStrLazy(RequestTypeInsertMutationStr, RequestTypeLargeFragment)
+
 export const RequestTypeInsertAsyncAction = createAsyncGraphQLAction(RequestTypeInsertMutation)

@@ -2,7 +2,7 @@ import { ButtonWithDialog, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfro
 
 import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared";
 import { DigitalFormSectionDeleteAsyncAction, DigitalFormSectionInsertAsyncAction, DigitalFormSectionUpdateAsyncAction } from "../Queries";
-import { DigitalFormSectionMediumEditableContent } from "./DigitalFormSectionMediumEditableContent";
+import { DigitalFormSectionJSONContent, DigitalFormSectionMediumEditableContent } from "./DigitalFormSectionMediumEditableContent";
 
 /**
  * DigitalFormSectionCUDButton Component
@@ -91,6 +91,15 @@ export const DigitalFormSectionButton = ({ operation, children, digitalformsecti
                 </h2>
             ),
         },
+        JSON: {
+            asyncAction: DigitalFormSectionInsertAsyncAction,
+            dialogTitle: "Vytvořit sekci na základě dat JSON",
+            loadingMsg: "Vkládám novou sekci",
+            renderContent: () => <DigitalFormSectionJSONContent 
+                digitalformsection={digitalformsection} 
+                className="form-control"
+            />,
+        },
     };
 
     if (!operationConfig[operation]) {
@@ -101,6 +110,10 @@ export const DigitalFormSectionButton = ({ operation, children, digitalformsecti
 
     const { error, loading, fetch, entity } = useAsyncAction(asyncAction, digitalformsection, { deferred: true });
     const handleClick = async (params = {}) => {
+        if (operation === 'JSON') {
+            console.log("JSON operation, params:", params);
+            return
+        }
         const fetchParams = { ...digitalformsection, ...params };
         onOptimistic(fetchParams);
         const freshDigitalFormSection = await fetch(fetchParams);
