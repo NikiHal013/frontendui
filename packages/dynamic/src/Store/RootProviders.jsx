@@ -3,19 +3,19 @@ import { store } from "./Store";
 import { createGraphQLClient } from "../Core/gqlClient2";
 import { createContext, useContext, useMemo } from "react";
 
-export const RootProviders = ({ children }) => (
-    <GQLClientProvider>
+export const RootProviders = ({ children, clientOptions }) => (
+    <GQLClientProvider clientOptions={clientOptions}>
         <ReduxProvider store={store}>
             {children}
         </ReduxProvider>
     </GQLClientProvider>
 );
 
-const GQLClientContext = createContext(null);
+export const GQLClientContext = createContext(null);
 
-const GQLClientProvider = ({children}) => {
+const GQLClientProvider = ({children, clientOptions={}}) => {
     const client = useMemo(
-        () => createGraphQLClient({ /* sem pak endpoint, headers, ... */ }),
+        () => createGraphQLClient(clientOptions),
         []
     );
     return (

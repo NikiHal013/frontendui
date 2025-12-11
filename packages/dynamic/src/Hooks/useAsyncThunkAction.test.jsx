@@ -1,70 +1,50 @@
-import React from "react";
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { ItemReducer, ItemActions } from "../Store/ItemSlice";
+// useAsyncThunkAction.test.jsx
+import { renderHook, act } from "@testing-library/react";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "../Store";
+import { GQLClientContext } from "../Store"; // pokud ho exportuješ
 import { useAsyncThunkAction } from "./useAsyncThunkAction";
+import { createAsyncGraphQLAction2 } from "../Core/createAsyncGraphQLAction2";
+import { createMockGqlClient } from "../../test/createMockGqlClient";
 
-const id1 = "832bd904-de58-432b-aaf4-6dff721fd9e5"
+const wrapper = ({ children, client }) => (
+    <ReduxProvider store={store}>
+        <GQLClientContext.Provider value={client}>
+            {children}
+        </GQLClientContext.Provider>
+    </ReduxProvider>
+);
 
-// 1) testovací async akce – jednoduchý thunk
-// simuluje createAsyncGraphQLAction2 bez middlewarů
-const createTestAsyncAction = () => {
-    const AsyncAction = (vars) => async (dispatch, getState) => {
-        // jako by proběhl fetch...
-        const entity = { id: vars.id ?? id1, __typename: "Test", name: "Alice" };
+it("useAsyncThunkAction + createAsyncGraphQLAction2 používají klienta z kontextu", async () => {
+    const mockClient = createMockGqlClient();
 
-        // uložíme do ItemSlice
-        dispatch(ItemActions.item_add(entity));
+    const query = `
+        query Me {
+            me { id __typename name }
+        }
+    `;
 
-        // a vrátíme výsledek
-        return entity;
-    };
-    return AsyncAction;
-};
+    const AsyncAction = createAsyncGraphQLAction2(query);
 
-const TestComponent = ({ id }) => {
-    const AsyncAction = React.useMemo(() => createTestAsyncAction(), []);
-    const { loading, error, data, entity } = useAsyncThunkAction(
-        AsyncAction,
-        id ? { id } : {}
+    const { result } = renderHook(
+        () => useAsyncThunkAction(AsyncAction),
+        { wrapper: ({ children }) => wrapper({ children, client: mockClient }) }
     );
 
-    return (
-        <div>
-            <div data-testid="loading">{String(loading)}</div>
-            <div data-testid="error">{error ? "ERR" : ""}</div>
-            <div data-testid="data">{data ? data.name : ""}</div>
-            <div data-testid="entity">{entity ? entity.name : ""}</div>
-        </div>
-    );
-};
-
-describe("useAsyncThunkAction", () => {
-    const renderWithStore = (ui, { preloadedState } = {}) => {
-        const store = configureStore({
-            reducer: { items: ItemReducer },
-            preloadedState,
-        });
-
-        return render(<Provider store={store}>{ui}</Provider>);
+    const fakeResult = {
+        data: { me: { id: "1", __typename: "User", name: "Tester" } },
     };
+    mockClient.request.mockResolvedValueOnce(fakeResult);
 
-    it("načte data a uloží entity do storu, entity vrátí podle id", async () => {
-        renderWithStore(<TestComponent id="123" />);
-
-        // počáteční loading true
-        expect(screen.getByTestId("loading").textContent).toBe("true");
-
-        // po doběhnutí thunk
-        await waitFor(() => {
-            expect(screen.getByTestId("loading").textContent).toBe("false");
-        });
-
-        // data z thunk
-        expect(screen.getByTestId("data").textContent).toBe("Alice");
-        // entity z ItemSlice selectItemById (id = 123)
-        expect(screen.getByTestId("entity").textContent).toBe("Alice");
+    let out;
+    await act(async () => {
+        out = await result.current.run({});
     });
+
+    expect(mockClient.request).toHaveBeenCalledWith({
+        query,
+        variables: {},
+    });
+
+    expect(out).toEqual(fakeResult); // nebo to, co middleware chain vrací
 });

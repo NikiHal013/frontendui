@@ -7,7 +7,7 @@ import { fetchGraphQL, GraphQLResponseError } from "./gqlFetch";
  * @property {(errors: any[], response: any) => void} [onGraphQLErrors]
  */
 
-const introspectionQuery = `
+export const introspectionQuery = `
 query IntrospectionQuery {
   __schema {
     queryType { name }
@@ -81,6 +81,7 @@ query IntrospectionQuery {
 }
 `;
 
+export const sdlQuery = `query __ApolloGetServiceDefinition__ { _service { sdl } }`
 
 export function createGraphQLClient(options) {
     const {
@@ -138,7 +139,7 @@ export function createGraphQLClient(options) {
     const sdl = async () => {
         if (!cachedSDL) {
             const data = await request({
-                query: `query __ApolloGetServiceDefinition__ { _service { sdl } }`,
+                query: sdlQuery,
             });
             cachedSDL = data?._service?.sdl || null;
         }

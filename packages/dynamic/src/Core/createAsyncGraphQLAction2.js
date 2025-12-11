@@ -1,6 +1,4 @@
 import { updateItemsFromGraphQLResult } from "../Store/Middlewares/updateItemsFromGraphQLResult";
-import { gqlClient } from "./gqlClient2";
-
 
 // export const createFetchQuery = (graphQLQuery, defaultParams = {}) => {
 //     return async (variables) => {
