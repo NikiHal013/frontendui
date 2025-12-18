@@ -87,17 +87,8 @@ const LiveEditWrapper = ({ item, children }) => {
 }
 
 
-export const LiveEdit = ({ item, children }) => {
-    const { run , error, loading, entity, data, onChange: contextOnChange, onBlur: contextOnBlur } = useGQLEntityContext()
-    
-    // const localOnMutationEvent = useCallback((mutationHandler, notifyHandler) => async (e) => {
-    //     const newItem = { ...item, [e.target.id]: e.target.value }
-    //     const newEvent = { target: { value: newItem } }
-        
-    //     await notifyHandler(newEvent)
-    //     return await mutationHandler(e)
-    // })
-
+export const LiveEdit = ({ item, children, asyncMutationAction=UpdateAsyncAction }) => {
+    // const { run , error, loading, entity, data, onChange: contextOnChange, onBlur: contextOnBlur } = useGQLEntityContext()
     const {
         draft,
         dirty,
@@ -106,20 +97,11 @@ export const LiveEdit = ({ item, children }) => {
         onBlur,
         onCancel,
         onConfirm,
-    } = useEditAction(UpdateAsyncAction, item, {
+    } = useEditAction(asyncMutationAction, item, {
         mode: "live", 
         // onCommit: contextOnChange
     })
 
-    // const [dirty, setDirty] = useState(false);
-    // const handleChange = useCallback(async () => {
-    //     setDirty(true);
-    //     const result = await onChange();
-    //     setDirty(false);
-    //     // console.log("LiveEdit handleConfirm result", result, "draft", draft)
-    // })
-
-    const className=dirty || loading?"border border-danger rounded":"border rounded"
     return (
         
         <MediumEditableContent item={item} onChange={onChange} onBlur={onBlur} >

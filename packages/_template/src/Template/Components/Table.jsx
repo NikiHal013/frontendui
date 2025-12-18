@@ -4,5 +4,4 @@ export const Table = ({ data }) => {
     return (
         <BaseTable data={data} />
     )
-
 }

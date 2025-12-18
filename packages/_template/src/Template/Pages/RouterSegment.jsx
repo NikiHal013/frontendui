@@ -1,5 +1,6 @@
 import { LinkURI } from "../Components/Link"
-import { Page, PageEdit } from "./Page"
+import { Page } from "./Page"
+import { PageEdit } from "./PageEdit"
 import { VectorPage } from "./VectorPage"
 
 /**
