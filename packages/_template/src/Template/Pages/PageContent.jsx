@@ -1,5 +1,6 @@
+import { useGQLEntityContext } from "../../Base/Helpers/GQLEntityProvider"
 import { LargeCard } from "../Components/LargeCard"
-import { useGQLEntityContext } from "../Utils/GQLEntityProvider"
+// import { useGQLEntityContext } from "../Utils/GQLEntityProvider"
 import { PageNavbar } from "./PageNavbar"
 
 /**

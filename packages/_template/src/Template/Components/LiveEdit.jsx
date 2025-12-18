@@ -1,12 +1,10 @@
-import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared";
-import { UpdateAsyncAction } from "../Queries";
-import { useState } from "react";
-import { CreateDelayer, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfrontend-shared";
-import { AsyncActionProvider, useGQLEntityContext } from "../Utils/GQLEntityProvider";
-import { MediumEditableContent } from "./MediumEditableContent";
-import { useEditAction } from "../../../../dynamic/src/Hooks/useEditAction";
 import { useCallback } from "react";
 import { useMemo } from "react";
+
+import { UpdateAsyncAction } from "../Queries";
+import { CreateDelayer, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfrontend-shared";
+import { MediumEditableContent } from "./MediumEditableContent";
+import { useEditAction } from "../../../../dynamic/src/Hooks/useEditAction";
 
 /**
  * TemplateLiveEdit Component

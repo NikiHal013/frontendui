@@ -1,6 +1,6 @@
 import { LiveEdit } from "../Components";
 import { UpdateAsyncAction } from "../Queries";
-import { PlaceChild } from "../Utils/PlaceChild";
+import { PlaceChild } from "../../Base/Helpers/PlaceChild";
 import { PageCapsule } from "./PageCapsule";
 
 const UpdateLiveEdit = (props) => (

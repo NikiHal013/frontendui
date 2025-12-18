@@ -1,5 +1,5 @@
 import { LinkURI } from "../Components/Link"
-import { Page } from "./Page"
+import { Page, PageMediumCard } from "./Page"
 import { PageEdit } from "./PageEdit"
 import { VectorPage } from "./VectorPage"
 
@@ -44,5 +44,9 @@ export const TemplateRouterSegments = [
     {
         path: `/${LinkURI.replace('view', 'edit')}:id`,
         element: (<PageEdit />),
-    }
+    },
+    {
+        path: `/${LinkURI.replace('view', 'view2')}:id`,
+        element: (<PageMediumCard />),
+    }    
 ]
