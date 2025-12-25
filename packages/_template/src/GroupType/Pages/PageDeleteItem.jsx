@@ -3,8 +3,6 @@ import { LinkURI } from "../Components";
 import { PageBase } from "./PageBase";
 import { DeleteBody } from "../Mutations/Delete";
 
-export { DeleteURI } from "../Mutations/Delete"
-
 export const PageDeleteItem = ({ children, queryAsyncAction=DeleteAsyncAction, ...props }) => {
     return (
         <PageBase>

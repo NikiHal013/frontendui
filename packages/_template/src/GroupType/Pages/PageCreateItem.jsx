@@ -5,8 +5,6 @@ import { LinkURI } from "../Components";
 import { PageBase } from "./PageBase";
 import { CreateBody } from "../Mutations/Create";
 
-export const CreateItemURI = `${LinkURI.replace('view', 'create')}`
-
 export const PageCreateItem = ({ children, queryAsyncAction=ReadAsyncAction, ...props }) => {
     return (
         <PageBase>

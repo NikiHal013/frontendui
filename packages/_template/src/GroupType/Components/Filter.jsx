@@ -5,7 +5,6 @@ export const Filter = ({ id, onChange: handleChange, children }) => {
         <BaseFilter id={id} onChange={handleChange}>
             <UUIDFilter id="id" />
             <StringFilter id="name" />
-            <StringFilter id="nameEn" />
             <DateTimeFilter id="created" emitUtcIso={false} />
             {/* <FloatFilter id="count" /> */}
             {children}

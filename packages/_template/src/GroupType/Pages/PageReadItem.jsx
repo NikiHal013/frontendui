@@ -3,15 +3,14 @@ import { MediumCardScalars } from "../../Base/Scalars/ScalarAttribute"
 import { MediumCardVectors } from "../../Base/Vectors/VectorAttribute"
 import { LargeCard, LinkURI } from "../Components"
 import { ReadAsyncAction } from "../Queries"
-import { PageItemBase } from "./PageBase"
-
+import { PageBase, PageItemBase } from "./PageBase"
 
 export const ReadItemURI = `${LinkURI}:id`
 
 export const PageReadItem = ({ children, queryAsyncAction=ReadAsyncAction, ...props }) => {
-    
     return (
         <PageItemBase queryAsyncAction={queryAsyncAction}>
+            PageReadItem
             <Read {...props} />
         </PageItemBase>
     )
@@ -20,7 +19,6 @@ export const PageReadItem = ({ children, queryAsyncAction=ReadAsyncAction, ...pr
 const Read = ({...props}) => {
     const { item } = useGQLEntityContext()
     if (!item) return null
-    // return (<pre>{JSON.stringify(item)}</pre>)
     return (
         <LargeCard item={item} {...props} >
             <MediumCardScalars item={item} />
