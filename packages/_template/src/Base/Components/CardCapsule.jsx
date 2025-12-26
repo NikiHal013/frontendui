@@ -74,7 +74,7 @@ const styles = {
     },
     capsuleRightCorner: {
         position: "absolute",
-        top: "-10px",
+        top: "-14px",
         right: "16px",
         backgroundColor: "white",
         padding: "0 8px",
@@ -134,3 +134,7 @@ export const SimpleCardCapsule = ({ id, header, title, children, style, ...props
 };
     
 export const CardCapsule = SimpleCardCapsule
+
+export const SimpleCardCapsuleRightCorner = ({ children }) => {
+    return <span style={styles.capsuleRightCorner}>{children}</span>;
+};
