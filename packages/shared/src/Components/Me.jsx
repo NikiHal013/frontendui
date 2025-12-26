@@ -381,13 +381,13 @@ export const MyNavbar = ({
 
     const state = useMe()
 
-    if (state.loading) {
-        return (
-            <div className="text-center">
-                <span>Nahrávám...</span>
-            </div>
-        );
-    }
+    // if (state.loading) {
+    //     return (
+    //         <div className="text-center">
+    //             <span>Nahrávám...</span>
+    //         </div>
+    //     );
+    // }
 
     if (state.error) {
         return (
@@ -409,6 +409,9 @@ export const MyNavbar = ({
     //navbar-light bg-light
     return (
         <Navbar bg="light" expand="lg">
+            {/* {state?.loading && <div className="text-center">
+                <span>Nahrávám...</span>
+            </div>} */}
             {/* Navbar Brand or Logo */}
             {/* <Navbar.Collapse id="never">
             <Nav variant="tabs" className="align-items-left">
