@@ -68,13 +68,13 @@ export const Input = ({ label, ariaHidden = false, children, ...props }) => {
         onChange = () => null,
         onBlur = () => null,
         type="text",
+        reset=0,
         ...rest
     } = props;
 
     const isControlled = value !== undefined; // klíčové
     const touchedRef = useRef(false);
-    const [value_, setValue_] = useState(value)
-    useEffect(() => setValue_(value), [value])
+
     const coerceValue = (val) => {
         if (type === "number") {
             if (val === "" || val == null) return "";
@@ -83,6 +83,17 @@ export const Input = ({ label, ariaHidden = false, children, ...props }) => {
         }
         return val ?? "";
     };
+
+    const [value_, setValue_] = useState(() => coerceValue(value));
+    
+    useEffect(() => {
+        // console.log("Input.useEffect.value")
+        if (!isControlled) return;
+        // console.log("Input.useEffect.value changed to", value)
+        touchedRef.current = false;
+        setValue_(value)
+    }, [isControlled, value, reset])
+
 
     // reset "touched", když se změní hodnota zvenku (typicky reload / cancel / confirm)
     const externalValueKey = useMemo(
@@ -103,6 +114,7 @@ export const Input = ({ label, ariaHidden = false, children, ...props }) => {
         touchedRef.current = true;
         const value = e?.target?.value
         setValue_(value)
+        // console.log("Input.handleChange.value changed to", value, reset)
         emit(onChange)(e);
     };
 
@@ -123,6 +135,7 @@ export const Input = ({ label, ariaHidden = false, children, ...props }) => {
 
     // Controlled vs uncontrolled:
     if (isControlled) {
+        // console.log("Input.isControlled using value", value_, value)
         inputProps.value = coerceValue(value_);
     } else {
         inputProps.defaultValue = coerceValue(defaultValue);
@@ -134,10 +147,12 @@ export const Input = ({ label, ariaHidden = false, children, ...props }) => {
     // console.log("Input default", isControlled, defaultValue, inputProps)
     const inputElement = <input {...inputProps} />;
 
+    // console.log(inputProps)
     if (!label) return inputElement;
 
     return (
         <Label title={label}>
+            {/* {JSON.stringify(inputProps)} */}
             {inputElement}
             {/* value_: {value_} <br />
             value: {value}  */}

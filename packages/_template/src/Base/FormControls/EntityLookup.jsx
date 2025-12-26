@@ -89,6 +89,7 @@ export const EntityLookup = ({
         setValue_(value)
     },[value])
 
+
     const handleChange = useCallback(async (e) => {
         const target = e?.target || {}
         const value = target?.value || ""
@@ -106,8 +107,8 @@ export const EntityLookup = ({
     }, [asyncAction, skip, limit])
 
     const handleSelect = useCallback((item) => {
-        
-        setValue_(prev => item || prev)
+        console.log("EntityLookup.handleSelect", item)
+        setValue_(prev => (item || prev))
 
         if (onChange) {
             onChange({target: {id, value: item?.id}})
@@ -127,13 +128,16 @@ export const EntityLookup = ({
     return (
         <>
             <AsyncStateIndicator loading={loading} error={error} text={"Hledám"} />
-            {/* {JSON.stringify(value)} */}
+            {/* {JSON.stringify(value_)}<br/>
+            {value_?.fullname || value_?.name} */}
             <Label title={label}>
                 <Input {...props} 
                     id={"__phrase"} 
                     onChange={handleChange} 
                     placeholder="Napiště alespoň 3 znaky" 
-                    value={value_?.name}
+                    value={value_?.fullname || value_?.name}
+                    reset={value_}
+                    // defaultValue={value_?.name}
                 />
                 {fetchedItems.map(
                     item => <SearchResult key={item?.id} item={item} onSelect={handleSelect} />
