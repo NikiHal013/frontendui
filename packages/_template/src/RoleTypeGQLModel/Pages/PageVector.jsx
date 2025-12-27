@@ -13,8 +13,6 @@ import { AsyncStateIndicator } from "../../Base/Helpers/AsyncStateIndicator"
 import { Collapsible } from "../../Base/FormControls/Collapsible"
 
 
-export const VectorItemsURI = LinkURI.replace('view', 'list')
-
 function safeParseWhere(sp, paramName = "where") {
     const raw = sp.get(paramName);
     if (!raw) return null;
