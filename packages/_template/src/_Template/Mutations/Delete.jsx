@@ -1,16 +1,12 @@
-import { LinkURI, MediumContent } from "../Components";
+import { DeleteItemURI, MediumContent, VectorItemsURI } from "../Components";
 import { DeleteAsyncAction } from "../Queries";
-import { makeMutationURI } from "./helpers";
 import { 
     DeleteBody as BaseDeleteBody, 
     DeleteButton as BaseDeleteButton, 
     DeleteDialog as BaseDeleteDialog, 
     DeleteLink as BaseDeleteLink
 } from "../../Base/Mutations/Delete";
-import { VectorItemsURI } from "../Pages";
 
-
-export const DeleteURI = makeMutationURI(LinkURI, "delete", { withId: true });
 const DefaultContent = MediumContent
 const mutationAsyncAction = DeleteAsyncAction
 
@@ -23,7 +19,7 @@ export const DeleteLink = ({ ...props }) => {
     return (
         <BaseDeleteLink 
             {...props} 
-            uriPattern={DeleteURI} 
+            uriPattern={DeleteItemURI} 
             {...permissions}
         />
     )
