@@ -8,23 +8,25 @@ import {
 import { MediumEditableContent, UpdateItemURI } from "../Components";
 import { UpdateAsyncAction } from "../Queries";
 
-
 const DefaultContent = MediumEditableContent
 const mutationAsyncAction = UpdateAsyncAction
 
-// const permissions = {
-//     oneOfRoles: ["superadmin"],
-//     mode: "absolute",
-// }
-
-// ALTERNATIVE, CHECK GQLENDPOINT
 const permissions = {
-    oneOfRoles: ["administrátor", "personalista"],
-    mode: "item",
+    oneOfRoles: ["superadmin"],
+    mode: "absolute",
 }
 
+// ALTERNATIVE, CHECK GQLENDPOINT
+// const permissions = {
+//     oneOfRoles: ["administrátor", "personalista"],
+//     mode: "item",
+// }
 
-export const UpdateLink = ({uriPattern=UpdateItemURI, ...props}) => {
+
+export const UpdateLink = ({
+    uriPattern=UpdateItemURI, 
+    ...props
+}) => {
     return <BaseUpdateLink 
         {...props} 
         uriPattern={uriPattern} 
@@ -32,16 +34,24 @@ export const UpdateLink = ({uriPattern=UpdateItemURI, ...props}) => {
     />
 }
 
-export const UpdateButton = ({...props}) => {
+export const UpdateButton = ({
+    DefaultContent:DefaultContent_=DefaultContent,
+    mutationAsyncAction:mutationAsyncAction_=mutationAsyncAction,
+    ...props
+}) => {
     return <BaseUpdateButton 
         {...props} 
-        DefaultContent={DefaultContent} 
-        mutationAsyncAction={mutationAsyncAction}
+        DefaultContent={DefaultContent_} 
+        mutationAsyncAction={mutationAsyncAction_}
         {...permissions}
     />
 }
 
-export const UpdateDialog = ({...props}) => {
+export const UpdateDialog = ({
+    DefaultContent:DefaultContent_=DefaultContent,
+    mutationAsyncAction:mutationAsyncAction_=mutationAsyncAction,
+    ...props
+}) => {
     return <BaseUpdateDialog 
         {...props} 
         DefaultContent={DefaultContent} 
@@ -50,7 +60,11 @@ export const UpdateDialog = ({...props}) => {
     />
 }
 
-export const UpdateBody = ({...props}) => {
+export const UpdateBody = ({
+    DefaultContent:DefaultContent_=DefaultContent,
+    mutationAsyncAction:mutationAsyncAction_=mutationAsyncAction,
+    ...props
+}) => {
     return <BaseUpdateBody 
         {...props} 
         DefaultContent={DefaultContent} 
