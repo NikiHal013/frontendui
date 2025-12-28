@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import { useAsyncThunkAction } from "@hrbolek/uoisfrontend-dynamic";
-import { RootProviders } from "@hrbolek/uoisfrontend-dynamic";
+// import { RootProviders } from "@hrbolek/uoisfrontend-dynamic";
 // import { createAsyncGraphQLAction2 } from '../../../packages/dynamic/src/Core/createAsyncGraphQLAction2';
 // import { reduceToFirstEntity } from '../../../packages/dynamic/src/Store/Middlewares';
 // import { useAsync } from '../../../packages/dynamic/src/Hooks/useAsyncThunkAction';
@@ -9,6 +9,7 @@ import { RootProviders } from "@hrbolek/uoisfrontend-dynamic";
 // import { BaseUI } from '../../../packages/_template/src/Base';
 // import { TemplateUI } from '../../../packages/_template/src/Template/Utils';
 import { AppRouter } from './AppRouter';
+import { RootProviders } from '../../../packages/dynamic/src/Store';
 
 export const GQLENDPOINT = "/api/gql"
 // const getSdl = () => client.sdl()
