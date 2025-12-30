@@ -7,14 +7,14 @@ import { Link } from "./Link";
 export const LargeCard = ({ item, children }) => {
     return (
         <Row>
-            <Col className="col-4">
+            <Col className="col-3">
                 <MediumCard item={item}>
                     <SimpleCardCapsuleRightCorner>
                         <Link className="btn btn-sm border-0" item={item} action="__def">Definice</Link>
                     </SimpleCardCapsuleRightCorner>
                 </MediumCard>
             </Col>
-            <Col className="col-8">
+            <Col className="col-9">
                 {children}
             </Col>
         </Row>
