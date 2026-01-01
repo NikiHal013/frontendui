@@ -113,7 +113,7 @@ const PageItemInnerStructure = ({
  */
 export const PageItemBase = ({ 
     queryAsyncAction=ReadAsyncAction,
-    PageNavbar=null,
+    PageNavbar=()=>null,
     ItemLayout=LargeCard,
     SubPage=GeneratedContentBase,
     children

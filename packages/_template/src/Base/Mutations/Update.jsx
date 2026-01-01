@@ -103,6 +103,7 @@ export const UpdateButton = ({
                 mutationAsyncAction={mutationAsyncAction}
                 DefaultContent={DefaultContent_}
                 Dialog={Dialog}
+                children={children}
                 {...props}
             />
         </PermissionGate>
@@ -207,7 +208,7 @@ export const UpdateBody = ({
 }) => {
     const { item } = useGQLEntityContext()
     // const { can, roleNames } = useRolePermission(item, ["administrátor"])
-    if (!item) return null
+    if (!item) return (<>No item</>)
     return (
         <PermissionGate oneOfRoles={oneOfRoles} mode={mode} item={item}>
             <UpdateBodyBody 

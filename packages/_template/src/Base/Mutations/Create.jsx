@@ -88,7 +88,7 @@ const CreateButtonBody = ({
     children,
     rbacitem,
     mutationAsyncAction=InsertAsyncAction,
-    CreateDialog: CreateDialog_,
+    CreateDialog: CreateDialog_=CreateDialog,
     DefaultContent: DefaultContent_ = DefaultContent,
     readItemURI=ReadItemURI,
     initialItem,

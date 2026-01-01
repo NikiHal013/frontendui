@@ -27,12 +27,14 @@ export function useCreateSession({
     const navigate = useNavigate();
 
     const baseItem = useMemo(() => {
-        return (
+        const result = (
             initialItem ?? {
                 id: crypto.randomUUID(),
                 name: defaultName,
             }
-        );
+        )
+        result.id = result?.id ?? crypto.randomUUID()
+        return result;
     }, [initialItem, defaultName]);
 
     const [newItem, setNewItem] = useState(baseItem);

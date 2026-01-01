@@ -7,6 +7,9 @@ import { MyNavDropdown as UserNavDropdown } from "../../../packages/_template/sr
 import { MyNavDropdown as GroupNavDropdown } from "../../../packages/_template/src/GroupGQLModel";
 import { MyNavDropdown as RoleNavDropdown } from "../../../packages/_template/src/RoleGQLModel";
 import { MyNavDropdown as RoleTypeNavDropdown } from "../../../packages/_template/src/RoleTypeGQLModel";
+
+import { MyNavDropdown as DigitalFormNavDropdown } from "../../../packages/office/src/DigitalFormGQLModel/Pages/PageNavbar";
+
 import { PageNavbar } from "../../../packages/_template/src/Base/Pages/PageNavbar";
 
 export const AppNavbar = () => {
@@ -20,6 +23,8 @@ export const AppNavbar = () => {
             <RoleNavDropdown item={item} />
             <GroupTypeNavDropdown item={item} />
             <RoleTypeNavDropdown item={item} />
+
+            <DigitalFormNavDropdown item={item} />
         </PageNavbar>
     )
 }

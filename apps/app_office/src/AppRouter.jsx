@@ -13,6 +13,8 @@ import { UserRouterSegments } from "../../../packages/_template/src/UserGQLModel
 import { GroupTypeRouterSegments } from "../../../packages/_template/src/GroupTypeGQLModel/Pages/RouterSegment";
 import { RoleRouterSegments } from "../../../packages/_template/src/RoleGQLModel/Pages";
 import { AppNavbar } from "./AppNavbar";
+import { DigitalFormGQLModelRouterSegments } from "../../../packages/office/src/DigitalFormGQLModel/Pages";
+import { SubmissionRouterSegments } from "../../../packages/office/src/DigitalSubmission/Pages/RouterSegment";
 
 
 const AppLayout = () => (
@@ -34,6 +36,9 @@ const Routes = [
             ...UserRouterSegments,
             ...GroupTypeRouterSegments,
             ...RoleRouterSegments,
+
+            ...DigitalFormGQLModelRouterSegments,
+            ...SubmissionRouterSegments
         ],
     },
 ];

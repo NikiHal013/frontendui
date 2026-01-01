@@ -49,7 +49,7 @@ export const MediumContent = ({ item }) => {
         )}
         <hr/>
         <Attribute label="Poslední změna" item={item} attribute_name={"lastchange"} />
-        <Attribute label="Provedl" item={item} attribute_name={"lastchange"}>
+        <Attribute label="Provedl" item={item} attribute_name={"changedby"}>
             <BaseLink item={item?.changedby} />
         </Attribute>
     </>)

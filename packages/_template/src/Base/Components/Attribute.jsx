@@ -1,17 +1,19 @@
 import { Col } from "./Col";
 import { Row } from "./Row";
 
+export const formatDateTime = (d) => {
+    const date = d instanceof Date ? d : new Date(d);
+    if (Number.isNaN(date.getTime())) return String(d); // fallback, když to není validní datum
+    return new Intl.DateTimeFormat("cs-CZ", {
+        dateStyle: "medium",
+        timeStyle: "short",
+    }).format(date);
+};
+
+
 export const Attribute = ({ item, label, attribute_name, attribute_value, children }) => {
     const raw = attribute_value != null ? attribute_value : item?.[attribute_name];
 
-    const formatDateTime = (d) => {
-        const date = d instanceof Date ? d : new Date(d);
-        if (Number.isNaN(date.getTime())) return String(d); // fallback, když to není validní datum
-        return new Intl.DateTimeFormat("cs-CZ", {
-            dateStyle: "medium",
-            timeStyle: "short",
-        }).format(date);
-    };
 
     const renderValue = (v) => {
         if (v == null) return ""; // nebo "—"

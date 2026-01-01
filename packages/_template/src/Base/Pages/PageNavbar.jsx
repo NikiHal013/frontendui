@@ -1,7 +1,6 @@
 import { Nav, Navbar } from "react-bootstrap"
 import { BoxArrowInLeft, BoxArrowRight, HouseFill, PersonCircle } from "react-bootstrap-icons";
 import { Link } from "../Components";
-import { childNodes } from "happy-dom/lib/PropertySymbol";
 
 export const HomeButton = ({indexURL}) => {
     return (
@@ -51,19 +50,21 @@ export const PageNavbar = ({
     PersonButton: PersonButton_ = DummyComponent,
     SearchBox: SearchBox_ = DummyComponent
 }) => {
-    <Navbar bg="light" expand="lg">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-            <Nav variant="tabs" className="align-items-center w-100 flex-column flex-lg-row">
-                <HomeButton_ indexURL={indexUrl} />
-                <div className="mx-auto d-flex align-items-center flex-column flex-lg-row mb-0">
-                    {children}
-                </div>
-                <div className="d-flex flex-column flex-lg-row align-items-center ml-lg-auto">
-                    <SearchBox_ handleSearchChange={handleSearchChange} />
-                </div>
-                <PersonButton_ item={item} />
-            </Nav>
-        </Navbar.Collapse>
-    </Navbar>
+    return (
+        <Navbar bg="light" expand="lg">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav variant="tabs" className="align-items-center w-100 flex-column flex-lg-row">
+                    <HomeButton_ indexURL={indexUrl} />
+                    <div className="mx-auto d-flex align-items-center flex-column flex-lg-row mb-0">
+                        {children}
+                    </div>
+                    <div className="d-flex flex-column flex-lg-row align-items-center ml-lg-auto">
+                        <SearchBox_ handleSearchChange={handleSearchChange} />
+                    </div>
+                    <PersonButton_ item={item} />
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    )
 }
