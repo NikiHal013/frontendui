@@ -99,6 +99,7 @@ export const DeleteButton = ({
                 mutationAsyncAction={mutationAsyncAction}
                 DefaultContent={DefaultContent_}
                 vectorItemsURI={vectorItemsURI}
+                children={children}
                 {...props }
             />
             {/* {JSON.stringify(visible)} */}
@@ -121,7 +122,8 @@ const DeleteButtonBody = ({
     const togleVisible = () => setVisible(prev => !prev)
     const handleOkClick = () => {
         setVisible(false)
-        follow()
+        if (vectorItemsURI)
+            follow()
     }
     const handleCancelClick = () => {
         setVisible(false)
