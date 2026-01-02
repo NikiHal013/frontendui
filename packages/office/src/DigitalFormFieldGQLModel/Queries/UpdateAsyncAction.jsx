@@ -11,7 +11,7 @@ mutation digitalFormFieldUpdate($id: UUID!, $lastchange: DateTime!, $name: Strin
   }
 }
 
-fragment Error on RoleTypeGQLModelUpdateError {
+fragment Error on DigitalFormFieldGQLModelUpdateError {
   __typename
   Entity {
     ...Large

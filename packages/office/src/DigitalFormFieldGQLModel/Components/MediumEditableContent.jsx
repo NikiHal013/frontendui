@@ -27,8 +27,16 @@ export const MediumEditableContent = ({ item, onChange=(e)=>null, onBlur=(e)=>nu
     return (
         <>           
         {/* defaultValue={item?.name|| "Název"}  */}
-            <Input id={"name"} label={"Jméno"} className="form-control" value={item?.name|| "Název"} onChange={onChange} onBlur={onBlur} />
-            <Input id={"nameEn"} label={"Anglický název"} className="form-control" value={item?.nameEn|| "Anglický název"} onChange={onChange} onBlur={onBlur} />
+            <Input id={"name"} label={"Jméno"} className="form-control" value={item?.name|| "name"} onChange={onChange} onBlur={onBlur} />
+            <Input id={"label"} label={"Označení"} className="form-control" value={item?.label|| "Položka"} onChange={onChange} onBlur={onBlur} />
+            <Input id={"labelEn"} label={"Label"} className="form-control" value={item?.labelEn|| "Field"} onChange={onChange} onBlur={onBlur} />
+            <Input id={"description"} label={"Anglický název"} className="form-control" value={item?.description|| "Popisný text"} onChange={onChange} onBlur={onBlur} />
+            {/* required */}
+            <Input type="number" id={"order"} label={"Pořadí"} className="form-control" value={item?.order|| 1} onChange={onChange} onBlur={onBlur} />
+            {/* formula */}
+            {/* type_id */}
+            {/* backend_formula */}
+            {/* flatten_formula */}
             {children}
         </>
     )
