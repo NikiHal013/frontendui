@@ -464,7 +464,37 @@ const UpdateFormSectionSections = ({
     dummy,
     mode,
     onSubmissionSectionChange,
+    onAddSubmissionSection,
+    onRemoveSubmissionSection,
 }) => {
+    const handleAddSubmissionSection = useCallback(
+        (formSectionDef) => {
+            const payload = {
+                id: stableId(),
+                formSectionId: formSectionDef?.id,
+                sections: [],
+                fields: [],
+            };
+            if (onAddSubmissionSection) {
+                onAddSubmissionSection(payload);
+            } else {
+                onSubmissionSectionChange(payload);
+            }
+        },
+        [onAddSubmissionSection, onSubmissionSectionChange]
+    )
+
+    const handleRemoveSubmissionSection = useCallback(
+        (formSectionDef, targetSection, count) => {
+            const min = formSectionDef?.repeatableMin ?? 0;
+            if (count <= min) return;
+            if (onRemoveSubmissionSection) {
+                onRemoveSubmissionSection(targetSection);
+            }
+        },
+        [onRemoveSubmissionSection]
+    )
+
     const formSectionsSorted = useMemo(
         () => (formSections || []).toSorted((a, b) => (a?.order || 0) - (b?.order || 0)),
         [formSections]
@@ -482,16 +512,38 @@ const UpdateFormSectionSections = ({
                 const include_add_section_button = form_section?.repeatableMax > filtered.length
                 return (
                     <div key={form_section?.id}>
-                        <UpdateSectionWrap
-                            key={form_section?.id}
-                            formSectionDef={form_section}
-                            level={level + 1}
-                            dummy={dummy}
-                            mode={mode}
-                            digital_submission_sections={filtered}
-                            onSubmissionSectionChange={onSubmissionSectionChange}
-                        />
-                        {include_add_section_button && <button className="form-control btn btn-outline-primary">+</button>}
+                        {filtered.map((sectionInstance) => (
+                            <div key={sectionInstance?.id}>
+                                <UpdateSectionWrap
+                                    formSectionDef={form_section}
+                                    level={level + 1}
+                                    dummy={dummy}
+                                    mode={mode}
+                                    digital_submission_sections={[sectionInstance]}
+                                    onSubmissionSectionChange={onSubmissionSectionChange}
+                                />
+                                {mode === "view" && filtered.length > (form_section?.repeatableMin ?? 0) && (
+                                    <button
+                                        className="form-control btn btn-outline-danger mt-2"
+                                        type="button"
+                                        onClick={() =>
+                                            handleRemoveSubmissionSection(form_section, sectionInstance, filtered.length)
+                                        }
+                                    >
+                                        - {form_section?.label ?? form_section?.name ?? "section"}
+                                    </button>
+                                )}
+                            </div>
+                        ))}
+                        {include_add_section_button && mode === "view" && (
+                            <button
+                                className="form-control btn btn-outline-primary"
+                                type="button"
+                                onClick={() => handleAddSubmissionSection(form_section)}
+                            >
+                                + {form_section?.label ?? form_section?.name ?? "section"}
+                            </button>
+                        )}
                     </div>
                 )
             })}
@@ -508,7 +560,7 @@ export const UpdateFormSection = ({
 
     digital_submission_section = empty,
     onSubmissionSectionChange = dummy,
-
+    children
 }) => {
 
     const handleSubmissionFieldChange = useCallback((submission_field) => {
@@ -644,12 +696,22 @@ export const UpdateFormSection = ({
 
         const current = digital_submission_section;
 
-        const normalized = {
+        const normalizedBase = {
             ...current,
             // jistota vazeb
             formSectionId: current?.formSectionId ?? formSectionDef?.id,
             fields: normalizeFieldsForSection(current, formSectionDef),
-            sections: normalizeSubsectionsForSection(current, formSectionDef),
+        };
+        const normalizedSections = normalizeSubsectionsForSection(current, formSectionDef);
+        const normalizedSectionIds = new Set(normalizedSections.map((s) => s?.id));
+        const mergedSections = [
+            ...normalizedSections,
+            ...(current?.sections ?? []).filter((s) => s?.id && !normalizedSectionIds.has(s.id)),
+        ];
+
+        const normalized = {
+            ...normalizedBase,
+            sections: mergedSections,
         };
 
         // velmi jednoduchá "changed" detekce:
@@ -673,6 +735,38 @@ export const UpdateFormSection = ({
         }
     }, [digital_submission_section, formSectionDef, onSubmissionSectionChange]);
 
+    const handleAddChildSubmissionSection = useCallback(
+        (child) => {
+            const parentId = digital_submission_section?.id ?? stableId();
+            const normalizedChild = { ...child, sectionId: parentId };
+            const nextSections = [
+                ...(digital_submission_section?.sections || []),
+                normalizedChild,
+            ];
+            onSubmissionSectionChange({
+                ...digital_submission_section,
+                id: parentId,
+                sections: nextSections,
+            });
+        },
+        [digital_submission_section, onSubmissionSectionChange]
+    );
+
+    const handleRemoveChildSubmissionSection = useCallback(
+        (child) => {
+            const parentId = digital_submission_section?.id ?? stableId();
+            const nextSections = (digital_submission_section?.sections || []).filter(
+                (s) => s?.id !== child?.id
+            );
+            onSubmissionSectionChange({
+                ...digital_submission_section,
+                id: parentId,
+                sections: nextSections,
+            });
+        },
+        [digital_submission_section, onSubmissionSectionChange]
+    );
+
 
 
 
@@ -691,6 +785,7 @@ export const UpdateFormSection = ({
                 // className="border-start border-danger ps-3"
                 style={{ paddingLeft: 12, borderLeft: "2px solid #e02222ff" }}
             >
+                
                 {(mode === "design") &&
                     <SimpleCardCapsuleRightCorner>
                         <DesignSectionButton
@@ -732,6 +827,8 @@ export const UpdateFormSection = ({
                             dummy={dummy}
                             mode={mode}
                             onSubmissionSectionChange={handleSubmissionSectionChange}
+                            onAddSubmissionSection={handleAddChildSubmissionSection}
+                            onRemoveSubmissionSection={handleRemoveChildSubmissionSection}
                         />
                     </div>
                 </div>
@@ -792,19 +889,32 @@ export const UpdateForm = ({
     const handleSubmissionSectionChange = useCallback((submission_section) => {
         setSubmission(prev => {
             const { ds = [] } = prev
-            const has = ds.find(s => s?.id === submission_section?.id)
-            if (has) {
-                const newds = ds.map(s => (s?.id === submission_section?.id) ? submission_section : s)
-                return {
-                    ...prev,
-                    ds: newds
+            const idx = ds.findIndex(s => s?.id === submission_section?.id)
+            const existing = idx >= 0 ? ds[idx] : undefined
+
+            const merged = existing
+                ? {
+                    ...existing,
+                    ...submission_section,
+                    // prefer incoming sections when present; otherwise keep existing to avoid accidental drops
+                    sections: submission_section?.sections?.length
+                        ? submission_section.sections
+                        : existing.sections,
                 }
-            } else {
-                return {
-                    ...prev,
-                    ds: [...ds, submission_section]
-                }
+                : submission_section
+
+            const newds = idx >= 0
+                ? ds.map((s, i) => (i === idx ? merged : s))
+                : [...ds, merged]
+
+            const result = {
+                ...prev,
+                ds: newds
             }
+            console.log("handleSubmissionSectionChange", submission_section, prev, result)
+
+            return result
+
         })
         // console.log(submission_section)
     }, [])
