@@ -136,19 +136,13 @@ export const PageNavbar = ({ item, children, onSearchChange }) => {
                         <NavDropdown.Item 
                             as={CreateGroupInserMembershipButton} 
                             item={item} 
-                            item={{
-                                group: item,
-                                groupId: item?.groupId
-                            }}
+                            // item={{
+                            //     group: item,
+                            //     groupId: item?.groupId
+                            // }}
                             action="memberships"
                         >
                             Nové členství
-                            {/* <CreateGroupInserMembershipButton 
-                                item={item}
-                                className="btn btn-link border-0"
-                            >
-                                Nové členství
-                            </CreateGroupInserMembershipButton> */}
                         </NavDropdown.Item>
                     </NavDropdown>
 
@@ -223,13 +217,13 @@ export const MyNavDropdown = ({ item }) => {
             </NavDropdown.Item>
             
             <NavDropdown.Item as={GroupLink} item={item} action="roles" disabled={!hasProperType}>
-                Role<br/><Link item={item} />
+                Role {hasProperType&&item?.name}
             </NavDropdown.Item>
             <NavDropdown.Item as={GroupLink} item={item} action="subgroups" disabled={!hasProperType}>
-                Podskupiny<br/><Link item={item} />
+                Podskupiny {hasProperType&&item?.name}
             </NavDropdown.Item>
             <NavDropdown.Item as={GroupLink} item={item} action="memberships" disabled={!hasProperType}>
-                Členové<br/><Link item={item} />
+                Členové {hasProperType&&item?.name}
             </NavDropdown.Item>
         
         
@@ -240,18 +234,15 @@ export const MyNavDropdown = ({ item }) => {
                 item={item}
                 disabled={!hasProperType} 
             >
-                Upravit<br/><Link item={item} />
+                Upravit {hasProperType&&item?.name}
             </NavDropdown.Item>
             <NavDropdown.Item 
                 as={CreateGroupInserMembershipButton} 
                 // item={item} 
                 disabled={!hasProperType} 
-                item={{
-                    group: item,
-                    groupId: item?.groupId
-                }}
+                item={item}
             >
-                Nové členství<br/><Link item={item} />
+                Nové členství {hasProperType&&item?.name}
             </NavDropdown.Item>
             <NavDropdown.Item 
                 as={AddRoleOnGroupButton} 
@@ -261,9 +252,9 @@ export const MyNavDropdown = ({ item }) => {
                     group: item,
                     groupId: item?.id,
                 }}
-                disabled={!(item?.__typename === "GroupGQLModel")}
+                disabled={!hasProperType}
             >
-                Nové oprávnění na <br/><Link item={item} />
+                Nové oprávnění u {hasProperType&&item?.name}
             </NavDropdown.Item>
             
             <NavDropdown.Divider />

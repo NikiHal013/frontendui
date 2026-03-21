@@ -121,7 +121,7 @@ export const MyNavDropdown = ({ item }) => {
                 Seznam všech 
             </NavDropdown.Item>
             
-            <NavDropdown.Item as={Link} item={item} action="roles" disabled={!hasProperType}>
+            {/* <NavDropdown.Item as={Link} item={item} action="roles" disabled={!hasProperType}>
                 Role<br/><Link item={item} />
             </NavDropdown.Item>
             <NavDropdown.Item as={Link} item={item} action="subgroups" disabled={!hasProperType}>
@@ -129,7 +129,7 @@ export const MyNavDropdown = ({ item }) => {
             </NavDropdown.Item>
             <NavDropdown.Item as={Link} item={item} action="memberships" disabled={!hasProperType}>
                 Členové<br/><Link item={item} />
-            </NavDropdown.Item>
+            </NavDropdown.Item> */}
         
         
             <NavDropdown.Divider />
@@ -139,18 +139,32 @@ export const MyNavDropdown = ({ item }) => {
                 item={item}
                 disabled={!hasProperType} 
             >
-                Upravit<br/><Link item={item} />
+                Upravit {hasProperType??item?.name}
             </NavDropdown.Item>
             <NavDropdown.Item 
                 as={CreateButton} 
-                item={item} 
+                rbacitem={item} 
                 disabled={!hasProperType} 
-                // item={{
-                //     group: item,
-                //     groupId: item?.groupId
-                // }}
+                item={{
+                    name: "Nový typ žádostí",
+                    mastergroupId: "d75d64a4-bf5f-43c5-9c14-8fda7aff6c09",
+                    description: "Popis procesu"
+                }}
             >
-                Nové<br/><Link item={item} />
+                Vytvořit nový typ žádostí
+            </NavDropdown.Item>
+
+            <NavDropdown.Item 
+                as={CreateButton} 
+                rbacitem={item} 
+                disabled={!hasProperType} 
+                item={{
+                    name: "Nový typ žádostí",
+                    mastergroupId: "d75d64a4-bf5f-43c5-9c14-8fda7aff6c09",
+                    description: "Popis procesu"
+                }}
+            >
+                Vytvořit žádost {hasProperType??item?.name}
             </NavDropdown.Item>
             
             <NavDropdown.Divider />

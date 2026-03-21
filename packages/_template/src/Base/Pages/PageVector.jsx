@@ -14,7 +14,6 @@ import { SimpleCardCapsuleRightCorner } from "@hrbolek/uoisfrontend-shared"
 import { CopyButton } from "../Components/CopyButton"
 import { Table } from "../Components/Table"
 
-
 export const GeneratedContentBase = ({ item }) => {
     return (<>
         <Tree item={item} />

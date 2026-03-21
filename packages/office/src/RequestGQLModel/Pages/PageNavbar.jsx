@@ -114,14 +114,21 @@ import { CreateButton } from '../Mutations/Create';
 
 export const MyNavDropdown = ({ item }) => {
     const { __typename } = item || {}
-    const hasProperType = __typename === "TemplateGQLModel"
+    const hasProperType = __typename === "RequestGQLModel"
     return (
         <NavDropdown title="Požadavky">
             <NavDropdown.Item as={ProxyLink} to={VectorItemsURI}>
                 Seznam všech 
             </NavDropdown.Item>
+            <NavDropdown.Item 
+                as={Link} 
+                item={item}
+                disabled={!hasProperType} 
+            >
+                Zen mode
+            </NavDropdown.Item>
             
-            <NavDropdown.Item as={Link} item={item} action="roles" disabled={!hasProperType}>
+            {/* <NavDropdown.Item as={Link} item={item} action="roles" disabled={!hasProperType}>
                 Role<br/><Link item={item} />
             </NavDropdown.Item>
             <NavDropdown.Item as={Link} item={item} action="subgroups" disabled={!hasProperType}>
@@ -129,7 +136,7 @@ export const MyNavDropdown = ({ item }) => {
             </NavDropdown.Item>
             <NavDropdown.Item as={Link} item={item} action="memberships" disabled={!hasProperType}>
                 Členové<br/><Link item={item} />
-            </NavDropdown.Item>
+            </NavDropdown.Item> */}
         
         
             <NavDropdown.Divider />
@@ -139,18 +146,7 @@ export const MyNavDropdown = ({ item }) => {
                 item={item}
                 disabled={!hasProperType} 
             >
-                Upravit<br/><Link item={item} />
-            </NavDropdown.Item>
-            <NavDropdown.Item 
-                as={CreateButton} 
-                // item={item} 
-                disabled={!hasProperType} 
-                item={{
-                    group: item,
-                    groupId: item?.groupId
-                }}
-            >
-                Nové<br/><Link item={item} />
+                Upravit {item?.name}
             </NavDropdown.Item>
             
             <NavDropdown.Divider />

@@ -85,7 +85,7 @@ fragment RequestSubmission on DigitalSubmissionGQLModel {
   submittedSectionsAll {
     ...DigitalSubmissionSectionGQLModel
   }
-    value
+  value
   sections {
     ...DigitalSubmissionSectionGQLModel
     sections {

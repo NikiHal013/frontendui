@@ -14,7 +14,7 @@ export const registerLink = (__typename, Link) => {
 
 export const GenericURIRoot = "/generic";
 export const LinkURI = GenericURIRoot + "/view/";
-
+export const VectorItemsURI = GenericURIRoot + "/list/";
 
 export const Link = ({ item, action="view", children, ...others }) => {
     const SpecificLink = item?.__typename ? RegisterofLinks[item.__typename] : null;
@@ -24,7 +24,7 @@ export const Link = ({ item, action="view", children, ...others }) => {
     }
     
     const label =
-        children || item?.fullname || item?.name || item?.id || "Data Error";
+        children || item?.fullname || item?.name || item?.id || "Missing";
 
     const to = item?.__typename && item?.id
         ? `${GenericURIRoot}/${item.__typename}/${action}/${item.id}`

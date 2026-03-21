@@ -5,3 +5,4 @@
 
 // export * as GroupTypeGQLModel from "./GroupTypeGQLModel"
 // export * as RoleTypeGQLModel from "./RoleTypeGQLModel"
+export * from "./Base"

@@ -20,8 +20,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.js"),
       name: "UoisfrontendGqlShared",
-      formats: ["es", "cjs"],
-      fileName: (format) => `index.${format}.js`,
+      formats: ["es", "cjs", "umd"],
+      fileName: (format, name) => `${format}/${name}.js`,
     },
     rollupOptions: {
       external: [
