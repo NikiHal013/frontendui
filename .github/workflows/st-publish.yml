@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
@@ -31,10 +31,10 @@ jobs:
       - name: Build & publish Vite app
         working-directory: apps/my-vite-app
         run: |
-          npm ci               # install only this package’s deps
           npm run build        # runs `vite build`, produces dist/
           ls dist              # sanity-check
-          npm publish --access public
+          APP=$(node -p "require('./package.json').name")
+          npm publish -w "$APP" --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -44,9 +44,9 @@ jobs:
       - name: Build & publish core package
         working-directory: packages/my-package
         run: |
-          npm ci
           npm run build        # whatever build script you have
           ls dist
-          npm publish --access public
+          APP=$(node -p "require('./package.json').name")
+          npm publish -w "$APP" --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
