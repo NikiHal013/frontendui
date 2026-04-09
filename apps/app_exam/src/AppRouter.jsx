@@ -14,7 +14,7 @@ import { BaseRouterSegments } from "../../../packages/_template/src/Base/Pages/R
 // import { RoleRouterSegments } from "../../../packages/_template/src/RoleGQLModel/Pages";
 // import { Page } from "../../../packages/_template/src/Base/Pages/Page";
 import { AppNavbar } from "./AppNavbar";
-import { ExamGQLModelRouterSegments } from "../../../packages/_project1/src/ExamGQLModel/Pages/RouterSegment";
+import { ExamGQLModelRouterSegments } from "../../../packages/exam/src/ExamGQLModel/Pages/RouterSegment";
 
 
 const AppLayout = () => (
