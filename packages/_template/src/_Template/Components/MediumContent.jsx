@@ -93,4 +93,27 @@ import { Link } from "./Link"
 //     )
 // }
 
-export { MediumContent } from "../../../../_template/src/Base/Components/MediumContent"
+export { MediumContent as MediumContent } from "../../../../_template/src/Base/Components/MediumContent"
+import { Attribute, formatDateTime} from "../../Base/Components/Attribute"
+
+export const MediumContent = ({ item, children }) => {
+    return (
+        <>
+            <Attribute name="id">
+                <Link item={item} />
+            </Attribute>
+            <Attribute label="zmeneno">
+                {formatDateTime(item?.last_changed)}
+                {item?.changedby?.fullname}
+            </Attribute>
+            <hr/>
+            {item?.id}{""}
+            {item?.order}
+            <hr/>
+            <pre>
+                {JSON.stringify(item, null, 2)}
+            </pre>
+            {children}
+        </>
+            )
+        }
