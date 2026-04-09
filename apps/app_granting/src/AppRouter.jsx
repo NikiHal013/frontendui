@@ -9,6 +9,7 @@ import { StudentGQLModelRouterSegments } from "../../../packages/granting2/src/S
 import { CatchRouterSegments } from "../../../packages/granting2/src/_PageCatch/PageCatch";
 import { AppNavbar } from "./AppNavbar";
 import { ProgramGQLModelRouterSegments } from "../../../packages/granting2/src/ProgramGQLModel/Pages/RouterSegment";
+import { SemesterGQLModelRouterSegments } from "../../../packages/granting2/src/SemesterGQLModel/Pages/RouterSegment";
 
 
 const AppLayout = () => (
@@ -22,6 +23,7 @@ const AppLayout = () => (
 const ChildRoutes = [
     ...StudentGQLModelRouterSegments,
     ...ProgramGQLModelRouterSegments,
+    ...SemesterGQLModelRouterSegments,
     ...CatchRouterSegments,
 ]
 
