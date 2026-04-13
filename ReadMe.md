@@ -90,7 +90,12 @@ V root `package.json` jsou mimo jiné:
 
 ---
 
-## První projektový den
+## Změny
 
-- První kroky projektu
-- Základní funkčnost a zkoumání možností
+### 13. 4. 2026
+- Aktualizace `ReadMe.md` – doplnění popisu monorepa (apps/packages), požadavků, instalace a spuštění `@nik-kb-sp/app_exam` přes `npm run dev -w @nik-kb-sp/app_exam`.
+- Doplnění poznámek k backendu (Docker Compose, proxy `/api/gql` → `http://localhost:33001`) a stručné technické poznámky k implementaci `app_exam`.
+
+### 9. 4. 2026
+- Změna kořenové URI pro „exam“ modul: `URIRoot` změněn z `"/project1"` na `"/exam"` (`packages/exam/src/uriroot.js`).
+- Přejmenování / úpravy názvů balíčků v monorepu (např. `@nik-kb-sp/pck_project1` → `@nik-kb-sp/pck_exam`) a související úpravy v `package-lock.json`.
