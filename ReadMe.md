@@ -99,3 +99,6 @@ V root `package.json` jsou mimo jiné:
 ### 9. 4. 2026
 - Změna kořenové URI pro „exam“ modul: `URIRoot` změněn z `"/project1"` na `"/exam"` (`packages/exam/src/uriroot.js`).
 - Přejmenování / úpravy názvů balíčků v monorepu (např. `@nik-kb-sp/pck_project1` → `@nik-kb-sp/pck_exam`) a související úpravy v `package-lock.json`.
+
+### 9. 4. 2026
+- První velký commit aplikace a balíčku.
