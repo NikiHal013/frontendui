@@ -1,6 +1,6 @@
-import { URIRoot } from "../../../../semestr/src/uriroot";
 import { registerLink } from "../../../../_template/src/Base/Components/Link";
 import { ProxyLink } from "../../../../_template/src/Base/Components/ProxyLink";
+import { URIRoot } from "../../uriroot";
 
 const modelURI = `${URIRoot}/SemesterGQLModel`
 export const ListURI = `${modelURI}/list/`;

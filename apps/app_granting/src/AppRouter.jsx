@@ -10,6 +10,8 @@ import { CatchRouterSegments } from "../../../packages/granting2/src/_PageCatch/
 import { AppNavbar } from "./AppNavbar";
 import { ProgramGQLModelRouterSegments } from "../../../packages/granting2/src/ProgramGQLModel/Pages/RouterSegment";
 import { SemesterGQLModelRouterSegments } from "../../../packages/granting2/src/SemesterGQLModel/Pages/RouterSegment";
+import { TopicGQLModelRouterSegments } from "../../../packages/granting2/src/TopicGQLModel/Pages/RouterSegment";
+import { StudyPlanGQLModelRouterSegments } from "../../../packages/granting2/src/StudyPlanGQLModel/Pages/RouterSegment";
 
 
 const AppLayout = () => (
@@ -24,6 +26,8 @@ const ChildRoutes = [
     ...StudentGQLModelRouterSegments,
     ...ProgramGQLModelRouterSegments,
     ...SemesterGQLModelRouterSegments,
+    ...TopicGQLModelRouterSegments,
+    ...StudyPlanGQLModelRouterSegments,
     ...CatchRouterSegments,
 ]
 

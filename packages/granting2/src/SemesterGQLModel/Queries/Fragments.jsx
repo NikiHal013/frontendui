@@ -25,6 +25,14 @@ fragment Medium on SemesterGQLModel {
   rbacobject {
     ...RBRoles
   }
+    subject {
+        __typename
+        id
+        name
+    }
+
+    createdby { id __typename fullname }
+    changedby { id __typename fullname }
 }
 `
 
@@ -34,8 +42,16 @@ fragment Large on SemesterGQLModel {
   topics {
   __typename
   id
-
 }
+  plans {
+    __typename
+    id
+  }
+    prerequisites {
+        __typename
+        id
+        name
+    }
 }
 `
 

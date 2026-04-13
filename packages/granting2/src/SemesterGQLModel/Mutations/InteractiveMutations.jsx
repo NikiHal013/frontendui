@@ -3,6 +3,7 @@ import { CreateButton, CreateLink } from "./Create"
 import { UpdateButton, UpdateLink } from "./Update"
 import { ProxyLink } from "../../../../_template/src/Base/Components/ProxyLink"
 import { DeleteButton } from "./Delete"
+import { CreateButton as CreatePlanButton } from "../../StudyPlanGQLModel/Mutations/Create"
 
 export const PageLink = ({ children, preserveHash = true, preserveSearch = true, ...props }) => {
     return (
@@ -25,6 +26,8 @@ export const InteractiveMutations = ({ item }) => {
             <UpdateButton className="btn btn-outline-success" item={item}>Upravit Dialog</UpdateButton>
             <CreateButton className="btn btn-outline-success" rbacitem={{}}>Vytvořit nový</CreateButton>
             <DeleteButton className="btn btn-outline-danger" item={item}>Odstranit</DeleteButton>
+            <hr />
+            <CreatePlanButton className="btn btn-outline-primary">Vytvořit plán</CreatePlanButton>
         </CardCapsule>
     )
 }

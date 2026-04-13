@@ -44,17 +44,25 @@ export const MediumContent = ({ item, children }) => {
                 <BaseLink item={item?.subject} />
             </Attribute>
             <hr/>
-            <Attribute label="Změněno">
+            <Attribute label="Vytvořeno" item={item}>
+                <BaseLink item={item?.createdby} />{" @ "}
+                {formatDateTime(item?.created)}
+            </Attribute>
+            <Attribute label="Změněno" item={item}>
                 <BaseLink item={item?.changedby} />{" @ "}
                 {formatDateTime(item?.lastchange)}
             </Attribute>
             <hr/>
+            <pre>
+                {JSON.stringify(item, null, 2)}
+            </pre>
+            {/* <hr/>
             {item?.id}{" "}
             {item?.order}
             <hr/>
             <pre>
                 {JSON.stringify(item, null, 2)}
-            </pre>
+            </pre> */}
             {/* <MediumContent_ item={item}>
                 Byl jsem zde Fantomas.
                 {children}

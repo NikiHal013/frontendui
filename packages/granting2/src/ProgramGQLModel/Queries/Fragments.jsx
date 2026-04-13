@@ -18,7 +18,8 @@ fragment Link on ProgramGQLModel  {
   typeId
 
 
-  
+  createdby { __typename id fullname }
+  changedby { __typename id fullname }
 }
 `
 

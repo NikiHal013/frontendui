@@ -24,9 +24,9 @@ import { MediumContent as BaseMediumContent } from "../../../../_template/src/Ba
  * </MediumContent>
  */
 export const MediumContent = ({ item, children}) => {
-    return (
+    return (<>
         <BaseMediumContent item={item}>
             {children}
         </BaseMediumContent>
-    )
+    </>)
 }
