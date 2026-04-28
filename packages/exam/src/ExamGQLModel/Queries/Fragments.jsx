@@ -11,7 +11,12 @@ fragment Link on ExamGQLModel {
   rbacobjectId
 
 
-  
+  name
+  nameEn
+  description
+  descriptionEn
+  minScore
+  maxScore 
 }
 `
 
