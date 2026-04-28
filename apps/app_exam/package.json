@@ -1,12 +1,16 @@
 {
   "name": "@nik-kb-sp/app_exam",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "files": [
     "dist",
     "src"
   ],
+  "publishConfig": {
+  "access": "public"
+},
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -15,6 +19,7 @@
     "build:production": "NODE_ENV=production vite build",
     "prepublishOnly": "npm run build"    
   },
+  
   "dependencies": {
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
