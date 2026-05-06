@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { UpdateAsyncAction } from "../Queries";
 import { CreateDelayer, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfrontend-shared";
 import { MediumEditableContent } from "./MediumEditableContent";
+import { ReadItemURI } from "./Link";
 import { useEditAction } from "../../../../dynamic/src/Hooks/useEditAction";
 
 /**
@@ -96,15 +97,35 @@ export const LiveEdit = ({ item, children, asyncMutationAction=UpdateAsyncAction
         onCancel,
         onConfirm,
     } = useEditAction(asyncMutationAction, item, {
-        mode: "live", 
+        mode: "confirm", 
         // onCommit: contextOnChange
     })
 
+    const handleConfirm = useCallback(async () => {
+        const result = await onConfirm()
+        return result
+    }, [onConfirm])
+
     return (
         
-        <MediumEditableContent item={item} onChange={onChange} onBlur={onBlur} >
+        <MediumEditableContent item={item} draft={draft} onChange={onChange} onBlur={() => null} >
             {saving && <LoadingSpinner/>}
             {children}
+            <hr />
+            <button
+                className="btn btn-warning form-control"
+                onClick={onCancel}
+                disabled={!dirty || saving}
+            >
+                Zrušit změny
+            </button>
+            <button
+                className="btn btn-primary form-control"
+                onClick={handleConfirm}
+                disabled={!dirty || saving}
+            >
+                Uložit změny
+            </button>
         </MediumEditableContent>
         
     )

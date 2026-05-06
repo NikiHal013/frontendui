@@ -9,12 +9,12 @@ fragment Link on ExamGQLModel {
   createdbyId
   changedbyId
   rbacobjectId
-
-
   name
   nameEn
   description
   descriptionEn
+  typeId
+  planId
   minScore
   maxScore 
 }
@@ -32,7 +32,7 @@ fragment Medium on ExamGQLModel {
 const LargeFragmentStr = `
 fragment Large on ExamGQLModel {
   ...Medium
-  
+  parts{...Link}
 }
 `
 

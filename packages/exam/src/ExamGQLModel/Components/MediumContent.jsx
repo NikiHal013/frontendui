@@ -101,31 +101,6 @@ import {Attribute, formatDateTime} from "../../../../_template/src/Base/Componen
 export const MediumContent = ({ item, children}) => {
     return (
         <>
-            <Attribute label="Id">
-                <Link item={item}/>
-            </Attribute>
-            <Attribute label="Order">
-                <Link item={item}>
-                    {item?.order || item?.id || "Data Error"}
-                </Link>
-            </Attribute>
-            <Attribute label="Název">
-                
-                    {item?.name || "Data Error"}
-                
-            </Attribute>
-            <hr/>
-            <Attribute label="Zmeneno">
-                {formatDateTime(item?.lastchange)}
-                {item?.changeby?.fullname}
-            </Attribute>
-            <hr/>
-            {item?.id}{" "}
-            {item?.order}
-            <hr/>
-            <pre>{JSON.stringify(item, null, 2)}</pre>
-            
-            <hr/>
         <MediumContent_ item={item}>
             {children}
         </MediumContent_>

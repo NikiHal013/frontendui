@@ -147,7 +147,7 @@ export const GeneralDialog = ({
             onOk={handleOk_}
             {...props}
         >
-            <DefaultContent_ item={draftItem} onChange={handleChange} onBlur={handleBlur}>
+            <DefaultContent_ item={draftItem} onChange={handleChange} onBlur={handleBlur} onSubmit={handleOk_} onCancel={handleCancel}>
                 {children}
                 
             </DefaultContent_>

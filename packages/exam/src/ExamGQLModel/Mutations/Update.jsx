@@ -5,14 +5,38 @@ import {
     UpdateLink as BaseUpdateLink
 } from "../../../../_template/src/Base/Mutations/Update";
 
-import { MediumEditableContent, UpdateItemURI } from "../Components";
+import { MediumEditableContent, ReadItemURI, UpdateItemURI } from "../Components";
 import { UpdateAsyncAction } from "../Queries";
+import { CreateButton } from "./Create";
+import { useNavigate } from "react-router-dom";
 
-const DefaultContent = (props) => <MediumEditableContent {...props} />
+const DefaultContent = (props) => {
+    const item = props?.item || {}
+    const handleSubmit = props?.onSubmit || (() => null)
+    const onSaveClick = () => handleSubmit()
+    const navigate = useNavigate()
+    const typeId = item?.typeId || item?.type?.id || null
+    const planId = item?.planId || item?.plan?.id || null
+    const canCreatePart = Boolean(typeId && planId)
+    const partDraft = {
+        name: item?.name ? `${item.name} - part` : "Nový part",
+        parentId: item?.id,
+        typeId,
+        planId,
+    }
+
+    return (
+        <MediumEditableContent {...props}>
+            <CreateButton className="btn btn-outline-primary form-control mt-2" item={partDraft} rbacitem={item} title={canCreatePart ? "" : "Chybí typeId nebo planId"}>Přidat part</CreateButton>
+            <button type="button" className="btn btn-outline-secondary form-control mt-2" onClick={() => navigate(ReadItemURI.replace(":id", `${item?.id}`))}>Zpět</button>
+            <button type="button" className="btn btn-primary form-control mt-2" onClick={onSaveClick}>Uložit změny</button>
+        </MediumEditableContent>
+    )
+}
 const mutationAsyncAction = UpdateAsyncAction
 
 const permissions = {
-    oneOfRoles: ["administrátor"],
+    oneOfRoles: [],
     mode: "absolute",
 }
 
@@ -101,6 +125,7 @@ export const UpdateButton = ({
     DefaultContent: DefaultContent_ = DefaultContent,
     Dialog = UpdateDialog,
     mutationAsyncAction: mutationAsyncAction_ = mutationAsyncAction,
+    uriPattern = ReadItemURI,
     ...props
 }) => {
     return (
@@ -109,6 +134,7 @@ export const UpdateButton = ({
             DefaultContent={DefaultContent_}
             Dialog={Dialog}
             mutationAsyncAction={mutationAsyncAction_}
+            uriPattern={uriPattern}
             {...permissions}
         />
     );
