@@ -88,21 +88,15 @@ export const useEditAction = (
     const commitNow = useCallback(
         async (nextDraft) => {
             console.log("useEditAction commitNow", dirty, nextDraft);
-            // Ensure we send the full object by merging baseline and nextDraft.
-            const mergedDraft = { ...(baseline || {}), ...(nextDraft || {}) };
-            // debug: show what will be sent to the mutation
-            try {
-                console.debug("useEditAction.commitNow mergedDraft:", mergedDraft);
-            } catch (e) {}
             // posíláme přes run() -> thunk -> gqlClient.request(...)
-            const result = await run(toVars(mergedDraft));
+            const result = await run(toVars(nextDraft));
             // po úspěchu nastav baseline; entity se stejně typicky aktualizuje přes middleware do store
-            setBaseline(mergedDraft);
-            onCommit(mergedDraft, result);
-            setDraft(mergedDraft);
+            // setBaseline(nextDraft);
+            onCommit(nextDraft, result);
+            // setDraft(nextDraft)
             return result;
         },
-        [run, toVars, baseline, onCommit]
+        [run, toVars]
     );
 
     const scheduleCommit = useCallback(
