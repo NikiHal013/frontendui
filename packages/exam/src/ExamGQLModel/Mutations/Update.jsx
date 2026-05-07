@@ -42,33 +42,6 @@ const DefaultContent = (props) => {
     return (
         <MediumEditableContent {...props}>
 
-            <CreateButton
-                className="btn btn-outline-primary form-control mt-2"
-                item={partDraft}
-                rbacitem={item}
-                title={
-                    canCreatePart
-                        ? ""
-                        : "Chybí typeId nebo planId"
-                }
-            >
-                Přidat part
-            </CreateButton>
-
-            <button
-                type="button"
-                className="btn btn-outline-secondary form-control mt-2"
-                onClick={() =>
-                    navigate(
-                        ReadItemURI.replace(
-                            ":id",
-                            `${item?.id}`
-                        )
-                    )
-                }
-            >
-                Zpět
-            </button>
 
         </MediumEditableContent>
     );
