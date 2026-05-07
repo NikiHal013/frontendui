@@ -1,44 +1,85 @@
 import {
-    UpdateBody as BaseUpdateBody,
     UpdateButton as BaseUpdateButton,
     UpdateDialog as BaseUpdateDialog,
     UpdateLink as BaseUpdateLink
 } from "../../../../_template/src/Base/Mutations/Update";
 
-import { MediumEditableContent, ReadItemURI, UpdateItemURI } from "../Components";
+import {
+    MediumEditableContent,
+    ReadItemURI,
+    UpdateItemURI,
+} from "../Components";
+import {ExamEditForm} from "../Pages/ExamEditForm"
+
 import { UpdateAsyncAction } from "../Queries";
 import { CreateButton } from "./Create";
 import { useNavigate } from "react-router-dom";
 
 const DefaultContent = (props) => {
-    const item = props?.item || {}
-    const handleSubmit = props?.onSubmit || (() => null)
-    const onSaveClick = () => handleSubmit()
-    const navigate = useNavigate()
-    const typeId = item?.typeId || item?.type?.id || null
-    const planId = item?.planId || item?.plan?.id || null
-    const canCreatePart = Boolean(typeId && planId)
+
+    const item = props?.item || {};
+
+    const navigate = useNavigate();
+
+    const typeId =
+        item?.typeId || item?.type?.id || null;
+
+    const planId =
+        item?.planId || item?.plan?.id || null;
+
+    const canCreatePart =
+        Boolean(typeId && planId);
+
     const partDraft = {
-        name: item?.name ? `${item.name} - part` : "Nový part",
+        name: item?.name
+            ? `${item.name} - part`
+            : "Nový part",
         parentId: item?.id,
         typeId,
         planId,
-    }
+    };
 
     return (
         <MediumEditableContent {...props}>
-            <CreateButton className="btn btn-outline-primary form-control mt-2" item={partDraft} rbacitem={item} title={canCreatePart ? "" : "Chybí typeId nebo planId"}>Přidat part</CreateButton>
-            <button type="button" className="btn btn-outline-secondary form-control mt-2" onClick={() => navigate(ReadItemURI.replace(":id", `${item?.id}`))}>Zpět</button>
-            <button type="button" className="btn btn-primary form-control mt-2" onClick={onSaveClick}>Uložit změny</button>
+
+            <CreateButton
+                className="btn btn-outline-primary form-control mt-2"
+                item={partDraft}
+                rbacitem={item}
+                title={
+                    canCreatePart
+                        ? ""
+                        : "Chybí typeId nebo planId"
+                }
+            >
+                Přidat part
+            </CreateButton>
+
+            <button
+                type="button"
+                className="btn btn-outline-secondary form-control mt-2"
+                onClick={() =>
+                    navigate(
+                        ReadItemURI.replace(
+                            ":id",
+                            `${item?.id}`
+                        )
+                    )
+                }
+            >
+                Zpět
+            </button>
+
         </MediumEditableContent>
-    )
-}
-const mutationAsyncAction = UpdateAsyncAction
+    );
+};
+
+const mutationAsyncAction = UpdateAsyncAction;
 
 const permissions = {
     oneOfRoles: [],
     mode: "absolute",
-}
+};
 
 // ALTERNATIVE, CHECK GQLENDPOINT
 // const permissions = {
@@ -46,85 +87,42 @@ const permissions = {
 //     mode: "item",
 // }
 
-/**
- * Link na update stránku / update route pro konkrétní entitu.
- *
- * Wrapper nad `BaseUpdateLink`. Nastavuje výchozí `uriPattern` a aplikuje RBAC
- * přes `permissions`. Vše ostatní přeposílá do Base komponenty.
- *
- * @param {Object} params
- * @param {string} [params.uriPattern=UpdateItemURI]
- *   URI pattern pro update route (typicky obsahuje `:id` nebo je již konkrétní URL dle routování).
- * @param {Object} params.props
- *   Další props přeposílané do `BaseUpdateLink` (např. `children`, `className`,
- *   `preserveSearch`, `preserveHash`, atd.).
- * @returns {JSX.Element}
- */
 export const UpdateLink = ({
     uriPattern = UpdateItemURI,
     ...props
 }) => {
-    return <BaseUpdateLink
-        {...props}
-        uriPattern={uriPattern}
-        {...permissions}
-    />
-}
+    return (
+        <BaseUpdateLink
+            {...props}
+            uriPattern={uriPattern}
+            {...permissions}
+        />
+    );
+};
 
-/**
- * Dialog pro editaci entity.
- *
- * Wrapper nad `BaseUpdateDialog`. Dodává výchozí editovatelný obsah (`DefaultContent`)
- * a výchozí mutační akci (`mutationAsyncAction`) pro uložení změn. Aplikuje RBAC
- * přes `permissions`.
- *
- * @param {Object} params
- * @param {React.ComponentType<Object>} [params.DefaultContent=DefaultContent]
- *   Komponenta, která vykreslí editovatelný obsah dialogu (typicky MediumEditableContent).
- * @param {Function} [params.mutationAsyncAction=mutationAsyncAction]
- *   Async action (thunk) pro uložení změn (např. UpdateAsyncAction). Použije se podle Base/General implementace.
- * @param {Object} params.props
- *   Další props přeposílané do `BaseUpdateDialog` (např. `title`, `oklabel`, `cancellabel`,
- *   `item`, `onOk`, `onCancel`, atd.).
- * @returns {JSX.Element}
- */
 export const UpdateDialog = ({
     DefaultContent: DefaultContent_ = DefaultContent,
-    mutationAsyncAction: mutationAsyncAction_ = mutationAsyncAction,
+    mutationAsyncAction:
+        mutationAsyncAction_ = mutationAsyncAction,
     ...props
 }) => {
     return (
         <BaseUpdateDialog
             {...props}
             DefaultContent={DefaultContent_}
-            mutationAsyncAction={mutationAsyncAction_}
+            mutationAsyncAction={
+                mutationAsyncAction_
+            }
             {...permissions}
         />
     );
 };
 
-/**
- * Tlačítko, které otevře update dialog a provede uložení.
- *
- * Wrapper nad `BaseUpdateButton`. Dodává výchozí `DefaultContent`, výchozí `Dialog`,
- * a výchozí `mutationAsyncAction`. Aplikuje RBAC přes `permissions`.
- *
- * @param {Object} params
- * @param {React.ComponentType<Object>} [params.DefaultContent=DefaultContent]
- *   Komponenta editovatelného obsahu (typicky MediumEditableContent).
- * @param {React.ComponentType<Object>} [params.Dialog=UpdateDialog]
- *   Dialog komponenta použitá pro editaci (volá `onOk(draft)` / `onCancel()`).
- * @param {Function} [params.mutationAsyncAction=mutationAsyncAction]
- *   Async action (thunk) pro uložení změn (např. UpdateAsyncAction).
- * @param {Object} params.props
- *   Další props přeposílané do `BaseUpdateButton` (např. `children`, `className`, `title`,
- *   `item`, `uriPattern`, `onOk`, `onCancel`, atd.).
- * @returns {JSX.Element}
- */
 export const UpdateButton = ({
     DefaultContent: DefaultContent_ = DefaultContent,
     Dialog = UpdateDialog,
-    mutationAsyncAction: mutationAsyncAction_ = mutationAsyncAction,
+    mutationAsyncAction:
+        mutationAsyncAction_ = mutationAsyncAction,
     uriPattern = ReadItemURI,
     ...props
 }) => {
@@ -133,41 +131,20 @@ export const UpdateButton = ({
             {...props}
             DefaultContent={DefaultContent_}
             Dialog={Dialog}
-            mutationAsyncAction={mutationAsyncAction_}
+            mutationAsyncAction={
+                mutationAsyncAction_
+            }
             uriPattern={uriPattern}
             {...permissions}
         />
     );
 };
 
-/**
- * “Page-level” update workflow (inline edit / celá stránka editace).
- *
- * Wrapper nad `BaseUpdateBody`. Typicky vykreslí editovatelný obsah (`DefaultContent`)
- * a zajistí uložení přes `mutationAsyncAction` (dle Base/General implementace).
- * Aplikuje RBAC přes `permissions`.
- *
- * @param {Object} params
- * @param {React.ComponentType<Object>} [params.DefaultContent=DefaultContent]
- *   Komponenta editovatelného obsahu (typicky MediumEditableContent).
- * @param {Function} [params.mutationAsyncAction=mutationAsyncAction]
- *   Async action (thunk) pro uložení změn (např. UpdateAsyncAction).
- * @param {Object} params.props
- *   Další props přeposílané do `BaseUpdateBody` (např. `title`, `oklabel`, `cancellabel`,
- *   `item`, `onOk`, `onCancel`, `className`, atd.).
- * @returns {JSX.Element}
- */
-export const UpdateBody = ({
-    DefaultContent: DefaultContent_ = DefaultContent,
-    mutationAsyncAction: mutationAsyncAction_ = mutationAsyncAction,
-    ...props
-}) => {
+export const UpdateBody = ({ children }) => {
+
     return (
-        <BaseUpdateBody
-            {...props}
-            DefaultContent={DefaultContent_}
-            mutationAsyncAction={mutationAsyncAction_}
-            {...permissions}
-        />
+        <ExamEditForm>
+            {children}
+        </ExamEditForm>
     );
 };
