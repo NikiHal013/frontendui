@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { LoadingSpinner } from "@hrbolek/uoisfrontend-shared";
 
 import { useGQLClient }
-from "../../../../dynamic/src/Store/RootProviders";
+    from "../../../../dynamic/src/Store/RootProviders";
 
 import { useGQLEntityContext }
-from "../../../../_template/src/Base/Helpers/GQLEntityProvider";
+    from "../../../../_template/src/Base/Helpers/GQLEntityProvider";
 
 import { UpdateAsyncAction } from "../Queries";
 
@@ -62,18 +62,18 @@ export const ExamEditForm = ({ children }) => {
 
             setError(null);
 
-        const updateData = {
-    id: draft.id,
-    name: draft.name,
-    nameEn: draft.nameEn,
-    minScore: draft.minScore,
-    maxScore: draft.maxScore,
-}
+            const updateData = {
+                id: draft.id,
+                name: draft.name,
+                nameEn: draft.nameEn,
+                minScore: draft.minScore,
+                maxScore: draft.maxScore,
+            }
 
-const response =
-    await dispatch(
-        UpdateAsyncAction(updateData, gqlClient)
-    )
+            const response =
+                await dispatch(
+                    UpdateAsyncAction(updateData, gqlClient)
+                )
 
             if (response) {
 
