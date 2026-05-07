@@ -1,5 +1,7 @@
 import { Input } from "../../../../_template/src/Base/FormControls/Input"
 
+const disableScroll = (e) => e.target.blur()
+
 /**
  * A component that displays medium-level content for an template entity.
  *
@@ -18,7 +20,7 @@ import { Input } from "../../../../_template/src/Base/FormControls/Input"
  * @example
  * // Example usage:
  * const templateEntity = { id: 123, name: "Sample Entity" };
- * 
+ *
  * <TemplateMediumContent template={templateEntity}>
  *   <p>Additional information about the entity.</p>
  * </TemplateMediumContent>
@@ -26,13 +28,13 @@ import { Input } from "../../../../_template/src/Base/FormControls/Input"
 export const MediumEditableContent = ({ item, draft, onChange=(e)=>null, onBlur=(e)=>null, children}) => {
     const source = draft ?? item ?? {}
     return (
-        <>           
+        <>
         {/* defaultValue={item?.name|| "Název"}  */}
             <Input id={"name"} label={"Jméno"} className="form-control" value={source?.name ?? ""} placeholder={"Jméno"} onChange={onChange} />
             <Input id={"nameEn"} label={"Anglický název"} className="form-control" value={source?.nameEn ?? ""} placeholder={"Anglický název"} onChange={onChange} />
-            <Input id={"minScore"} type="number" label={"Minimální počet bodů"} className="form-control" value={source?.minScore ?? ""} placeholder={"Minimální počet bodů"} onChange={onChange} />
-            <Input id={"maxScore"} type="number" label={"Maximální počet bodů"} className="form-control" value={source?.maxScore ?? ""} placeholder={"Maximální počet bodů"} onChange={onChange} />
-            
+            <Input id={"minScore"} type="number" label={"Minimální počet bodů"} className="form-control" value={source?.minScore ?? ""} placeholder={"Minimální počet bodů"} onChange={onChange} onWheel={disableScroll} />
+            <Input id={"maxScore"} type="number" label={"Maximální počet bodů"} className="form-control" value={source?.maxScore ?? ""} placeholder={"Maximální počet bodů"} onChange={onChange} onWheel={disableScroll} />
+
 
             {children}
         </>

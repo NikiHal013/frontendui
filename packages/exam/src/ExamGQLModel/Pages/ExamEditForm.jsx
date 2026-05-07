@@ -39,6 +39,10 @@ export const ExamEditForm = ({ children }) => {
     const dirty =
         JSON.stringify(item) !== JSON.stringify(draft);
 
+    const minScore = Number(draft?.minScore) || 0;
+    const maxScore = Number(draft?.maxScore) || 0;
+    const isScoreValid = minScore <= maxScore;
+
     const onChange = useCallback((e) => {
 
         const { id, value } = e?.target || {};
@@ -64,6 +68,7 @@ export const ExamEditForm = ({ children }) => {
 
             const updateData = {
                 id: draft.id,
+                lastchange: draft.lastchange,
                 name: draft.name,
                 nameEn: draft.nameEn,
                 minScore: draft.minScore,
@@ -114,22 +119,16 @@ export const ExamEditForm = ({ children }) => {
 
             {loading && <LoadingSpinner />}
 
-            {saved && (
-                <div className="alert alert-success">
-                    Uloženo
-                </div>
-            )}
-
-            {error && (
-                <div className="alert alert-danger">
-                    {error?.message}
+            {!isScoreValid && (
+                <div className="alert alert-warning">
+                    Minimální počet bodů musí být menší nebo roven maximálnímu počtu bodů
                 </div>
             )}
 
             <button
                 className="btn btn-primary mt-2 form-control"
                 onClick={onSave}
-                disabled={!dirty || loading}
+                disabled={!dirty || loading || !isScoreValid}
             >
                 Uložit změny
             </button>

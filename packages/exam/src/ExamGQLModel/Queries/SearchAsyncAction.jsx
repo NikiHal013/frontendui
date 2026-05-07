@@ -5,7 +5,7 @@ import { reduceToFirstEntity } from "../../../../dynamic/src/Store"
 
 const SearchQueryStr = `
 query SearchQuery($skip: Int, $limit: Int, $pattern: String) {
-  result: userPage(skip: $skip, limit: $limit, where: {email: {_ilike: $pattern}}) {
+  result: examPage(skip: $skip, limit: $limit, where: {name: {_ilike: $pattern}}) {
     ...Large
   }
 }
