@@ -73,6 +73,8 @@ export const ExamEditForm = ({ children }) => {
                 nameEn: draft.nameEn,
                 minScore: draft.minScore,
                 maxScore: draft.maxScore,
+                description: draft.description,
+                descriptionEn: draft.descriptionEn,
             }
 
             const response =

@@ -99,11 +99,79 @@ import {Attribute, formatDateTime} from "../../../../_template/src/Base/Componen
 //export { MediumContent } from "../../../../_template/src/Base/Components/MediumContent"
 
 export const MediumContent = ({ item, children}) => {
+     console.log("item", item)
     return (
         <>
-        <MediumContent_ item={item}>
+            {item?.name && (
+                <Attribute label="Název">
+                    <Link item={item} />
+                </Attribute>
+            )}
+            {item?.nameEn && (
+                <Attribute label="Anglický název">
+                    {item.nameEn}
+                </Attribute>
+            )}
+            {item?.description && (
+                <Attribute label="Popis">
+                    {item.description}
+                </Attribute>
+            )}
+            {item?.descriptionEn && (
+                <Attribute label="Anglický popis">
+                    {item.descriptionEn}
+                </Attribute>
+            )}
+            {item?.minScore && (
+                <Attribute label="Minimální počet bodů">
+                    {item.minScore}
+                </Attribute>
+            )}
+            {item?.maxScore && (
+                <Attribute label="Maximální počet bodů">
+                    {item.maxScore}
+                </Attribute>
+            )}
+            {item?.parts && (
+                <Attribute label="Části">
+                    {item.parts.map(part => (
+                        <span key={part.id} className="badge bg-secondary me-1">
+                            {part.name}
+                        </span>
+                    ))}
+                </Attribute>
+            )}
+            {item?.rbacobject?.currentUserRoles?.length > 0 && (
+                <Attribute label="Moje role">
+                    {item.rbacobject.currentUserRoles.map(role => (
+                        <span key={role.id} className="badge bg-secondary me-1">
+                    {role.roletype?.name}
+                </span>
+                    ))}
+                </Attribute>
+            )}
+            <hr />
+            {item?.createdby?.fullname && (
+                <Attribute label="Vytvořil">
+                    {item.createdby.fullname}
+                </Attribute>
+            )}
+            {item?.created && (
+                <Attribute label="Vytvořeno">
+                    {formatDateTime(item.created)}
+                </Attribute>
+            )}
+            {item?.lastchange && (
+                <Attribute label="Změněno">
+                    {formatDateTime(item.lastchange)}
+                </Attribute>
+            )}
+            {item?.changedby?.fullname && (
+                <Attribute label="Změnil">
+                    {item.changedby.fullname}
+                </Attribute>
+            )}
             {children}
-        </MediumContent_>
-</>
-)
+        </>
+    )
 }

@@ -1,4 +1,5 @@
 import { Input } from "../../../../_template/src/Base/FormControls/Input"
+import { Label } from "../../../../_template/src/Base/FormControls/Label"
 
 const disableScroll = (e) => e.target.blur()
 
@@ -34,7 +35,27 @@ export const MediumEditableContent = ({ item, draft, onChange=(e)=>null, onBlur=
             <Input id={"nameEn"} label={"Anglický název"} className="form-control" value={source?.nameEn ?? ""} placeholder={"Anglický název"} onChange={onChange} />
             <Input id={"minScore"} type="number" label={"Minimální počet bodů"} className="form-control" value={source?.minScore ?? ""} placeholder={"Minimální počet bodů"} onChange={onChange} onWheel={disableScroll} />
             <Input id={"maxScore"} type="number" label={"Maximální počet bodů"} className="form-control" value={source?.maxScore ?? ""} placeholder={"Maximální počet bodů"} onChange={onChange} onWheel={disableScroll} />
+            <Label id="description" title="Popis">
+                <textarea
+                    id="description"
+                    className="form-control"
+                    rows={4}
+                    value={source?.description ?? ""}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            </Label>
 
+            <Label id="descriptionEn" title="Anglický popis">
+                <textarea
+                    id="descriptionEn"
+                    className="form-control"
+                    rows={4}
+                    value={source?.descriptionEn ?? ""}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                />
+            </Label>
 
             {children}
         </>
