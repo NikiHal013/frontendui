@@ -15,6 +15,15 @@ export default defineConfig({
             "@hrbolek/uoisfrontend-template": path.resolve(__dirname, "../../packages/_template/src"),
             "@hrbolek/uoisfrontend-dynamic": path.resolve(__dirname, "../../packages/dynamic/src"),
             "@hrbolek/uoisfrontend-shared": path.resolve(__dirname, "../../packages/shared/src"),
+            "@hrbolek/uoisfrontend-gql-shared": path.resolve(__dirname, "../../packages/gql_shared/src"),
+            "@hrbolek/uoisfrontend-ug": path.resolve(__dirname, "../../packages/ug/src"),
+            "@hrbolek/uoisfrontend-ugx": path.resolve(__dirname, "../../packages/ug/src"),
+            "@hrbolek/uoisfrontend-granting": path.resolve(__dirname, "../../packages/granting/src"),
+            "@hrbolek/uoisfrontend-admissions": path.resolve(__dirname, "../../packages/admissions/src"),
+            "@hrbolek/uoisfrontend-requests": path.resolve(__dirname, "../../packages/requests/src"),
+            "@hrbolek/uoisfrontend-zp": path.resolve(__dirname, "../../packages/z_pack/src"),
+            // Local exam package
+            "@nik-kb-sp/pck_exam": path.resolve(__dirname, "../../packages/subjects/src"),
         },
     },
 

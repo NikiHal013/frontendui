@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       workspace_name:
-        description: "Název npm workspace (např. @hrbolek/app_ug2)"
+        description: "Název npm workspace (např. @nik-kb-sp/app_exam)"
         required: true
         type: string
 
