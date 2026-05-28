@@ -113,6 +113,22 @@ export const ExamEditForm = ({ children }) => {
         contextOnChange
     ]);
 
+    useEffect(() => {
+
+    if (!dirty) return;
+
+    if (loading) return;
+
+    if (!isScoreValid) return;
+
+    const timeout = setTimeout(() => {
+        onSave();
+    }, 700);
+
+    return () => clearTimeout(timeout);
+
+}, [draft]);
+
     return (
         <MediumEditableContent
             item={draft}
@@ -126,14 +142,6 @@ export const ExamEditForm = ({ children }) => {
                     Minimální počet bodů musí být menší nebo roven maximálnímu počtu bodů
                 </div>
             )}
-
-            <button
-                className="btn btn-primary mt-2 form-control"
-                onClick={onSave}
-                disabled={!dirty || loading || !isScoreValid}
-            >
-                Uložit změny
-            </button>
 
             {children}
 
