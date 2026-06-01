@@ -132,12 +132,26 @@ export const MediumContent = ({ item, children}) => {
                     {item.maxScore}
                 </Attribute>
             )}
+            
+                <Attribute label="Plán">
+                    {typeof item.plan === "object" ? (item.plan.name || item.plan.id) : item.plan}
+                </Attribute>
+            
+            {item?.parent && (
+                <Attribute label="Nadřazený">
+                    {item.parent?.name ? (
+                        <Link item={item.parent} />
+                    ) : (
+                        item.parent?.id || JSON.stringify(item.parent)
+                    )}
+                </Attribute>
+            )}
             {item?.parts && (
                 <Attribute label="Části">
                     {item.parts.map(part => (
-                        <span key={part.id} className="badge bg-secondary me-1">
+                        <Link key={part.id} item={part} className="badge bg-secondary me-1 text-decoration-none">
                             {part.name}
-                        </span>
+                        </Link>
                     ))}
                 </Attribute>
             )}

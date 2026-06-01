@@ -1,3 +1,4 @@
+import { LargeCard } from "../Components"
 import { UpdateBody } from "../Mutations/Update"
 import { PageItemBase } from "./PageBase"
 
@@ -7,6 +8,9 @@ export const PageUpdateItem = ({
 }) => {
     return (
         <PageItemBase 
+            ItemLayout={(layoutProps) => (
+                <LargeCard {...layoutProps} showPartActions={true} />
+            )}
             SubPage={SubPage}
             {...props}
         />

@@ -17,9 +17,9 @@ import { ReadAsyncAction } from "../Queries"
 
 export const GeneratedContentBase = ({ item }) => {
     return (<>
-        <Tree item={item} />
-        <MediumCardScalars item={item} />
-        <MediumCardVectors item={item} />
+        {/*<Tree item={item} />
+        {/*<MediumCardScalars item={item} />*/}
+        {/*<MediumCardVectors item={item} />*/}
     </>)
 }
 
@@ -176,7 +176,7 @@ export const PageContent = ({queryById, queryVector, mutations, children, params
     if ((action === "view"))
         content = (
             <>
-                <MediumCardScalars key={"MediumCardScalars"} item={item} />
+                <MediumCardScalars key={"MediumCardScalars"} item={item} />*/
                 <MediumCardVectors key={"MediumCardVectors"} item={item} />
             </>
         )
