@@ -111,6 +111,42 @@ V root `package.json` jsou mimo jiné:
 - **Změny:** Vylepšení funkcionalitu EditInline pro Exam Parts, přidání dodatečných polí pro reprezentaci dat a jejich úprava.
 - **Status:** ✅ Implementováno
 
+**Commit:** `f2c135fbd9a2e866e2325313cd7fb69439b8105e`
+- **Autor:** DusanRepan
+- **Zpráva:** "Fix exam part creation and async insert actions"
+- **Změny:**
+  - Oprava vytváření nových Exam Parts
+  - Oprava asynchronních GraphQL insert akcí
+  - Stabilizace ukládání nově vytvořených záznamů
+- **Status:** ✅ Implementováno
+
+**Commit:** `2bd6e5318498c69b9a3cb34f518d6182afd504f5`
+- **Autor:** DusanRepan
+- **Zpráva:** "improve exam parts deletion functionality"
+- **Změny:**
+  - Vylepšení mazání Exam Parts
+  - Oprava logiky odstranění navázaných položek
+  - Lepší synchronizace UI po smazání záznamu
+- **Status:** ✅ Implementováno
+
+**Commit:** `b587294275df999edb0543a7e432c59018ca6438`
+- **Autor:** DusanRepan
+- **Zpráva:** "add unlink plan functionality and enhance exam part management"
+- **Změny:**
+  - Přidána možnost odpojení (unlink) Classification Planu
+  - Rozšířena správa Exam Parts
+  - Úpravy GraphQL operací souvisejících s vazbami mezi entitami
+- **Status:** ✅ Implementováno
+
+**Commit:** `f2c135fbd9a2e866e2325313cd7fb69439b8105e`
+- **Autor:** DusanRepan
+- **Zpráva:** "clean up rendering logic for score attributes in MediumContent"
+- **Změny:**
+  - Vyčištění renderovací logiky komponenty MediumContent
+  - Úprava zobrazování bodových atributů (score attributes)
+  - Zlepšení čitelnosti a udržovatelnosti kódu
+- **Status:** ✅ Implementováno
+
 #### 31. 5. 2026
 **Commit:** `2b3a09ed2bbf2e1ac41e81b9f50e2fc4c0b0f216`
 - **Autor:** DusanRepan
@@ -348,5 +384,5 @@ V root `package.json` jsou mimo jiné:
 ## Kontakty a Reference
 
 - **Repository:** [NikiHal013/frontendui-Exam](https://github.com/NikiHal013/frontendui-Exam)
-- **Vývojáři:** NikiHal013, DusanRepan, velkayolanda
+- **Vývojáři:** NikiHal013, DusanRepan
 - **Poslední aktualizace:** 1. 6. 2026
