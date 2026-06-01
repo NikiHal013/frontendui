@@ -350,6 +350,30 @@ V root `package.json` jsou mimo jiné:
 - **Řešení:** Vyžaduje pečlivou review a testing při změnách
 - **Status:** K monitorování
 
+#### 4. Ukládání a editace Exam Parts
+- **Popis:** Při vytváření a editaci Exam Parts se stále objevují problémy s ukládáním dat.
+- **Projevy:**
+  - Nekonečný loading po stisknutí tlačítka „Uložit“.
+  - Opakované GraphQL requesty bez dokončení operace.
+  - Neuložení změn i přes zobrazený stav načítání.
+  - Nekonzistentní synchronizace mezi frontendem a backendem.
+- **Dosavadní kroky:**
+  - Úprava async insert akcí.
+  - Opravy logiky vytváření Exam Parts.
+  - Testování správy stavu komponent a GraphQL mutation.
+- **Aktuální stav:** ⚠️ Problém přetrvává a vyžaduje další analýzu.
+
+#### 5. Mazání Exam Parts
+- **Popis:** Mazání Exam Parts není ve všech případech spolehlivé.
+- **Projevy:**
+  - Položka může zůstat zobrazená i po smazání.
+  - Nutnost obnovení stránky pro synchronizaci dat.
+  - Občasné chyby při komunikaci s backendem.
+- **Dosavadní kroky:**
+  - Úprava delete funkcionality.
+  - Testování obnovy dat po odstranění záznamu.
+- **Aktuální stav:** ⚠️ Probíhá testování a ladění.
+
 ### Sekce pro Doplnění
 
 ### Další problémy, které se nedaří vyřešit:**
