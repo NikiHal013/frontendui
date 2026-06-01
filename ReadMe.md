@@ -108,7 +108,7 @@ V root `package.json` jsou mimo jiné:
 **Commit:** `7d73a6b312d460fd6aeefad44cb0a59643b633e0`
 - **Autor:** NikiHal013
 - **Zpráva:** "Enhance Exam Parts functionality with inline editing and additional fields"
-- **Změny:** Vylepšení funkcionalitu EditInline pro Exam Parts, přidání dodatečných polí pro reprezentaci dat
+- **Změny:** Vylepšení funkcionalitu EditInline pro Exam Parts, přidání dodatečných polí pro reprezentaci dat a jejich úprava.
 - **Status:** ✅ Implementováno
 
 #### 31. 5. 2026
@@ -305,8 +305,8 @@ V root `package.json` jsou mimo jiné:
 - **Doporučení:** Pravidelně kontrolovat kompatibilitu a updatovat
 
 #### 2. **GraphQL Endpoint Stabilita**
-- **Popis:** Dev proxy na `http://localhost:33001` musí běžet bez přerušení
-- **Řešení:** Zajistit běh Docker stacku, viz sekce Backend / API
+- **Popis:** Dev proxy na `http://localhost:33001` musí běžet bez přerušení. Tenhle error se musí opravit zároveň s mazáním dat
+- **Řešení:** Zajistit běh Docker stacku, viz sekce Backend / API - vyžaduje to restart
 - **Status:** Vyžaduje monitoring
 
 #### 3. **_template Balíček Stabilita**
@@ -316,11 +316,14 @@ V root `package.json` jsou mimo jiné:
 
 ### Sekce pro Doplnění
 
-**Zde prosím doplnit:**
-- Další problémy, které se nedaří vyřešit
-- Dlouhodobé úkoly v tahu
-- Known issues a jejich workarounds
-- Plány na budoucí vývoj
+### Další problémy, které se nedaří vyřešit:**
+- Mazání a problém v dockeru
+- Nesprávné zobrazení MIN počtu bodů v MediumContents při vytvoření nové subparty
+- Propojení s Evaluation a StudyPlan
+
+### Co jsme objevili:
+- Správná nebo lepší práce s backendem
+- Většina věcí je řešitelná pomocí už existujících templatů
 
 ---
 
