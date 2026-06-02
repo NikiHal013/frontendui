@@ -353,7 +353,7 @@ V root `package.json` jsou mimo jiné:
 #### 4. Ukládání a editace Exam Parts
 - **Popis:** Při vytváření a editaci Exam Parts se stále objevují problémy s ukládáním dat.
 - **Projevy:**
-  - Nekonečný loading po stisknutí tlačítka „Uložit“.
+  - Nekonečný loading.
   - Opakované GraphQL requesty bez dokončení operace.
   - Neuložení změn i přes zobrazený stav načítání.
   - Nekonzistentní synchronizace mezi frontendem a backendem.
@@ -361,7 +361,7 @@ V root `package.json` jsou mimo jiné:
   - Úprava async insert akcí.
   - Opravy logiky vytváření Exam Parts.
   - Testování správy stavu komponent a GraphQL mutation.
-- **Aktuální stav:** ⚠️ Problém přetrvává a vyžaduje další analýzu.
+- **Aktuální stav:** ⚠️ Problém přetrvává a probíhá testování a ladění nové verze.
 
 #### 5. Mazání Exam Parts
 - **Popis:** Mazání Exam Parts není ve všech případech spolehlivé.
