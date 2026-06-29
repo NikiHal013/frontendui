@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { Table as BaseTable, KebabMenu } from "../../../../_template/src/Base/Components/Table"
+import { KebabMenu } from "../../../../_template/src/Base/Components/Table"
 import { Link } from "./Link"
 import { UpdateLink } from "../Mutations/Update"
 import { DeleteButton } from "../Mutations/Delete"
@@ -83,16 +83,83 @@ const buildExamTableDef = () => ({
     },
 })
 
-export const Table = ({ data }) => {
-    const sortedData = useMemo(() => {
-        return [...(data || [])].sort((left, right) => {
-            const leftTime = left?.lastchange ? new Date(left.lastchange).getTime() : 0
-            const rightTime = right?.lastchange ? new Date(right.lastchange).getTime() : 0
-            return rightTime - leftTime
-        })
-    }, [data])
+const SortButton = ({ column, sortConfig, onSort }) => {
+    const isActive = sortConfig.column === column
+    const direction = isActive ? sortConfig.direction : null
 
+    const getIcon = () => {
+        if (!isActive) return "↕"
+        return direction === "asc" ? "↑" : "↓"
+    }
+    const getTitle = () => {
+        if (!isActive) return "Seřadit vzestupně"
+        return direction === "asc" ? "Seřadit sestupně" : "Zrušit řazení"
+    }
+
+    return (
+        <button
+            type="button"
+            className={`btn btn-sm ${isActive ? "btn-primary" : "btn-outline-secondary"} ms-1`}
+            onClick={() => onSort(column)}
+            title={getTitle()}
+            style={{ padding: "0.1rem 0.3rem", fontSize: "0.75rem" }}
+        >
+            {getIcon()}
+        </button>
+    )
+}
+
+const SortableTableHeader = ({ tableDef, sortConfig, onSort }) => {
+    const sortableColumns = ["name", "nameEn", "minScore", "maxScore", "changed"]
+
+    return (
+        <thead>
+            <tr>
+                {Object.entries(tableDef).map(([key, { label }]) => (
+                    <th key={key}>
+                        {label}
+                        {sortableColumns.includes(key) && (
+                            <SortButton
+                                column={key}
+                                sortConfig={sortConfig}
+                                onSort={onSort}
+                            />
+                        )}
+                    </th>
+                ))}
+            </tr>
+        </thead>
+    )
+}
+
+const TableRow = ({ row, table_def }) => (
+    <tr>
+        {Object.keys(table_def).map((name) => {
+            const Cell = table_def[name].component
+            return <Cell key={name} row={row} name={name} />
+        })}
+    </tr>
+)
+
+export const Table = ({ data, sortConfig = { column: null, direction: null }, onSort }) => {
     const tableDef = useMemo(() => buildExamTableDef(), [])
 
-    return <BaseTable data={sortedData} table_def={tableDef} />
+    if (!data || data.length === 0) return null
+
+    return (
+        <div className="table-responsive">
+            <table className="table table-striped">
+                <SortableTableHeader
+                    tableDef={tableDef}
+                    sortConfig={sortConfig}
+                    onSort={onSort}
+                />
+                <tbody>
+                    {data.map((row) => (
+                        <TableRow key={row?.id} row={row} table_def={tableDef} />
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    )
 }
