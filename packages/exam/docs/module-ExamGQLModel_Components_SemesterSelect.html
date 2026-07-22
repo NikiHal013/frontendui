@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: ExamGQLModel/Components/SemesterSelect</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: ExamGQLModel/Components/SemesterSelect</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Komponenta pro výběr semestru a jeho propojení se zkouškou.
+Umožňuje uživateli vybrat semestr ze seznamu studijních plánů
+a automaticky propojí vybraný plán se zkouškou.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".SemesterSelect"><span class="type-signature">(static, constant) </span>SemesterSelect<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>Komponenta pro výběr semestru a propojení se zkouškou.
+Zobrazuje select s dostupnými studijními plány a umožňuje jejich výběr.</p>
+<p>Chování při editaci existujícího examu (má lastchange):</p>
+<ul>
+<li>Odpojí starý studijní plán od zkoušky</li>
+<li>Propojí nový studijní plán se zkouškou</li>
+<li>Aktualizuje název zkoušky podle předmětu</li>
+<li>Aktualizuje planId u všech částí zkoušky</li>
+</ul>
+<p>Chování při vytváření nového examu (nemá lastchange):</p>
+<ul>
+<li>Pouze uloží vybraný planId do draftu přes onChange</li>
+<li>Propojení se provede až po vytvoření examu</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~FetchStudyPlanByExamIdAction"><span class="type-signature">(inner, constant) </span>FetchStudyPlanByExamIdAction<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Asynchronní akce pro načtení studijního plánu podle examId.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line216">line 216</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~FetchStudyPlanByIdAction"><span class="type-signature">(inner, constant) </span>FetchStudyPlanByIdAction<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Asynchronní akce pro načtení studijního plánu podle ID.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line222">line 222</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~FetchStudyPlansAction"><span class="type-signature">(inner, constant) </span>FetchStudyPlansAction<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Asynchronní akce pro načtení studijních plánů.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line210">line 210</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~StudyPlanByExamIdQuery"><span class="type-signature">(inner, constant) </span>StudyPlanByExamIdQuery<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Lazy-loaded GraphQL query pro studijní plán podle examId.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line180">line 180</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~StudyPlanByExamIdQueryStr"><span class="type-signature">(inner, constant) </span>StudyPlanByExamIdQueryStr<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>GraphQL query pro načtení studijního plánu propojeného s konkrétním examem.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line44">line 44</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~StudyPlanByIdQuery"><span class="type-signature">(inner, constant) </span>StudyPlanByIdQuery<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Lazy-loaded GraphQL query pro studijní plán podle ID.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line186">line 186</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~StudyPlanByIdQueryStr"><span class="type-signature">(inner, constant) </span>StudyPlanByIdQueryStr<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>GraphQL query pro načtení jednoho studijního plánu podle ID.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~StudyPlansQuery"><span class="type-signature">(inner, constant) </span>StudyPlansQuery<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Lazy-loaded GraphQL query pro studijní plány.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line174">line 174</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~StudyPlansQueryStr"><span class="type-signature">(inner, constant) </span>StudyPlansQueryStr<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>GraphQL query pro načtení stránkovaného seznamu studijních plánů se semestry.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateExamNameAction"><span class="type-signature">(inner, constant) </span>UpdateExamNameAction<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Asynchronní akce pro aktualizaci názvu zkoušky.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line240">line 240</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateExamNameMutation"><span class="type-signature">(inner, constant) </span>UpdateExamNameMutation<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Lazy-loaded GraphQL mutace pro aktualizaci názvu zkoušky.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line204">line 204</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateExamNameMutationStr"><span class="type-signature">(inner, constant) </span>UpdateExamNameMutationStr<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>GraphQL mutace pro aktualizaci názvu zkoušky.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line151">line 151</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateExamPlanIdAction"><span class="type-signature">(inner, constant) </span>UpdateExamPlanIdAction<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Asynchronní akce pro aktualizaci planId zkoušky.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line234">line 234</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateExamPlanIdMutation"><span class="type-signature">(inner, constant) </span>UpdateExamPlanIdMutation<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Lazy-loaded GraphQL mutace pro aktualizaci planId zkoušky.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateExamPlanIdMutationStr"><span class="type-signature">(inner, constant) </span>UpdateExamPlanIdMutationStr<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>GraphQL mutace pro aktualizaci planId u zkoušky.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line129">line 129</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateStudyPlanAction"><span class="type-signature">(inner, constant) </span>UpdateStudyPlanAction<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Asynchronní akce pro aktualizaci studijního plánu.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line228">line 228</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateStudyPlanMutation"><span class="type-signature">(inner, constant) </span>UpdateStudyPlanMutation<span class="type-signature"> :function</span></h4>
+
+
+
+
+<div class="description">
+    <p>Lazy-loaded GraphQL mutace pro aktualizaci studijního plánu.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">function</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line192">line 192</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateStudyPlanMutationStr"><span class="type-signature">(inner, constant) </span>UpdateStudyPlanMutationStr<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>GraphQL mutace pro aktualizaci studijního plánu (propojení s examem).</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_SemesterSelect.jsx.html">ExamGQLModel/Components/SemesterSelect.jsx</a>, <a href="ExamGQLModel_Components_SemesterSelect.jsx.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ExamGQLModel_Components.html">ExamGQLModel/Components</a></li><li><a href="module-ExamGQLModel_Components_ExamParts.html">ExamGQLModel/Components/ExamParts</a></li><li><a href="module-ExamGQLModel_Components_MediumContent.html">ExamGQLModel/Components/MediumContent</a></li><li><a href="module-ExamGQLModel_Components_MediumEditableContent.html">ExamGQLModel/Components/MediumEditableContent</a></li><li><a href="module-ExamGQLModel_Components_SemesterSelect.html">ExamGQLModel/Components/SemesterSelect</a></li><li><a href="module-ExamGQLModel_Mutations_Create.html">ExamGQLModel/Mutations/Create</a></li><li><a href="module-ExamGQLModel_Queries.html">ExamGQLModel/Queries</a></li><li><a href="module-ExamGQLModel_Queries_Fragments.html">ExamGQLModel/Queries/Fragments</a></li><li><a href="module-ExamGQLModel_Queries_ReadStudyPlanByExamIdAsyncAction.html">ExamGQLModel/Queries/ReadStudyPlanByExamIdAsyncAction</a></li><li><a href="module-ExamGQLModel_Queries_UpdateAsyncAction.html">ExamGQLModel/Queries/UpdateAsyncAction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardCapsule">CardCapsule</a></li><li><a href="global.html#Children">Children</a></li><li><a href="global.html#ConfirmEdit">ConfirmEdit</a></li><li><a href="global.html#CreateURI">CreateURI</a></li><li><a href="global.html#DefaultContent">DefaultContent</a></li><li><a href="global.html#DeleteBody">DeleteBody</a></li><li><a href="global.html#DeleteButton">DeleteButton</a></li><li><a href="global.html#DeleteDialog">DeleteDialog</a></li><li><a href="global.html#DeleteItemURI">DeleteItemURI</a></li><li><a href="global.html#DeleteLink">DeleteLink</a></li><li><a href="global.html#DeleteURI">DeleteURI</a></li><li><a href="global.html#ExamEditForm">ExamEditForm</a></li><li><a href="global.html#ExamGQLModelRouterSegments">ExamGQLModelRouterSegments</a></li><li><a href="global.html#InteractiveMutations">InteractiveMutations</a></li><li><a href="global.html#LargeCard">LargeCard</a></li><li><a href="global.html#Link">Link</a></li><li><a href="global.html#LinkURI">LinkURI</a></li><li><a href="global.html#ListURI">ListURI</a></li><li><a href="global.html#LiveEdit">LiveEdit</a></li><li><a href="global.html#LiveEditWrapper">LiveEditWrapper</a></li><li><a href="global.html#LiveEdit_">LiveEdit_</a></li><li><a href="global.html#MediumCard">MediumCard</a></li><li><a href="global.html#MyNavDropdown">MyNavDropdown</a></li><li><a href="global.html#PageItemBase">PageItemBase</a></li><li><a href="global.html#PageLink">PageLink</a></li><li><a href="global.html#PageReadItemRolesOn">PageReadItemRolesOn</a></li><li><a href="global.html#ReadAsyncAction">ReadAsyncAction</a></li><li><a href="global.html#ReadItemURI">ReadItemURI</a></li><li><a href="global.html#ReadURI">ReadURI</a></li><li><a href="global.html#TemplateScalarAttribute">TemplateScalarAttribute</a></li><li><a href="global.html#TemplateScalarAttributeLazy">TemplateScalarAttributeLazy</a></li><li><a href="global.html#TemplateVectorsAttribute">TemplateVectorsAttribute</a></li><li><a href="global.html#TemplateVectorsAttributeInfinite">TemplateVectorsAttributeInfinite</a></li><li><a href="global.html#TemplateVectorsAttributeLazy">TemplateVectorsAttributeLazy</a></li><li><a href="global.html#TemplateVectorsAttribute_old">TemplateVectorsAttribute_old</a></li><li><a href="global.html#UpdateBody">UpdateBody</a></li><li><a href="global.html#UpdateButton">UpdateButton</a></li><li><a href="global.html#UpdateDialog">UpdateDialog</a></li><li><a href="global.html#UpdateItemURI">UpdateItemURI</a></li><li><a href="global.html#UpdateLink">UpdateLink</a></li><li><a href="global.html#UpdateURI">UpdateURI</a></li><li><a href="global.html#VectorItemsURI">VectorItemsURI</a></li><li><a href="global.html#VectorsVisualiser">VectorsVisualiser</a></li><li><a href="global.html#followUpTemplateVectorItemDelete">followUpTemplateVectorItemDelete</a></li><li><a href="global.html#followUpTemplateVectorItemInsert">followUpTemplateVectorItemInsert</a></li><li><a href="global.html#followUpTemplateVectorItemUpdate">followUpTemplateVectorItemUpdate</a></li><li><a href="global.html#idParam">idParam</a></li><li><a href="global.html#modelURI">modelURI</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 22 2026 11:20:26 GMT+0200 (středoevropský letní čas)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
