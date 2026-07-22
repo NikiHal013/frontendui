@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: ExamGQLModel/Components/Link.jsx</title>
+    <title>JSDoc: Module: ExamGQLModel/Pages/PageVector</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,95 +17,355 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: ExamGQLModel/Components/Link.jsx</h1>
+    <h1 class="page-title">Module: ExamGQLModel/Pages/PageVector</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @fileoverview Definice URL a linkové komponenty pro Exam modul.
- * Vytváří konzistentní URI strukturu pro navigaci v rámci Exam aplikace.
- * @module ExamGQLModel/Components/Link
- */
+        
+            
+        
+    
+</header>
 
-import { URIRoot } from "../../uriroot"
-import { registerLink } from "../../../../_template/src/Base/Components/Link"
-import { ProxyLink } from "../../../../_template/src/Base/Components/ProxyLink"
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Stránka s vektorem (seznamem) zkoušek.
+Poskytuje filtrování, hledání, stránkování (infinite scroll), tříbění a CRUD operace.</p></div>
+        
 
-/**
- * Základ URI pro ExamGQLModel modul.
- * @const {string} modelURI
- */
-const modelURI = `${URIRoot}/ExamGQLModel`
-/** @const {string} ListURI - URI for listing exam items. */
-export const ListURI = `${modelURI}/list/`;
-/** @const {string} CreateURI - URI for creating a new exam item. */
-export const CreateURI = `${modelURI}/create/`;
-/** @const {string} ReadURI - Base URI for viewing an exam item. */
-export const ReadURI = `${modelURI}/view/`;
-/** @const {string} UpdateURI - Base URI for editing an exam item. */
-export const UpdateURI = `${modelURI}/edit/`;
-/** @const {string} DeleteURI - Base URI for deleting an exam item. */
-export const DeleteURI = `${modelURI}/delete/`;
+        
+            
 
-/** @const {string} LinkURI - Default URI for a link, pointing to the read view. */
-export const LinkURI = ReadURI;
-/** @const {string} VectorItemsURI - URI for the list view, used for collections of items. */
-export const VectorItemsURI = ListURI;
 
-/** @const {string} idParam - URL parameter for the item ID. */
-const idParam = ":id"
-/** @const {string} ReadItemURI - Full URI for viewing a specific item by its ID. */
-export const ReadItemURI = `${LinkURI}${idParam}`;
-/** @const {string} UpdateItemURI - Full URI for editing a specific item by its ID. */
-export const UpdateItemURI = `${UpdateURI}${idParam}`;
-/** @const {string} DeleteItemURI - Full URI for deleting a specific item by its ID. */
-export const DeleteItemURI = `${DeleteURI}${idParam}`;
 
-/**
- * Renders a `ProxyLink` to a specific action page for an exam entity.
- *
- * The target URL is dynamically constructed using the item's `id` and the specified action.
- * The link text defaults to the item's name or ID if no children are provided.
- *
- * @param {Object} props - The properties for the `Link` component.
- * @param {Object} props.item - The exam entity object, must contain an `id`.
- * @param {string} [props.LinkURI=ReadURI] - The base URI for the link.
- * @param {string} [props.action='view'] - The action to perform (e.g., 'view', 'edit'). This replaces 'view' in the `LinkURI_`.
- * @param {React.ReactNode} [props.children] - The content to display inside the link. If not provided, it defaults to the item's name or ID.
- *
- * @returns {JSX.Element} A `ProxyLink` component.
- *
- * @example
- * // Link to the view page for an exam
- * const exam = { id: 'abc-123', name: 'Final Exam' };
- * &lt;Link item={exam} />
- * // Renders: &lt;ProxyLink to="/.../ExamGQLModel/view/abc-123">Final Exam&lt;/ProxyLink>
- *
- * @example
- * // Link to the edit page for an exam with custom text
- * &lt;Link item={exam} action="edit">Edit Exam&lt;/Link>
- * // Renders: &lt;ProxyLink to="/.../ExamGQLModel/edit/abc-123">Edit Exam&lt;/ProxyLink>
- *
- * @remarks
- * - This component utilizes `ProxyLink` to ensure consistent link behavior, including parameter preservation and conditional reloads.
- *
- * @see ProxyLink - The base component used for rendering the link.
- */
-export const Link = ({ item, LinkURI: LinkURI_ = LinkURI, action="view", children, ...props}) => {
-    const targetURI = LinkURI_.replace('view', action);
-    return &lt;ProxyLink to={targetURI + item?.id} {...props}>{children || item?.fullname || item?.name || item?.id || "Nevim"}&lt;/ProxyLink>
-    // return &lt;BaseUI.Link item={item} />
-    // return &lt;a>{children || item?.fullname || item?.name || item?.id || "Nevim"}&lt;/a>
-}
 
-registerLink('ExamGQLModel', Link)</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Pages_PageVector.jsx.html">ExamGQLModel/Pages/PageVector.jsx</a>, <a href="ExamGQLModel_Pages_PageVector.jsx.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~safeParseWhere"><span class="type-signature">(inner) </span>safeParseWhere<span class="signature">(sp, paramName<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Bezpečně parsé JSON objekt z URL parametru.
+Pokud parsívání selhá nebo parámetr chybí, vrátí null.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">URLSearchParams</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>URL search parametry.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>paramName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "where"
+                
+                </td>
+            
+
+            <td class="description last"><p>Název parametru k parsévání.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Pages_PageVector.jsx.html">ExamGQLModel/Pages/PageVector.jsx</a>, <a href="ExamGQLModel_Pages_PageVector.jsx.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Parséný objekt nebo null.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

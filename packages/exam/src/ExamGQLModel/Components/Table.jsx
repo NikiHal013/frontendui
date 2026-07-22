@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Tabulka pro zobrazení seznamu zkoušek.
+ * Poskytuje sortování, editační a mazací akce pro každou zkoušku.
+ * @module ExamGQLModel/Components/Table
+ */
+
 import { useMemo } from "react"
 import { KebabMenu } from "../../../../_template/src/Base/Components/Table"
 import { Link } from "./Link"
@@ -5,6 +11,11 @@ import { UpdateLink } from "../Mutations/Update"
 import { DeleteButton } from "../Mutations/Delete"
 import { formatDateTime } from "../../../../_template/src/Base/Components/Attribute"
 
+/**
+ * Vytvoří definici sloupců pro tabulku zkoušek.
+ * Každý sloupec zahrnuje label, renderovací funkci a volitelně sortovací logiku.
+ * @returns {Object} Definice sloupců s vlastnostmi name, nameEn, parent, minScore, maxScore, changed, tools.
+ */
 const buildExamTableDef = () => ({
     name: {
         label: "Název",

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Stránka s vektorem (seznamem) zkoušek.
+ * Poskytuje filtrování, hledání, stránkování (infinite scroll), tříbění a CRUD operace.
+ * @module ExamGQLModel/Pages/PageVector
+ */
 
 import { ReadPageAsyncAction } from "../Queries"
 import { useInfiniteScroll } from "../../../../dynamic/src/Hooks/useInfiniteScroll"
@@ -11,7 +16,13 @@ import { AsyncStateIndicator } from "../../../../_template/src/Base/Helpers/Asyn
 import { Collapsible } from "../../../../_template/src/Base/FormControls/Collapsible"
 import { CreateButton } from "../Mutations/Create"
 
-
+/**
+ * Bezpečně parsé JSON objekt z URL parametru.
+ * Pokud parsívání selhá nebo parámetr chybí, vrátí null.
+ * @param {URLSearchParams} sp - URL search parametry.
+ * @param {string} [paramName="where"] - Název parametru k parsévání.
+ * @returns {Object|null} Parséný objekt nebo null.
+ */
 function safeParseWhere(sp, paramName = "where") {
     const raw = sp.get(paramName);
     if (!raw) return null;

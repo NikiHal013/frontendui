@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: ExamGQLModel/Queries/Fragments</title>
+    <title>JSDoc: Module: ExamGQLModel/Components/Link</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: ExamGQLModel/Queries/Fragments</h1>
+    <h1 class="page-title">Module: ExamGQLModel/Components/Link</h1>
 
     
 
@@ -38,9 +38,8 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>GraphQL fragmenty pro model ExamGQLModel.
-Definuje fragmenty pro různé úrovně detailu dat zkoušky (Link, Medium, Large)
-a související fragmenty pro role a RBAC oprávnění.</p></div>
+            <div class="description"><p>Definice URL a linkové komponenty pro Exam modul.
+Vytváří konzistentní URI strukturu pro navigaci v rámci Exam aplikace.</p></div>
         
 
         
@@ -89,7 +88,7 @@ a související fragmenty pro role a RBAC oprávnění.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line1">line 1</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -140,27 +139,18 @@ a související fragmenty pro role a RBAC oprávnění.</p></div>
 
         
             
-<h4 class="name" id=".LargeFragment"><span class="type-signature">(static, constant) </span>LargeFragment<span class="type-signature"> :function</span></h4>
+<h4 class="name" id=".Link"><span class="type-signature">(static, constant) </span>Link<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    <p>Lazy-loaded GraphQL fragment pro velkou úroveň dat zkoušky.
-Závisí na MediumFragment.</p>
+    <p>Renders a <code>ProxyLink</code> to a specific action page for an exam entity.</p>
+<p>The target URL is dynamically constructed using the item's <code>id</code> and the specified action.
+The link text defaults to the item's name or ID if no children are provided.</p>
 </div>
 
 
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">function</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -195,12 +185,19 @@ Závisí na MediumFragment.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line160">line 160</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line71">line 71</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>ProxyLink - The base component used for rendering the link.</li>
+        </ul>
+    </dd>
     
 
     
@@ -210,306 +207,23 @@ Závisí na MediumFragment.</p>
 
 
 
-
-        
-            
-<h4 class="name" id=".LinkFragment"><span class="type-signature">(static, constant) </span>LinkFragment<span class="type-signature"> :function</span></h4>
-
-
-
-
-<div class="description">
-    <p>Lazy-loaded GraphQL fragment pro základní úroveň dat zkoušky.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">function</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
+    <h5>Examples</h5>
     
+    <pre class="prettyprint"><code>// Link to the view page for an examconst exam = { id: 'abc-123', name: 'Final Exam' };&lt;Link item={exam} />// Renders: &lt;ProxyLink to="/.../ExamGQLModel/view/abc-123">Final Exam&lt;/ProxyLink></code></pre>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line146">line 146</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
+    <pre class="prettyprint"><code>// Link to the edit page for an exam with custom text&lt;Link item={exam} action="edit">Edit Exam&lt;/Link>// Renders: &lt;ProxyLink to="/.../ExamGQLModel/edit/abc-123">Edit Exam&lt;/ProxyLink></code></pre>
 
 
 
         
             
-<h4 class="name" id=".MediumFragment"><span class="type-signature">(static, constant) </span>MediumFragment<span class="type-signature"> :function</span></h4>
+<h4 class="name" id="~CreateURI"><span class="type-signature">(inner, constant) </span>CreateURI<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>Lazy-loaded GraphQL fragment pro střední úroveň dat zkoušky.
-Závisí na LinkFragment a RBACFragment.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">function</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line153">line 153</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id=".RBACFragment"><span class="type-signature">(static, constant) </span>RBACFragment<span class="type-signature"> :function</span></h4>
-
-
-
-
-<div class="description">
-    <p>Lazy-loaded GraphQL fragment pro RBAC role.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">function</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line140">line 140</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id=".RoleFragment"><span class="type-signature">(static, constant) </span>RoleFragment<span class="type-signature"> :function</span></h4>
-
-
-
-
-<div class="description">
-    <p>Lazy-loaded GraphQL fragment pro roli.</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">function</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line134">line 134</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="~LargeFragmentStr"><span class="type-signature">(inner, constant) </span>LargeFragmentStr<span class="type-signature"> :string</span></h4>
-
-
-
-
-<div class="description">
-    <p>GraphQL fragment pro velkou úroveň dat zkoušky.
-Rozšiřuje Medium fragment o části (parts) zkoušky.</p>
+    <p>URI for creating a new exam item.</p>
 </div>
 
 
@@ -557,7 +271,7 @@ Rozšiřuje Medium fragment o části (parts) zkoušky.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line59">line 59</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -575,14 +289,13 @@ Rozšiřuje Medium fragment o části (parts) zkoušky.</p>
 
         
             
-<h4 class="name" id="~LinkFragmentStr"><span class="type-signature">(inner, constant) </span>LinkFragmentStr<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="~DeleteItemURI"><span class="type-signature">(inner, constant) </span>DeleteItemURI<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>GraphQL fragment pro základní (link) úroveň dat zkoušky.
-Obsahuje všechna základní pole včetně identifikátorů, názvů, popisů a bodů.</p>
+    <p>Full URI for deleting a specific item by its ID.</p>
 </div>
 
 
@@ -630,7 +343,7 @@ Obsahuje všechna základní pole včetně identifikátorů, názvů, popisů a 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line15">line 15</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -648,14 +361,13 @@ Obsahuje všechna základní pole včetně identifikátorů, názvů, popisů a 
 
         
             
-<h4 class="name" id="~MediumFragmentStr"><span class="type-signature">(inner, constant) </span>MediumFragmentStr<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="~DeleteURI"><span class="type-signature">(inner, constant) </span>DeleteURI<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>GraphQL fragment pro střední úroveň dat zkoušky.
-Rozšiřuje Link fragment o informace o RBAC objektu.</p>
+    <p>Base URI for deleting an exam item.</p>
 </div>
 
 
@@ -703,7 +415,7 @@ Rozšiřuje Link fragment o informace o RBAC objektu.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line45">line 45</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -721,14 +433,13 @@ Rozšiřuje Link fragment o informace o RBAC objektu.</p>
 
         
             
-<h4 class="name" id="~RBACFragmentStr"><span class="type-signature">(inner, constant) </span>RBACFragmentStr<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="~LinkURI"><span class="type-signature">(inner, constant) </span>LinkURI<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>GraphQL fragment pro RBAC role aktuálního uživatele.
-Obsahuje informace o rolích přiřazených k danému RBAC objektu.</p>
+    <p>Default URI for a link, pointing to the read view.</p>
 </div>
 
 
@@ -776,7 +487,7 @@ Obsahuje informace o rolích přiřazených k danému RBAC objektu.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line101">line 101</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -794,14 +505,13 @@ Obsahuje informace o rolích přiřazených k danému RBAC objektu.</p>
 
         
             
-<h4 class="name" id="~RoleFragmentStr"><span class="type-signature">(inner, constant) </span>RoleFragmentStr<span class="type-signature"> :string</span></h4>
+<h4 class="name" id="~ListURI"><span class="type-signature">(inner, constant) </span>ListURI<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>GraphQL fragment pro data role.
-Obsahuje kompletní informace o roli včetně vazeb na uživatele a skupinu.</p>
+    <p>URI for listing exam items.</p>
 </div>
 
 
@@ -849,7 +559,511 @@ Obsahuje kompletní informace o roli včetně vazeb na uživatele a skupinu.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ExamGQLModel_Queries_Fragments.jsx.html">ExamGQLModel/Queries/Fragments.jsx</a>, <a href="ExamGQLModel_Queries_Fragments.jsx.html#line71">line 71</a>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~ReadItemURI"><span class="type-signature">(inner, constant) </span>ReadItemURI<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>Full URI for viewing a specific item by its ID.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~ReadURI"><span class="type-signature">(inner, constant) </span>ReadURI<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>Base URI for viewing an exam item.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateItemURI"><span class="type-signature">(inner, constant) </span>UpdateItemURI<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>Full URI for editing a specific item by its ID.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~UpdateURI"><span class="type-signature">(inner, constant) </span>UpdateURI<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>Base URI for editing an exam item.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line22">line 22</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~VectorItemsURI"><span class="type-signature">(inner, constant) </span>VectorItemsURI<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>URI for the list view, used for collections of items.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~idParam"><span class="type-signature">(inner, constant) </span>idParam<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>URL parameter for the item ID.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="~modelURI"><span class="type-signature">(inner, constant) </span>modelURI<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>Základ URI pro ExamGQLModel modul.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ExamGQLModel_Components_Link.jsx.html">ExamGQLModel/Components/Link.jsx</a>, <a href="ExamGQLModel_Components_Link.jsx.html#line11">line 11</a>
     </li></ul></dd>
     
 

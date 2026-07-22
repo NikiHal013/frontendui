@@ -1,8 +1,17 @@
-import { URIRoot } from "../../uriroot";
-import { registerLink } from "../../../../_template/src/Base/Components/Link";
-import { ProxyLink } from "../../../../_template/src/Base/Components/ProxyLink";
+/**
+ * @fileoverview Definice URL a linkové komponenty pro Exam modul.
+ * Vytváří konzistentní URI strukturu pro navigaci v rámci Exam aplikace.
+ * @module ExamGQLModel/Components/Link
+ */
 
-/** @const {string} modelURI - Base URI for the ExamGQLModel. */
+import { URIRoot } from "../../uriroot"
+import { registerLink } from "../../../../_template/src/Base/Components/Link"
+import { ProxyLink } from "../../../../_template/src/Base/Components/ProxyLink"
+
+/**
+ * Základ URI pro ExamGQLModel modul.
+ * @const {string} modelURI
+ */
 const modelURI = `${URIRoot}/ExamGQLModel`
 /** @const {string} ListURI - URI for listing exam items. */
 export const ListURI = `${modelURI}/list/`;

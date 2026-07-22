@@ -35,29 +35,26 @@ import { MediumContent as MediumContent_ } from "./MediumContent"
 import { InteractiveMutations } from '../Mutations/InteractiveMutations'
 import { LeftColumn, MiddleColumn } from "../../../../_template/src/Base/Components/Col"
 import { ExamParts } from "./ExamParts"
+
 /**
- * A large card component for displaying detailed content and layout for an template entity.
- *
- * This component wraps an `TemplateCardCapsule` with a flexible layout that includes multiple
- * columns. It uses a `Row` layout with a `LeftColumn` for displaying an `TemplateMediumCard`
- * and a `MiddleColumn` for rendering additional children.
- *
+ * @fileoverview Velká card komponenta pro detailné zobrazení zkoušky.
+ * Kombinuje střední kartu, obsah, parts a mutace v rozložení.
+ * @module ExamGQLModel/Components/LargeCard
+ */
+
+/**
+ * Velká card komponenta pro zobrazení širokého detailu zkoušky.
+ * Kombinuje rozložení se střední kartou, obsahem, sekcemi a mutacemi.
  * @component
- * @param {Object} props - The properties for the TemplateLargeCard component.
- * @param {Object} props.template - The object representing the template entity.
- * @param {string|number} props.template.id - The unique identifier for the template entity.
- * @param {string} props.template.name - The name or label of the template entity.
- * @param {React.ReactNode} [props.children=null] - Additional content to render in the middle column.
- *
- * @returns {JSX.Element} A JSX element combining a large card layout with dynamic content.
- *
- * @example
- * // Example usage:
- * const templateEntity = { id: 123, name: "Sample Entity" };
- * 
- * &lt;TemplateLargeCard template={templateEntity}>
- *   &lt;p>Additional content for the middle column.&lt;/p>
- * &lt;/TemplateLargeCard>
+ * @param {Object} props - Vlastnosti komponenty.
+ * @param {Object} props.item - Objekt zkoušky k zobrazení.
+ * @param {string} props.item.id - ID zkoušky.
+ * @param {string} props.item.name - Název zkoušky.
+ * @param {Array} [props.item.parts] - Pole ExamParts (části zkoušky).
+ * @param {React.ReactNode} [props.children] - Dodatční obsah.
+ * @param {React.ComponentType} [props.CardCapsule] - Vlastní CardCapsule komponenta.
+ * @param {React.ComponentType} [props.MediumContent] - Vlastní MediumContent komponenta.
+ * @returns {JSX.Element} Vykreslená velká card komponenta.
  */
 export const LargeCard = ({ item, children, CardCapsule=CardCapsule_, MediumContent=MediumContent_ }) => {
     // console.log("LargeCard.item", item)
@@ -87,13 +84,13 @@ export const LargeCard = ({ item, children, CardCapsule=CardCapsule_, MediumCont
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ExamGQLModel_Components.html">ExamGQLModel/Components</a></li><li><a href="module-ExamGQLModel_Components_ExamParts.html">ExamGQLModel/Components/ExamParts</a></li><li><a href="module-ExamGQLModel_Components_MediumContent.html">ExamGQLModel/Components/MediumContent</a></li><li><a href="module-ExamGQLModel_Components_MediumEditableContent.html">ExamGQLModel/Components/MediumEditableContent</a></li><li><a href="module-ExamGQLModel_Components_SemesterSelect.html">ExamGQLModel/Components/SemesterSelect</a></li><li><a href="module-ExamGQLModel_Mutations_Create.html">ExamGQLModel/Mutations/Create</a></li><li><a href="module-ExamGQLModel_Mutations_Delete.html">ExamGQLModel/Mutations/Delete</a></li><li><a href="module-ExamGQLModel_Queries.html">ExamGQLModel/Queries</a></li><li><a href="module-ExamGQLModel_Queries_Fragments.html">ExamGQLModel/Queries/Fragments</a></li><li><a href="module-ExamGQLModel_Queries_ReadStudyPlanByExamIdAsyncAction.html">ExamGQLModel/Queries/ReadStudyPlanByExamIdAsyncAction</a></li><li><a href="module-ExamGQLModel_Queries_UpdateAsyncAction.html">ExamGQLModel/Queries/UpdateAsyncAction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#CardCapsule">CardCapsule</a></li><li><a href="global.html#Children">Children</a></li><li><a href="global.html#ConfirmEdit">ConfirmEdit</a></li><li><a href="global.html#CreateURI">CreateURI</a></li><li><a href="global.html#DefaultContent">DefaultContent</a></li><li><a href="global.html#DeleteItemURI">DeleteItemURI</a></li><li><a href="global.html#DeleteURI">DeleteURI</a></li><li><a href="global.html#ExamEditForm">ExamEditForm</a></li><li><a href="global.html#ExamGQLModelRouterSegments">ExamGQLModelRouterSegments</a></li><li><a href="global.html#InteractiveMutations">InteractiveMutations</a></li><li><a href="global.html#LargeCard">LargeCard</a></li><li><a href="global.html#Link">Link</a></li><li><a href="global.html#LinkURI">LinkURI</a></li><li><a href="global.html#ListURI">ListURI</a></li><li><a href="global.html#LiveEdit">LiveEdit</a></li><li><a href="global.html#LiveEditWrapper">LiveEditWrapper</a></li><li><a href="global.html#LiveEdit_">LiveEdit_</a></li><li><a href="global.html#MediumCard">MediumCard</a></li><li><a href="global.html#MyNavDropdown">MyNavDropdown</a></li><li><a href="global.html#PageItemBase">PageItemBase</a></li><li><a href="global.html#PageLink">PageLink</a></li><li><a href="global.html#PageReadItemRolesOn">PageReadItemRolesOn</a></li><li><a href="global.html#ReadAsyncAction">ReadAsyncAction</a></li><li><a href="global.html#ReadItemURI">ReadItemURI</a></li><li><a href="global.html#ReadURI">ReadURI</a></li><li><a href="global.html#TemplateScalarAttribute">TemplateScalarAttribute</a></li><li><a href="global.html#TemplateScalarAttributeLazy">TemplateScalarAttributeLazy</a></li><li><a href="global.html#TemplateVectorsAttribute">TemplateVectorsAttribute</a></li><li><a href="global.html#TemplateVectorsAttributeInfinite">TemplateVectorsAttributeInfinite</a></li><li><a href="global.html#TemplateVectorsAttributeLazy">TemplateVectorsAttributeLazy</a></li><li><a href="global.html#TemplateVectorsAttribute_old">TemplateVectorsAttribute_old</a></li><li><a href="global.html#UpdateBody">UpdateBody</a></li><li><a href="global.html#UpdateButton">UpdateButton</a></li><li><a href="global.html#UpdateDialog">UpdateDialog</a></li><li><a href="global.html#UpdateItemURI">UpdateItemURI</a></li><li><a href="global.html#UpdateLink">UpdateLink</a></li><li><a href="global.html#UpdateURI">UpdateURI</a></li><li><a href="global.html#VectorItemsURI">VectorItemsURI</a></li><li><a href="global.html#VectorsVisualiser">VectorsVisualiser</a></li><li><a href="global.html#followUpTemplateVectorItemDelete">followUpTemplateVectorItemDelete</a></li><li><a href="global.html#followUpTemplateVectorItemInsert">followUpTemplateVectorItemInsert</a></li><li><a href="global.html#followUpTemplateVectorItemUpdate">followUpTemplateVectorItemUpdate</a></li><li><a href="global.html#idParam">idParam</a></li><li><a href="global.html#modelURI">modelURI</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ExamGQLModel_Components.html">ExamGQLModel/Components</a></li><li><a href="module-ExamGQLModel_Components_CardCapsule.html">ExamGQLModel/Components/CardCapsule</a></li><li><a href="module-ExamGQLModel_Components_ExamParts.html">ExamGQLModel/Components/ExamParts</a></li><li><a href="module-ExamGQLModel_Components_Filter.html">ExamGQLModel/Components/Filter</a></li><li><a href="module-ExamGQLModel_Components_LargeCard.html">ExamGQLModel/Components/LargeCard</a></li><li><a href="module-ExamGQLModel_Components_Link.html">ExamGQLModel/Components/Link</a></li><li><a href="module-ExamGQLModel_Components_MediumContent.html">ExamGQLModel/Components/MediumContent</a></li><li><a href="module-ExamGQLModel_Components_MediumEditableContent.html">ExamGQLModel/Components/MediumEditableContent</a></li><li><a href="module-ExamGQLModel_Components_SemesterSelect.html">ExamGQLModel/Components/SemesterSelect</a></li><li><a href="module-ExamGQLModel_Components_Table.html">ExamGQLModel/Components/Table</a></li><li><a href="module-ExamGQLModel_Mutations_Create.html">ExamGQLModel/Mutations/Create</a></li><li><a href="module-ExamGQLModel_Mutations_Delete.html">ExamGQLModel/Mutations/Delete</a></li><li><a href="module-ExamGQLModel_Pages_PageCreateItem.html">ExamGQLModel/Pages/PageCreateItem</a></li><li><a href="module-ExamGQLModel_Pages_PageReadItem.html">ExamGQLModel/Pages/PageReadItem</a></li><li><a href="module-ExamGQLModel_Pages_PageUpdateItem.html">ExamGQLModel/Pages/PageUpdateItem</a></li><li><a href="module-ExamGQLModel_Pages_PageVector.html">ExamGQLModel/Pages/PageVector</a></li><li><a href="module-ExamGQLModel_Queries.html">ExamGQLModel/Queries</a></li><li><a href="module-ExamGQLModel_Queries_Fragments.html">ExamGQLModel/Queries/Fragments</a></li><li><a href="module-ExamGQLModel_Queries_ReadStudyPlanByExamIdAsyncAction.html">ExamGQLModel/Queries/ReadStudyPlanByExamIdAsyncAction</a></li><li><a href="module-ExamGQLModel_Queries_UpdateAsyncAction.html">ExamGQLModel/Queries/UpdateAsyncAction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Children">Children</a></li><li><a href="global.html#ConfirmEdit">ConfirmEdit</a></li><li><a href="global.html#DefaultContent">DefaultContent</a></li><li><a href="global.html#ExamEditForm">ExamEditForm</a></li><li><a href="global.html#ExamGQLModelRouterSegments">ExamGQLModelRouterSegments</a></li><li><a href="global.html#InteractiveMutations">InteractiveMutations</a></li><li><a href="global.html#LiveEdit">LiveEdit</a></li><li><a href="global.html#LiveEditWrapper">LiveEditWrapper</a></li><li><a href="global.html#LiveEdit_">LiveEdit_</a></li><li><a href="global.html#MediumCard">MediumCard</a></li><li><a href="global.html#MyNavDropdown">MyNavDropdown</a></li><li><a href="global.html#PageItemBase">PageItemBase</a></li><li><a href="global.html#PageLink">PageLink</a></li><li><a href="global.html#PageReadItemRolesOn">PageReadItemRolesOn</a></li><li><a href="global.html#ReadAsyncAction">ReadAsyncAction</a></li><li><a href="global.html#TemplateScalarAttribute">TemplateScalarAttribute</a></li><li><a href="global.html#TemplateScalarAttributeLazy">TemplateScalarAttributeLazy</a></li><li><a href="global.html#TemplateVectorsAttribute">TemplateVectorsAttribute</a></li><li><a href="global.html#TemplateVectorsAttributeInfinite">TemplateVectorsAttributeInfinite</a></li><li><a href="global.html#TemplateVectorsAttributeLazy">TemplateVectorsAttributeLazy</a></li><li><a href="global.html#TemplateVectorsAttribute_old">TemplateVectorsAttribute_old</a></li><li><a href="global.html#UpdateBody">UpdateBody</a></li><li><a href="global.html#UpdateButton">UpdateButton</a></li><li><a href="global.html#UpdateDialog">UpdateDialog</a></li><li><a href="global.html#UpdateLink">UpdateLink</a></li><li><a href="global.html#VectorsVisualiser">VectorsVisualiser</a></li><li><a href="global.html#followUpTemplateVectorItemDelete">followUpTemplateVectorItemDelete</a></li><li><a href="global.html#followUpTemplateVectorItemInsert">followUpTemplateVectorItemInsert</a></li><li><a href="global.html#followUpTemplateVectorItemUpdate">followUpTemplateVectorItemUpdate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 22 2026 17:32:28 GMT+0200 (středoevropský letní čas)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Jul 22 2026 18:13:41 GMT+0200 (středoevropský letní čas)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,33 +1,23 @@
+/**
+ * @fileoverview Komponenta CardCapsule pro zobrazen\u00ed zkou\u0161ky v k\u00e1rt\u011b.
+ * Je\u0161t\u011b speci\u00e1ln\u00ed card s ikonou a odkazem na zkou\u0161ku v z\u00e1hlav\u00ed.
+ * @module ExamGQLModel/Components/CardCapsule
+ */
+
 import { PersonFill } from "react-bootstrap-icons"
 import { Link } from "./Link"
 import { CardCapsule as CardCapsule_ } from "../../../../_template/src/Base/Components"
 
 /**
- * A specialized card component that displays an `TemplateLink` as its title and encapsulates additional content.
- *
- * This component extends the `CardCapsule` component by using a combination of a `PersonFill` icon and 
- * an `TemplateLink` component in the card's header. The `children` prop is used to render any content 
- * inside the card body. It is designed for use with entities represented by the `template` object.
- *
+ * Speci\u00e1liz\u00e1van\u00e1 card komponenta pro zobrazen\u00ed zkou\u0161ky.
+ * Zobrazuje ikonu (PersonFill), odkaz na zkou\u0161ku a jej\u00ed obsah v t\u011ble.
  * @component
- * @param {Object} props - The props for the TemplateCardCapsule component.
- * @param {Object} props.template - The object representing the template entity.
- * @param {string|number} props.template.id - The unique identifier for the template entity.
- * @param {string} props.template.name - The display name for the template entity.
- * @param {React.ReactNode} [props.children=null] - The content to render inside the card's body.
- *
- * @returns {JSX.Element} The rendered card component with a dynamic title and body content.
- *
- * @example
- * // Example usage:
- * import { TemplateCardCapsule } from './TemplateCardCapsule';
- * import { Button } from 'react-bootstrap';
- *
- * const templateEntity = { id: 123, name: "Example Entity" };
- *
- * <TemplateCardCapsule template={templateEntity}>
- *   <Button variant="primary">Click Me</Button>
- * </TemplateCardCapsule>
+ * @param {Object} props - Vlastnosti komponenty.
+ * @param {Object} props.item - Objekt zkoušky.
+ * @param {string} props.item.id - Identifikátor zkoušky.
+ * @param {string} props.item.name - Název zkoušky.
+ * @param {React.ReactNode} [props.children] - Obsah, který se vykresli v těle karty.
+ * @returns {JSX.Element} Vykreslená card komponenta.
  */
 export const CardCapsule = ({ item, children, title=null}) => {
     

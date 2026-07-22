@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: ExamGQLModel/Components/Link.jsx</title>
+    <title>JSDoc: Source: ExamGQLModel/Pages/PageVector.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: ExamGQLModel/Components/Link.jsx</h1>
+    <h1 class="page-title">Source: ExamGQLModel/Pages/PageVector.jsx</h1>
 
     
 
@@ -27,83 +27,121 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @fileoverview Definice URL a linkové komponenty pro Exam modul.
- * Vytváří konzistentní URI strukturu pro navigaci v rámci Exam aplikace.
- * @module ExamGQLModel/Components/Link
+ * @fileoverview Stránka s vektorem (seznamem) zkoušek.
+ * Poskytuje filtrování, hledání, stránkování (infinite scroll), tříbění a CRUD operace.
+ * @module ExamGQLModel/Pages/PageVector
  */
 
-import { URIRoot } from "../../uriroot"
-import { registerLink } from "../../../../_template/src/Base/Components/Link"
-import { ProxyLink } from "../../../../_template/src/Base/Components/ProxyLink"
+import { ReadPageAsyncAction } from "../Queries"
+import { useInfiniteScroll } from "../../../../dynamic/src/Hooks/useInfiniteScroll"
+import { PageBase } from "./PageBase"
+import { Table } from "../Components/Table"
+import { Filter } from "../Components/Filter"
+import { FilterButton, ResetFilterButton } from "../../../../_template/src/Base/FormControls/Filter"
+import { useSearchParams } from "react-router"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { AsyncStateIndicator } from "../../../../_template/src/Base/Helpers/AsyncStateIndicator"
+import { Collapsible } from "../../../../_template/src/Base/FormControls/Collapsible"
+import { CreateButton } from "../Mutations/Create"
 
 /**
- * Základ URI pro ExamGQLModel modul.
- * @const {string} modelURI
+ * Bezpečně parsé JSON objekt z URL parametru.
+ * Pokud parsívání selhá nebo parámetr chybí, vrátí null.
+ * @param {URLSearchParams} sp - URL search parametry.
+ * @param {string} [paramName="where"] - Název parametru k parsévání.
+ * @returns {Object|null} Parséný objekt nebo null.
  */
-const modelURI = `${URIRoot}/ExamGQLModel`
-/** @const {string} ListURI - URI for listing exam items. */
-export const ListURI = `${modelURI}/list/`;
-/** @const {string} CreateURI - URI for creating a new exam item. */
-export const CreateURI = `${modelURI}/create/`;
-/** @const {string} ReadURI - Base URI for viewing an exam item. */
-export const ReadURI = `${modelURI}/view/`;
-/** @const {string} UpdateURI - Base URI for editing an exam item. */
-export const UpdateURI = `${modelURI}/edit/`;
-/** @const {string} DeleteURI - Base URI for deleting an exam item. */
-export const DeleteURI = `${modelURI}/delete/`;
-
-/** @const {string} LinkURI - Default URI for a link, pointing to the read view. */
-export const LinkURI = ReadURI;
-/** @const {string} VectorItemsURI - URI for the list view, used for collections of items. */
-export const VectorItemsURI = ListURI;
-
-/** @const {string} idParam - URL parameter for the item ID. */
-const idParam = ":id"
-/** @const {string} ReadItemURI - Full URI for viewing a specific item by its ID. */
-export const ReadItemURI = `${LinkURI}${idParam}`;
-/** @const {string} UpdateItemURI - Full URI for editing a specific item by its ID. */
-export const UpdateItemURI = `${UpdateURI}${idParam}`;
-/** @const {string} DeleteItemURI - Full URI for deleting a specific item by its ID. */
-export const DeleteItemURI = `${DeleteURI}${idParam}`;
-
-/**
- * Renders a `ProxyLink` to a specific action page for an exam entity.
- *
- * The target URL is dynamically constructed using the item's `id` and the specified action.
- * The link text defaults to the item's name or ID if no children are provided.
- *
- * @param {Object} props - The properties for the `Link` component.
- * @param {Object} props.item - The exam entity object, must contain an `id`.
- * @param {string} [props.LinkURI=ReadURI] - The base URI for the link.
- * @param {string} [props.action='view'] - The action to perform (e.g., 'view', 'edit'). This replaces 'view' in the `LinkURI_`.
- * @param {React.ReactNode} [props.children] - The content to display inside the link. If not provided, it defaults to the item's name or ID.
- *
- * @returns {JSX.Element} A `ProxyLink` component.
- *
- * @example
- * // Link to the view page for an exam
- * const exam = { id: 'abc-123', name: 'Final Exam' };
- * &lt;Link item={exam} />
- * // Renders: &lt;ProxyLink to="/.../ExamGQLModel/view/abc-123">Final Exam&lt;/ProxyLink>
- *
- * @example
- * // Link to the edit page for an exam with custom text
- * &lt;Link item={exam} action="edit">Edit Exam&lt;/Link>
- * // Renders: &lt;ProxyLink to="/.../ExamGQLModel/edit/abc-123">Edit Exam&lt;/ProxyLink>
- *
- * @remarks
- * - This component utilizes `ProxyLink` to ensure consistent link behavior, including parameter preservation and conditional reloads.
- *
- * @see ProxyLink - The base component used for rendering the link.
- */
-export const Link = ({ item, LinkURI: LinkURI_ = LinkURI, action="view", children, ...props}) => {
-    const targetURI = LinkURI_.replace('view', action);
-    return &lt;ProxyLink to={targetURI + item?.id} {...props}>{children || item?.fullname || item?.name || item?.id || "Nevim"}&lt;/ProxyLink>
-    // return &lt;BaseUI.Link item={item} />
-    // return &lt;a>{children || item?.fullname || item?.name || item?.id || "Nevim"}&lt;/a>
+function safeParseWhere(sp, paramName = "where") {
+    const raw = sp.get(paramName);
+    if (!raw) return null;
+    try {
+        const obj = JSON.parse(raw);
+        return obj &amp;&amp; typeof obj === "object" ? obj : null;
+    } catch {
+        return null;
+    }
 }
 
-registerLink('ExamGQLModel', Link)</code></pre>
+const COLUMN_TO_DB_FIELD = {
+    name: "name",
+    nameEn: "name_en",
+    minScore: "min_score",
+    maxScore: "max_score",
+    changed: "lastchange",
+}
+
+const computeOrderby = (sortConfig) => {
+    if (!sortConfig.column || !sortConfig.direction) return undefined
+    const field = COLUMN_TO_DB_FIELD[sortConfig.column]
+    if (!field) return undefined
+    return sortConfig.direction === "desc" ? `-${field}` : field
+}
+
+const filterParameterName = "gr_where"
+export const PageVector = ({ children, queryAsyncAction = ReadPageAsyncAction }) => {
+
+    const [sp] = useSearchParams();
+    const [sortConfig, setSortConfig] = useState({ column: null, direction: null })
+
+    const whereFromUrl = useMemo(() => safeParseWhere(sp, filterParameterName), [sp.toString()]);
+
+    const { items, loading, error, hasMore, sentinelRef, loadMore, restart } = useInfiniteScroll(
+        {
+            asyncAction: queryAsyncAction,
+            actionParams: { skip: 0, limit: 25, where: whereFromUrl },
+        }
+    )
+
+    useEffect(() => {
+        const orderby = computeOrderby(sortConfig)
+        const params = { skip: 0, limit: 25, where: whereFromUrl, ...(orderby &amp;&amp; { orderby }) }
+        restart(params)
+    }, [whereFromUrl, sortConfig]);
+
+    const handleSort = useCallback((column) => {
+        setSortConfig(prev => {
+            if (prev.column !== column) return { column, direction: "asc" }
+            if (prev.direction === "asc") return { column, direction: "desc" }
+            return { column: null, direction: null }
+        })
+    }, [])
+
+    return (
+        &lt;PageBase>
+            &lt;Collapsible
+                className="form-control btn btn-outline-primary"
+                buttonLabelCollapsed="Zobrazit filtr"
+                buttonLabelExpanded="Skrýt filtr"
+            >
+                &lt;Filter>
+                    &lt;FilterButton
+                        className="form-control btn btn-outline-success"
+                        paramName={filterParameterName}
+                    >
+                        Filtrovat
+                    &lt;/FilterButton>
+                    &lt;ResetFilterButton
+                        className="form-control btn btn-warning"
+                        paramName={filterParameterName}
+                    >
+                        Vymazat filtr
+                    &lt;/ResetFilterButton>
+                &lt;/Filter>
+            &lt;/Collapsible>
+
+        &lt;div className="d-flex justify-content-center gap-5 mb-4 mt-4">
+                &lt;CreateButton className="btn btn-outline-success" rbacitem={{}}>Přidat&lt;/CreateButton>
+            &lt;/div>
+
+            &lt;Table data={items} sortConfig={sortConfig} onSort={handleSort} />
+
+            &lt;AsyncStateIndicator error={error} loading={loading} text="Nahrávám další..." />
+
+            {hasMore &amp;&amp; &lt;div ref={sentinelRef} style={{ height: 80, backgroundColor: "lightgray" }} />}
+            {hasMore &amp;&amp; &lt;button className="btn btn-success form-control" onClick={() => loadMore()}>Více&lt;/button>}
+        &lt;/PageBase>
+    )
+}</code></pre>
         </article>
     </section>
 
